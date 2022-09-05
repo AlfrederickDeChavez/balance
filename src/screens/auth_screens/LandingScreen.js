@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, Dimensions, View, StatusBar, TouchableOpacity, Image} from 'react-native'
+import { Text, StyleSheet, Dimensions, View, StatusBar, TouchableOpacity, Image, useWindowDimensions} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -12,13 +12,13 @@ const LandingScreen = ({navigation}) => {
         style={styles.backGround}
       >
         <View style={styles.container}>
-          <View>
+          <View style={{alignItems: 'center'}}>
             <Image source={require('../.././assets/images/diet.png')} style={{width: 100, height: 100, alignSelf: 'center'}}/>
             <View style={styles.logoContainer}>
               <Image source={require('../.././assets/images/whiteLogo.png')} style={{width: 60, height: 60}}/>
               <Text style={styles.title}>balance.</Text>
             </View>
-            <Text style={styles.punchLine}>Until it becomes a habit.</Text>
+            <Text style={styles.punchLine}>Until proper diet becomes a habit.</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('LoginScreen')}

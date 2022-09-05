@@ -5,19 +5,18 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
 
 //Screens
-import Profile from '../Profile'
-import Dashboard from '../Dashboard'
-import HomeScreen from '../HomeScreen'
-import Plan from '../Plan'
-import More from '../More'
-
+import Profile from './Profile'
+import Dashboard from './Dashboard'
+import HomeScreen from './HomeScreen'
+import Plan from './Plan'
+import More from './More'
 
 const Tab = createBottomTabNavigator()
 
 const ContentStack = () => {
     return (
         <Tab.Navigator
-        initialRouteName='Dashboard'
+        initialRouteName='Home'
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, size, color}) => {
             let iconName; 
@@ -40,9 +39,13 @@ const ContentStack = () => {
             }
           }, 
           headerShown: false,
-          tabBarShowLabel: false, 
+          tabBarShowLabel: true, 
           tabBarStyle: {
-            backgroundColor: '#378805', height: 60
+            backgroundColor: '#0CA036', height: 55
+          },
+          tabBarLabelStyle: {
+            color: '#fff',
+            marginBottom: 3,
           }
         })}
           

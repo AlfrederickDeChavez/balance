@@ -8,13 +8,14 @@ import {
   Dimensions,
   TextInput,
   Keyboard,
+  useWindowDimensions
 } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import RadioButtonGroup, {RadioButtonItem} from 'expo-radio-button';
 
 const SignUpTwo = ({navigation}) => {
-
+ 
   const [gender, setGender] = useState('')
   const [age, setAge] = useState(null)
   const [height, setHeight] = useState(null)

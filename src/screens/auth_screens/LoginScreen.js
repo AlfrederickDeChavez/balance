@@ -1,6 +1,5 @@
 import React, {useState, useContext} from 'react'
 import { SafeAreaView, Text , Dimensions, StyleSheet, View, TextInput, TouchableOpacity, StatusBar, Image} from 'react-native'
-//import WavyBackground from "react-native-wavy-background";
 import { LinearGradient } from 'expo-linear-gradient'
 import AuthContext from '../../context/AuthContext'
 
@@ -14,17 +13,6 @@ const LoginScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      {/*
-        <WavyBackground
-            height={200}
-            width={}
-            amplitude={50}
-            frequency={5}
-            offset={150}
-            color="#fff"
-        />
-      */}
-
 
       <View style={styles.titleContainer}>
             <View style={styles.title}>

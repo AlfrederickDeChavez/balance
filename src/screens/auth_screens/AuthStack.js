@@ -21,7 +21,7 @@ const AuthStack = () => {
         <Stack.Screen name="LandingScreen" component={LandingScreen}/>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SignUpOne" component={SignUpOne} />
-        <Stack.Screen name="SignUpTwo" component={SignUpTwo} />
+        {/* <Stack.Screen name="SignUpTwo" component={SignUpTwo} /> */}
       </Stack.Navigator>
     </AuthProvider>
   );

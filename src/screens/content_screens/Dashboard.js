@@ -1,8 +1,8 @@
 import { SafeAreaView,View, Text, ScrollView, StyleSheet, StatusBar} from 'react-native'
 import React from 'react'
-import Header from '../components/header'
+import Header from '../../components/header'
 import { MaterialIcons, FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
-import { macronutrients , vitamins} from '../database/nutrients'
+import { macronutrients , vitamins} from '../../database/nutrients'
 
 
 const Dashboard = () => {
@@ -10,7 +10,7 @@ const Dashboard = () => {
     <SafeAreaView>
       <StatusBar/>
       <Header/>
-      <ScrollView style={{marginBottom: 70}}>
+      <ScrollView style={{marginBottom: 60, backgroundColor: '#ddd'}}>
         <View style={styles.performanceContainer}>
           <View style={styles.title}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Your Performance</Text>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10,
-    marginHorizontal: 25,
+    marginHorizontal: 25, 
   },
 
   performanceBox: {
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 25,
     marginTop: 10,
-    shadowColor: '#dedede',
+    shadowColor: '#ccc',
     shadowOffset: {width: 4, height: 4},
     shadowOpacity: 0.8,
   },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     right: 20,
     left: 20,
     borderRadius: 15,
-    shadowColor: '#dedede',
+    shadowColor: '#ccc',
     shadowOffset: {width: 4, height: 4},
     shadowOpacity: 0.8,
   }, 
