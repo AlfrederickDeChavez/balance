@@ -1,11 +1,12 @@
 import { SafeAreaView,View, Text, ScrollView, StyleSheet, StatusBar} from 'react-native'
 import React from 'react'
 import Header from '../../components/header'
-import { MaterialIcons, FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
 import { macronutrients , vitamins} from '../../database/nutrients'
 
-
 const Dashboard = () => {
+
+
+
   return (
     <SafeAreaView>
       <StatusBar/>
@@ -30,7 +31,11 @@ const Dashboard = () => {
                 <View key={index} style={styles.macronutrientBox}>
                   <Text style={{fontSize: 16, fontWeight: 'bold'}}>{macronutrient.name}</Text>
                   <View style={{margin: 16, flexDirection: 'row',}}>
-                    <View style={{width: 80, height: 80, borderRadius: 40, backgroundColor: '#cecece'}}></View>
+                    
+                    {/* Graph */}
+                    <View>
+                  
+                    </View>
                     <View style={{left: 25, top: 10}}>
                       <View style={{flexDirection: 'row', marginVertical: 5,  alignItems: 'center'}}>
                         <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}></View>
@@ -46,6 +51,7 @@ const Dashboard = () => {
               )
             })
           }
+          <View style={{width: 40}}></View>
           </ScrollView>
         </View>
 
@@ -63,7 +69,12 @@ const Dashboard = () => {
                     <View style={{width: 80, height: 80, borderRadius: 40, backgroundColor: '#cecece'}}></View>
                     <View style={{left: 25, top: 10}}>
                       <View style={{flexDirection: 'row', marginVertical: 5,  alignItems: 'center'}}>
-                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}></View>
+                       
+                        {/* Graph */}
+                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}>
+
+                        </View>
+
                         <Text style={{fontSize: 10}}>Recommended</Text>
                       </View>
                       <View style={{flexDirection: 'row', marginVertical: 5, alignItems: 'center'}}>
@@ -76,6 +87,7 @@ const Dashboard = () => {
               )
             })
           }
+          <View style={{width: 40}}></View>
           </ScrollView>
         </View>
 
@@ -106,6 +118,7 @@ const Dashboard = () => {
               )
             })
           }
+          <View style={{width: 40}}></View>
           </ScrollView>
         </View>
       </ScrollView>

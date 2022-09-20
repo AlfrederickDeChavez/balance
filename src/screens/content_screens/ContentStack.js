@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useEffect, useContext } from 'react'
 
 //Icons
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -10,13 +11,23 @@ import Dashboard from './Dashboard'
 import HomeScreen from './HomeScreen'
 import Plan from './Plan'
 import More from './More'
+import AuthContext from '../../context/AuthContext';
 
 const Tab = createBottomTabNavigator()
 
+
+
 const ContentStack = () => {
+
+    const {fetchUserData} = useContext(AuthContext)
+
+    useEffect(() => {
+      fetchUserData()
+    }, [])
+
     return (
         <Tab.Navigator
-        initialRouteName='Home'
+        initialRouteName='Plan'
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, size, color}) => {
             let iconName; 

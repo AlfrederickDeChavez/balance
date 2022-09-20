@@ -1,5 +1,6 @@
 import { SafeAreaView,View, Text, ScrollView, StyleSheet, TouchableOpacity, StatusBar, Dimensions, Image} from 'react-native'
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect, useContext} from 'react'
+import { fetchFoods } from '../../database/getFood'
 
 // Components 
 import Header from '../../components/header'
@@ -8,16 +9,19 @@ import AddFood from '../../components/AddFood'
 import { MaterialIcons, FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { calculateBMI, interpretBMI } from '../../functions/BMICalculator'
+import AuthContext from '../../context/AuthContext'
 
 
 const HomeScreen = () => {
 
+  const {user, logoutUser} = useContext(AuthContext)
+
   const addFoodRef = useRef()
   const screenHeight = Dimensions.get('window').height
 
-  const weight = 110
-  const height = 170
-  const gender = 'Female'
+  const weight = user.weight
+  const height = user.height
+  const gender = user.gender
   const bmi = calculateBMI(weight, height)
   const userBMI = interpretBMI(bmi, gender)
 
@@ -25,7 +29,7 @@ const HomeScreen = () => {
     <SafeAreaView>
       <StatusBar />
       <Header/>
-      <ScrollView style={{backgroundColor: '#ddd'}}>
+      <ScrollView style={{backgroundColor: '#ddd'}} showsVerticalScrollIndicator={false }>
       <View style={styles.healthStatusContainer}>
         <View style={styles.title}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Health</Text>
@@ -71,7 +75,7 @@ const HomeScreen = () => {
         </View>
       </View>
       
-      <View style={{...styles.addContainer, marginBottom: 60}}>
+      <View style={styles.addContainer}>
         <View style={styles.title}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Exercise</Text>
           <MaterialIcons name='more-horiz' size={30}/>
@@ -79,8 +83,8 @@ const HomeScreen = () => {
         <View style={styles.add}>
             <Ionicons name='bicycle' size={60} color='#b1b1b1' style={{marginLeft: 15}}/>
               <TouchableOpacity 
-                style={{...styles.addBtn, bottom: -25}}
-                onPress={() => alert('Add Exercise')}
+                style={styles.addBtn}
+                onPress={() => logoutUser()}
               >
                 <AntDesign name='pluscircle' size={15} color='#0CA036' />
                 <Text style={{marginLeft: 5, fontWeight: 'bold'}}>ADD EXERCISE</Text>
@@ -88,7 +92,7 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      
+      <View style={{height: 60}}></View>
       </ScrollView>
 
       <RBSheet
@@ -111,10 +115,13 @@ const HomeScreen = () => {
   )
 }
 
+const screenWidth = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
   healthStatusContainer: {
     height: 200,
-    width: '100%',
+    width: screenWidth,
+    alignSelf: 'center'
   }, 
 
   title: {
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
   },
 
   healthStatus: {
-    width: 250,
+    width: screenWidth * 0.7,
     height: 150,
     backgroundColor: '#fff',
     borderRadius: 15,
@@ -134,7 +141,7 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginTop: 5,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     shadowColor: '#ccc',
     shadowOffset: {width: 4, height: 4},
@@ -144,7 +151,7 @@ const styles = StyleSheet.create({
 
   bmiVector: {
     resizeMode: 'contain',
-    width: 50,
+    width: '30%',
     height: 100,
     flex: 2,
   },
@@ -180,7 +187,7 @@ const styles = StyleSheet.create({
   },
 
   calorieCount: {
-    width: 250,
+    width: screenWidth * 0.6,
     height: 150,
     backgroundColor: '#fff',
     borderRadius: 15,
@@ -193,11 +200,13 @@ const styles = StyleSheet.create({
 
   addContainer: {
     height: 220,
-    width: '100%',  
+    width: '100%',
+    paddingHorizontal: 20,  
   }, 
 
   add: {
-    width: '88%',
+    width: '100%',
+    alignSelf: 'center',
     height: 170,
     backgroundColor: '#fff',
     marginHorizontal: 25,

@@ -1,17 +1,28 @@
 import { Ionicons } from '@expo/vector-icons';
-import React , {useState } from 'react'
+import React , {useContext, useState } from 'react'
 import {View, StyleSheet, TextInput, TouchableOpacity, Text} from 'react-native';
 import InsertFood from './InsertFood';
 import SearchResult from './SearchResult';
-import SelectFood from './SelectFood';
+import SelectFood from './SelectFood'; 
+import { foods } from '../database/food';
+
+
+import ContentContext from '../context/ContentContext';
+import AuthContext from '../context/AuthContext';
 
 const AddFood = () => {
 
+    // CONTEXT DATA
+    const {addFood, getFoods} = useContext(ContentContext)
+    const {authtokens} = useContext(AuthContext)
+
+    // NAVIGATION STATE
     const [selectFood, setSelectFood] = useState(true)
     const [insertFood, setInsertFood] = useState(false)
     const [scanBarcode, setScanBarcode] = useState(false)
     const [searching, setSearching] = useState(false)
 
+    // NAVIGATION FUNCTIONS
     const focusSearch = () => {
         setSelectFood(false)
         setInsertFood(false)
@@ -43,6 +54,20 @@ const AddFood = () => {
 
     }
 
+    // FOOD TO ADD STAT
+    const [foodToAdd, setFoodToAdd] = useState()
+    const [selectedCategory, setSelectedCategory] = useState('') 
+    const [selectedFood, setSelectedFood] = useState(null) 
+
+    // SEND FOOD
+    const filterFoodToAdd = (category, name) => {
+        const foodtoadd = foods.filter(food => food.Category == String(category) && food.Name == String(name))[0]
+        setFoodToAdd(foodtoadd)    
+    }
+
+    const confirmAddFood = () => {
+        addFood(foodToAdd)
+    }
 
     return (
         <View style={styles.container}>
@@ -88,7 +113,10 @@ const AddFood = () => {
 
             {/* Selecting food to input */}
             {
-                selectFood && <SelectFood />
+                selectFood && <SelectFood 
+                                setSelectedCategory={setSelectedCategory}
+                                setSelectedFood={setSelectedFood}
+                            />
             }
 
             {/* Inserting food to input */}
@@ -109,6 +137,8 @@ const AddFood = () => {
                     </TouchableOpacity>
                 </View>
             }
+
+            
             
             {/* Searching for a food to input */}
 
@@ -116,11 +146,16 @@ const AddFood = () => {
                 searching && <SearchResult />
             }
 
+            {
+                // <FoodDetails />
+            }
+
 
             {/* Add Button - Sends a POST Request to the Server */}
 
             <TouchableOpacity 
                 style={styles.addFoodBtn}
+                onPress={() => filterFoodToAdd(selectedCategory, selectedFood)}
             >
                 <Text style={styles.addFoodText}>Add</Text>
             </TouchableOpacity>
@@ -199,12 +234,13 @@ const styles = StyleSheet.create({
     addFoodBtn: {
         position: 'absolute',
         bottom: 30,
-        width: '100%',
+        width: '90%',
         paddingVertical: 10,
         backgroundColor: '#fff',
         borderRadius: 15,
         alignSelf: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginHorizontal: 20,
     },
 
     addFoodText: {

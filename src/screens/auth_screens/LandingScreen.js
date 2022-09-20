@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Text, StyleSheet, Dimensions, View, StatusBar, TouchableOpacity, Image, useWindowDimensions} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import AuthContext from '../../context/AuthContext';
 
 const LandingScreen = ({navigation}) => {
+
+  const {authtokens} = useContext(AuthContext)
+
+  useEffect(() => {
+    console.log(authtokens)
+  }, [])
+  
   return (
     <View>
       <StatusBar />

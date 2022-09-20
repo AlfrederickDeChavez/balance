@@ -56,6 +56,7 @@ const SignUpOne = ({navigation}) => {
   // Animation functions
 
   const goNext = () => {
+
     signUpRef.current.scrollToEnd()
     Animated.timing(goNextAnim, {
       toValue: 100, 
@@ -68,6 +69,7 @@ const SignUpOne = ({navigation}) => {
       useNativeDriver: false,
       duration: 1500,
     }).start()
+  
   }
 
   const goBack = () => {
@@ -84,9 +86,6 @@ const SignUpOne = ({navigation}) => {
       duration: 1500,
     }).start()
   }
-
-    
-  
 
   const register = () => {
     registerUser(username, email, password, password2, age, gender, height, weight)
@@ -137,6 +136,7 @@ const SignUpOne = ({navigation}) => {
                     <TextInput style={styles.inputField}
                       onChangeText={(val) => setUserName(val)}
                     />
+                    { false && <Text style={{color: 'red', fontWeight: 'bold'}}>** Username field cannot be empty.</Text> }
                   </View>
 
                   <View style={styles.formControl}>
@@ -145,6 +145,7 @@ const SignUpOne = ({navigation}) => {
                       style={styles.inputField}
                       onChangeText={(val) => setEmail(val)}
                     />
+                    { false && <Text style={{color: 'red', fontWeight: 'bold'}}>** Please enter a valid email.</Text>}
                   </View>
 
                   <View style={styles.formControl}>
@@ -154,6 +155,8 @@ const SignUpOne = ({navigation}) => {
                       secureTextEntry
                       onChangeText={(val) => setPassword(val)}
                     />
+                    { false && <Text style={{color: 'red', fontWeight: 'bold'}}>** Password does not match.</Text> }
+
                   </View>
 
                   <View style={styles.formControl}>
@@ -163,6 +166,7 @@ const SignUpOne = ({navigation}) => {
                       secureTextEntry
                       onChangeText={(val) => setPassword2(val)}
                     />
+                    { false && <Text style={{color: 'red', fontWeight: 'bold'}}>** Password does not match.</Text>}
                   </View>
 
                 </View>
@@ -170,7 +174,7 @@ const SignUpOne = ({navigation}) => {
 
 {/* -------------------------------------Sign up - second slide* -------------------------------------*/}
     
-              <Animated.View style={{...styles.slide, backgroundColor: 'red'}}>
+              <Animated.View style={{...styles.slide}}>
                 <View style={styles.form}>
                   <View style={styles.formControl}>
 

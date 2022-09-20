@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
         width: '40%',
         paddingHorizontal: 5,
         paddingVertical: 8,
+        color: '#fff',
     },
 
     nutrientName: {

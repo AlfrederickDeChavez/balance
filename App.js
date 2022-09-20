@@ -1,28 +1,18 @@
-//Navigation
-import {NavigationContainer} from '@react-navigation/native';
+import AppNavigation from './src/screens/AppNavigation';
+import { AuthProvider } from './src/context/AuthContext';
+import { ContentProvider } from './src/context/ContentContext';
 
-//hooks 
-import {useState} from 'react';
-import AuthStack from './src/screens/auth_screens/AuthStack';
-import ContentStack from './src/screens/content_screens/ContentStack';
-
-
-  
 export default function App() {
 
-  const [token, setToken] = useState('jnk')
-
   return (
-    
-    /*  If there is a token in the AsyncStorage, meaning the user is logged in,
-    the content screens will be shown.
-    */
-    <NavigationContainer>
-      { token ? <ContentStack />: <AuthStack />}
-    </NavigationContainer>
+    <AuthProvider> 
+      <ContentProvider>
+        <AppNavigation />
+      </ContentProvider>
+    </AuthProvider>
   )  
-    
-  }
+     
+}
 
 
   

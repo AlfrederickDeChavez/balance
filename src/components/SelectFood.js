@@ -1,12 +1,35 @@
 import { Ionicons } from '@expo/vector-icons';
-import React from 'react'
-import {View, StyleSheet, TextInput, Text} from 'react-native';
+import React, { useState } from 'react'
+import {View, StyleSheet, TextInput, Text, TouchableOpacity} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import { foods } from '../database/food';
 
-const SelectFood = () => {
 
-    const foodNames = ['orange', 'fish', 'orange', 'fish', 'orange', 'fish']
-    const foodCategories = ['Fruits', 'Beverages', 'Grains']
+const SelectFood = ({setSelectedCategory, setSelectedFood}) => {
+
+    const [foodNames, setFoodNames] = useState([])
+    const foodCategories = [
+        'Dairy Products', 
+        'Spices and Herbs',
+        'Fats and Oils',
+        'Poultry Products',
+        'Nut and Seed Products',
+        'Beverages',
+        'Baked Products',
+        'Snacks',
+        'Sausage and Luncheon Meats',
+        'Cereal Grains and Pasta',
+        'Sweets'
+    ]
+
+    const filterFoods = (item) => {
+        setSelectedCategory(item)
+        const filteredFood = foods.filter(food => food.Category == item)
+        const names = []
+        filteredFood.map(food => names.unshift(food.Name))
+        setFoodNames(names)
+    }
+
   return (
     <>
     <View style={styles.dropdownContainer}>
@@ -16,6 +39,9 @@ const SelectFood = () => {
                 <Text style={styles.nameText}>Category</Text>
                 <SelectDropdown
                     data={foodCategories}
+                    onSelect={(selectedItem, index) => {
+                        filterFoods(selectedItem)
+                    }}
                     defaultButtonText={<View style={styles.dFlex}><Text style={{fontSize: 12, color: '#0CA036', fontWeight: 'bold'}}>Food Category</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#0CA036'}}/></View>}
                     buttonStyle={styles.nameBtn}
                     buttonTextStyle={{color: '#0CA036', fontSize: 12, fontWeight: 'bold'}}
@@ -33,6 +59,9 @@ const SelectFood = () => {
                 <Text style={styles.nameText}>Name</Text>
                 <SelectDropdown
                     data={foodNames}
+                    onSelect={(selectedItem, index) => {
+                        setSelectedFood(selectedItem)
+                    }}
                     defaultButtonText={<View style={styles.dFlex}><Text style={{fontSize: 12, color: '#0CA036', fontWeight: 'bold'}}>Food Name</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#0CA036'}}/></View>}
                     buttonStyle={styles.nameBtn}
                     buttonTextStyle={{color: '#0CA036', fontSize: 12, fontWeight: 'bold'}}
@@ -44,26 +73,6 @@ const SelectFood = () => {
                 </SelectDropdown>
             </View>
             <View style={styles.numericInputFormControl}>
-                <View style={styles.numericInputContainer}>
-
-                    {/* Measure of food - cups/oz/liters/etc. */}
-                    <Text style={styles.measureText}>Measure</Text>
-                    <View style={
-                        {
-                        flexDirection: 'row',
-                        alignItems: 'flex-end'
-                        }}>
-                        <TextInput 
-                            keyboardType='numeric'
-                            style={styles.measureInput}
-                            placeholder='0.0'
-                        />
-                        <Text style={{
-                            color: '#fff',
-                            marginLeft: 3,
-                        }}>cups</Text>
-                    </View>
-                </View>
                 <View style={styles.numericInputContainer}> 
 
                     {/* Amount of food - grams */}
@@ -98,7 +107,6 @@ const SelectFood = () => {
                     placeholder='0'
                 />
             </View>
-
     </>
   )
 
