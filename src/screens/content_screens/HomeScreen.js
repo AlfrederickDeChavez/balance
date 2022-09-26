@@ -1,6 +1,5 @@
 import { SafeAreaView,View, Text, ScrollView, StyleSheet, TouchableOpacity, StatusBar, Dimensions, Image} from 'react-native'
-import React, {useRef, useEffect, useContext} from 'react'
-import { fetchFoods } from '../../database/getFood'
+import React, {useRef, useContext} from 'react'
 
 // Components 
 import Header from '../../components/header'
@@ -11,7 +10,6 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import { calculateBMI, interpretBMI } from '../../functions/BMICalculator'
 import AuthContext from '../../context/AuthContext'
 
-
 const HomeScreen = () => {
 
   const {user, logoutUser} = useContext(AuthContext)
@@ -19,9 +17,9 @@ const HomeScreen = () => {
   const addFoodRef = useRef()
   const screenHeight = Dimensions.get('window').height
 
-  const weight = user.weight
-  const height = user.height
-  const gender = user.gender
+  const weight = 70
+  const height = 170
+  const gender = 'Male'
   const bmi = calculateBMI(weight, height)
   const userBMI = interpretBMI(bmi, gender)
 
@@ -29,7 +27,7 @@ const HomeScreen = () => {
     <SafeAreaView>
       <StatusBar />
       <Header/>
-      <ScrollView style={{backgroundColor: '#ddd'}} showsVerticalScrollIndicator={false }>
+      <ScrollView showsVerticalScrollIndicator={false }>
       <View style={styles.healthStatusContainer}>
         <View style={styles.title}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Health</Text>
@@ -62,7 +60,7 @@ const HomeScreen = () => {
         <View style={styles.add}>
           <FontAwesome5 name='utensils' size={50} color='#b1b1b1' style={{marginLeft: 15}}/>
           <View style={{alignItems: 'flex-end'}}>
-            <Text style={{fontSize: 10, marginBottom: 5}}>Scan Food</Text>
+            <Text style={{fontSize: 10, marginBottom: 5}}>Scan Food Barcode</Text>
             <MaterialCommunityIcons name='barcode-scan' size={25} color='green' onPress={() => alert('Scan food')}/>
             <TouchableOpacity 
               style={styles.addBtn} 

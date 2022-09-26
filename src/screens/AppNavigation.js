@@ -18,18 +18,15 @@ export default function AppNavigation() {
 
   const {authtokens} = useContext(AuthContext)
   
-//   useEffect(() => {
-//     retrieveToken()
-//   }, [authtokens]) 
-
   return (
     
-    /*  If there is a token in the AsyncStorage, meaning the user is logged in,
+    /* 
+     If there is a token in the AsyncStorage, meaning the user is logged in,
     the content screens will be shown.
     */
 
     <NavigationContainer>
-        { authtokens ? <ContentStack /> : <AuthStack />}
+        { true ? <ContentStack /> : <AuthStack />}
     </NavigationContainer>
   )  
      

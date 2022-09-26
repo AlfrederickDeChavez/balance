@@ -6,11 +6,44 @@ import SearchResult from './SearchResult';
 import SelectFood from './SelectFood'; 
 import { foods } from '../database/food';
 
-
 import ContentContext from '../context/ContentContext';
 import AuthContext from '../context/AuthContext';
+import Scanner from './Scanner';
 
 const AddFood = () => {
+
+    //NUTRIENTS STATE 
+    const [foodName, setFoodName] = useState('')
+    const [foodCategory, setFoodCategory] = useState('')
+    const [calories, setCalories] = useState(0)
+    const [protein, setProtein] = useState(0)
+    const [fiber, setFiber] = useState(0)
+    const [vitaminA, setVitaminA] = useState(0)
+    const [vitaminD, setVitaminD] = useState(0)
+    const [vitaminE, setVitaminE] = useState(0)
+    const [vitaminK, setVitaminK] = useState(0)
+    const [thiamin, setThiamin] = useState(0)
+    const [riboflavin, setRiboflavin] = useState(0)
+    const [niacin, setNiacin] = useState(0)
+    const [vitaminB6, setVitaminB6] = useState(0)
+    const [vitamin12, setVitamin12] = useState(0)
+    const [folate, setFolate] = useState(0)
+    const [vitaminC, setVitaminC] = useState(0)
+    const [iron, setIron] = useState(0)
+    const [zinc, setZinc] = useState(0)
+    const [selenium, setSelenium] = useState(0)
+    const [iodine, setIodine] = useState(0)
+    const [calcium, setCalcium] = useState(0)
+    const [magnesium, setMagnesium] = useState(0)
+    const [phosphorus, setPhosphorus] = useState(0)
+    const [flouride, setFlouride] = useState(0)
+    const [sodium, setSodium] = useState(0)
+    const [chloride, setChloride] = useState(0)
+    const [potassium, setPotassium] = useState(0)
+
+    // MEASURE
+    const [amount, setAmount] = useState(0)
+    const [quantity, setQuantity] = useState(0)
 
     // CONTEXT DATA
     const {addFood, getFoods} = useContext(ContentContext)
@@ -54,6 +87,8 @@ const AddFood = () => {
 
     }
 
+    const [openCamera, setOpenCamera] = useState(false)
+
     // FOOD TO ADD STAT
     const [foodToAdd, setFoodToAdd] = useState()
     const [selectedCategory, setSelectedCategory] = useState('') 
@@ -62,11 +97,7 @@ const AddFood = () => {
     // SEND FOOD
     const filterFoodToAdd = (category, name) => {
         const foodtoadd = foods.filter(food => food.Category == String(category) && food.Name == String(name))[0]
-        setFoodToAdd(foodtoadd)    
-    }
-
-    const confirmAddFood = () => {
-        addFood(foodToAdd)
+        console.log({...foodtoadd, quantity: quantity, amount: amount})  
     }
 
     return (
@@ -114,8 +145,7 @@ const AddFood = () => {
             {/* Selecting food to input */}
             {
                 selectFood && <SelectFood 
-                                setSelectedCategory={setSelectedCategory}
-                                setSelectedFood={setSelectedFood}
+                                filterFoodToAdd={filterFoodToAdd}
                             />
             }
 
@@ -129,14 +159,23 @@ const AddFood = () => {
                 scanBarcode && 
                 
                 <View style={styles.scanBarcodeView}>
-                    <TouchableOpacity
-                        style={styles.openCameraBtn}
-                    >
-                        <Ionicons name='scan' style={styles.cameraIcon}/>
-                        <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>Open Camera</Text>
-                    </TouchableOpacity>
+
+                    {
+                        openCamera ? 
+                        <Scanner setOpenCamera={setOpenCamera}/> : 
+                        <TouchableOpacity
+                            style={styles.openCameraBtn}
+                            onPress={() => setOpenCamera(true)}
+                        >
+                            <Ionicons name='scan' style={styles.cameraIcon}/>
+                            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>Open Camera</Text>
+                        </TouchableOpacity>
+                    }
+                    
                 </View>
             }
+
+            
 
             
             
@@ -155,7 +194,7 @@ const AddFood = () => {
 
             <TouchableOpacity 
                 style={styles.addFoodBtn}
-                onPress={() => filterFoodToAdd(selectedCategory, selectedFood)}
+                onPress={() => sendFood()}
             >
                 <Text style={styles.addFoodText}>Add</Text>
             </TouchableOpacity>

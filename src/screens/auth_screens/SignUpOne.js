@@ -11,6 +11,7 @@ import {
   useWindowDimensions
 } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import AlertSuccess from '../../components/AlertSuccess';
 
 import RadioButtonGroup, {RadioButtonItem} from 'expo-radio-button';
 import Paginator from '../../components/Paginator';
@@ -21,7 +22,8 @@ const SignUpOne = ({navigation}) => {
 
   // Context API imports
   const {registerUser} = useContext(AuthContext)
-
+  const response = 'Account Created'
+  const [visible, setVisible] = useState(false)
   // Window Dimensions 
   const {width} = useWindowDimensions()
 
@@ -88,7 +90,12 @@ const SignUpOne = ({navigation}) => {
   }
 
   const register = () => {
-    registerUser(username, email, password, password2, age, gender, height, weight)
+    const response = registerUser(username, email, password, password2, age, gender, height, weight)
+    if (response.status == 200) {
+      setVisible(true)
+    } else {
+      alert('Failed')
+    }
   }
 
   return (
@@ -100,7 +107,7 @@ const SignUpOne = ({navigation}) => {
           style={{
             position: 'absolute',
             top: 40,
-            left: 20,
+            left: 20, 
           }}
           onPress={goBack}
         >
@@ -180,7 +187,7 @@ const SignUpOne = ({navigation}) => {
 
                     {/* Gender Input */}
 
-                    <Text style={styles.inputLabel}>Gender</Text>
+                    <Text style={[styles.inputLabel, {marginBottom: 10}]}>Gender</Text>
                     <View>
                       <RadioButtonGroup
                         containerStyle={styles.genderInput}
@@ -270,12 +277,14 @@ const SignUpOne = ({navigation}) => {
         <View style={styles.loginLink}>
           <Text>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}> 
-            <Text style={{color: '#0CA036'}}>  Sign in.</Text>
+            <Text style={{color: '#0CA036'}}>  Log in.</Text>
           </TouchableOpacity> 
         </View>
         
 
       </View>
+
+      <AlertSuccess visible={visible} setVisible={setVisible} response={response}></AlertSuccess>
     </SafeAreaView>
   )
 }

@@ -21,7 +21,7 @@ export const ContentProvider = ({children}) => {
             },
 
             body: JSON.stringify(food)
-        })
+        }) 
 
         let data = await response.json()
         console.log(data)

@@ -3,7 +3,7 @@ export const foods = [
         "Category": "Dairy Products",
         "Name": "Butter",
         "Calories": 717,
-        "Protein": 0.9,
+        "Protein": 0.9, 
         "DietaryFiber(g)": 0,
         "Vitamin_A": 205.2,
         "Vitamin_D": 1.5,

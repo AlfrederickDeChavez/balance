@@ -1,9 +1,7 @@
 import { useRef, useState } from 'react'
 import { SafeAreaView, StyleSheet, View, TouchableOpacity, Dimensions, Text, ScrollView} from 'react-native'
 import Header from '../../components/header'
-import { achievements } from '../../database/achievements'
 import { MaterialCommunityIcons, Ionicons, MaterialIcons } from '@expo/vector-icons'
-// import { goals } from '../../database/goals'
 import RBSheet from 'react-native-raw-bottom-sheet';
 import AddGoal from '../../components/AddGoal'
 
@@ -13,6 +11,18 @@ const Plan = () => {
   const addGoalRef = useRef()
 
   const [goals, setGoals] = useState([])
+  const [achievements, setAchievements] = useState([])
+
+  const finishGoal = (id) => {
+     const achievement = goals[id]
+     setAchievements([achievement, ...achievements])
+     goals.splice(id)
+  }
+
+  const deleteGoal = (id) => {
+    const newGoals = goals.filter((goal) => goal !== goals[id])
+    setGoals(newGoals)
+  }
 
   return (
     <SafeAreaView>
@@ -20,20 +30,28 @@ const Plan = () => {
       <View style={styles.container}>
         <View style={styles.achievementView}>
           <Text style={styles.achievementTitle}>Achievements</Text>
-          <View style={styles.emptyView}>
-              <MaterialIcons name='filter-none' size={30} color='#aaa'></MaterialIcons>
-              <Text style={{fontSize: 18, color: '#aaa', marginTop: 5}}>No achievements yet</Text>
-          </View>
-          {/* {
-            achievements.map((a, index) => {
-              return (
-                <View key={index} style={styles.achievementBox}>
-                  <MaterialCommunityIcons name={a.icon} style={styles.achievementIcon}/>
-                  <Text style={styles.achievementText}>{a.title}</Text>
-                </View>
-              )
-            })
-          } */}
+
+          {
+            achievements.length < 1 ? 
+
+            <View style={[styles.emptyView, {alignSelf: 'center', height: '30%'}]}>
+                <MaterialIcons name='filter-none' size={30} color='#aaa'></MaterialIcons>
+                <Text style={{fontSize: 18, color: '#aaa', marginTop: 5}}>No achievements yet</Text>
+            </View> : 
+
+            <ScrollView style={styles.achievementScroll} showsVerticalScrollIndicator={false}>
+              {
+              achievements.map((achievement, index) => {
+                return (
+                  <View key={index} style={styles.achievementBox}>
+                    <Ionicons name='flag-sharp' style={styles.achievementIcon}/>
+                    <Text style={styles.achievementText}>{achievement}</Text>
+                  </View>
+                )
+              })
+              }
+            </ScrollView>
+          }
         </View>
         <View style={styles.goalsView}>
           <Text style={styles.goalsTitle}>Daily Goals</Text>
@@ -44,23 +62,36 @@ const Plan = () => {
               <MaterialIcons name='filter-none' size={30} color='#aaa'></MaterialIcons>
               <Text style={{fontSize: 18, color: '#aaa', marginTop: 5}}>No goals yet</Text>
             </View> : 
-          <ScrollView 
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.goalList}
-          >
+            <ScrollView 
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.goalList}
+            >
           
-          {
-            goals.map((goal, index) => {
-              return (
-                <View key={index} style={styles.goalBox}>
-                  <Text style={styles.goalText}>{goal}</Text>
-                </View>
-              )
-            })
-          } 
-          <View style={{width: 35}}></View>
-          </ScrollView>
+            {
+              goals.map((goal, index) => {
+                return (
+                  <View key={index} style={styles.goalBox}>
+                    <MaterialCommunityIcons name='target' style={styles.target}/>
+                    <Text style={styles.goalText}>{goal}</Text>
+                    <View style={styles.goalBtnControl}>
+                      <TouchableOpacity style={[styles.goalBtn, {backgroundColor: 'red'}]}
+                        onPress={() => deleteGoal(index)}
+                      >
+                        <Ionicons name='trash' color='#fff' size={20}/>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={[styles.goalBtn, {backgroundColor: '#0CA036'}]}
+                        onPress={() => finishGoal(index)}
+                      >
+                        <Ionicons name='flag' color='#fff' size={20}/>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                )
+              })
+            }   
+            <View style={{width: 35}}></View>
+            </ScrollView>
           }
         </View>
         
@@ -103,11 +134,13 @@ const styles = StyleSheet.create({
   achievementView: {
     paddingHorizontal: 20,
     marginVertical: 10,
+    width: screenWidth,
   },
 
   achievementTitle: {
     fontSize: 20,
-    fontWeight: 'bold'  
+    fontWeight: 'bold',
+    marginBottom: 10,   
   },
 
   goalsView: {
@@ -121,6 +154,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     
   },
+
+  achievementScroll: {
+    height: '30%',
+  }, 
 
   achievementBox: {
     width: '100%',
@@ -153,8 +190,8 @@ const styles = StyleSheet.create({
   },
 
   goalBox: {
-    width: 120,
-    height: 100,
+    minWidth: 120,
+    minHeight: 100,
     backgroundColor: '#fff',
     margin: 5,
     borderRadius: 5,
@@ -165,9 +202,29 @@ const styles = StyleSheet.create({
     borderColor: '#0CA'
   },
 
+  target: {
+    fontSize: 30, 
+    fontWeight: '500',
+    color: '#0CA',
+    margin: 8,
+  },
+
   goalText: {
     color: '#0CA',
     textAlign: 'center'
+  },
+
+  goalBtn: {
+    minWidth: 40,
+    minHeight: 40,
+    padding: 8,
+    borderRadius: 2,
+    marginHorizontal: 5,
+    marginTop: 10,
+  },
+
+  goalBtnControl: {
+    flexDirection: 'row'
   },
 
   addGoalBtn: {

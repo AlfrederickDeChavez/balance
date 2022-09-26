@@ -19,7 +19,7 @@ const AddGoal = ({goals, setGoals}) => {
         <TextInput 
             placeholder="Add Title"
             style={styles.goalInput}
-            onChangeText={(val => setGoal(val))}
+            onChangeText={(val) => setGoal(val)}
             value={goal}
         />
         <TouchableOpacity 

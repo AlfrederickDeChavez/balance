@@ -2,6 +2,7 @@ import { SafeAreaView,View, Text, ScrollView, StyleSheet, StatusBar} from 'react
 import React from 'react'
 import Header from '../../components/header'
 import { macronutrients , vitamins} from '../../database/nutrients'
+import ProgressGraph from '../../components/ProgressGraph'
 
 const Dashboard = () => {
 
@@ -29,24 +30,11 @@ const Dashboard = () => {
             macronutrients.map((macronutrient, index) => {
               return (
                 <View key={index} style={styles.macronutrientBox}>
-                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>{macronutrient.name}</Text>
-                  <View style={{margin: 16, flexDirection: 'row',}}>
-                    
+                  <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>{macronutrient.name}</Text>
                     {/* Graph */}
-                    <View>
-                  
-                    </View>
-                    <View style={{left: 25, top: 10}}>
-                      <View style={{flexDirection: 'row', marginVertical: 5,  alignItems: 'center'}}>
-                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}></View>
-                        <Text style={{fontSize: 10}}>Recommended</Text>
-                      </View>
-                      <View style={{flexDirection: 'row', marginVertical: 5, alignItems: 'center'}}>
-                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}></View>
-                        <Text style={{fontSize: 10}}>Your Intake</Text>
-                      </View>
-                    </View>
-                  </View>
+                    <ProgressGraph recommended={macronutrient.recommended}/>
+                    <Text style={{color: '#fff'}}>Recommended: {macronutrient.recommended}</Text>
+
                 </View>
               )
             })
@@ -63,26 +51,13 @@ const Dashboard = () => {
           {
             vitamins.map((vitamin, index) => {
               return (
-                <View key={index} style={styles.macronutrientBox}>
-                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>{vitamin.name}</Text>
-                  <View style={{margin: 16, flexDirection: 'row',}}>
-                    <View style={{width: 80, height: 80, borderRadius: 40, backgroundColor: '#cecece'}}></View>
-                    <View style={{left: 25, top: 10}}>
-                      <View style={{flexDirection: 'row', marginVertical: 5,  alignItems: 'center'}}>
-                       
-                        {/* Graph */}
-                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}>
+                <View key={index} style={styles.vitaminsBox}>
+                  <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>{vitamin.name}</Text>
+                  
+                  {/* Graph */}
+                  <ProgressGraph recommended={vitamin.recommended}/>
+                  <Text style={{color: '#fff'}}>Recommended: {vitamin.recommended}</Text>
 
-                        </View>
-
-                        <Text style={{fontSize: 10}}>Recommended</Text>
-                      </View>
-                      <View style={{flexDirection: 'row', marginVertical: 5, alignItems: 'center'}}>
-                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}></View>
-                        <Text style={{fontSize: 10}}>Your Intake</Text>
-                      </View>
-                    </View>
-                  </View>
                 </View>
               )
             })
@@ -99,21 +74,11 @@ const Dashboard = () => {
           {
             macronutrients.map((macronutrient, index) => {
               return (
-                <View key={index} style={styles.macronutrientBox}>
-                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>{macronutrient.name}</Text>
-                  <View style={{margin: 16, flexDirection: 'row'}}>
-                    <View style={{width: 80, height: 80, borderRadius: 40, backgroundColor: '#cecece'}}></View>
-                    <View style={{left: 25, top: 10}}>
-                      <View style={{flexDirection: 'row', marginVertical: 5,  alignItems: 'center'}}>
-                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}></View>
-                        <Text style={{fontSize: 10}}>Recommended</Text>
-                      </View>
-                      <View style={{flexDirection: 'row', marginVertical: 5, alignItems: 'center'}}>
-                        <View style={{width: 10, height: 10, backgroundColor: '#cecece', marginRight: 5}}></View>
-                        <Text style={{fontSize: 10}}>Your Intake</Text>
-                      </View>
-                    </View>
-                  </View>
+                <View key={index} style={styles.mineralsBox}>
+                  <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>{macronutrient.name}</Text>
+                  {/* Graph */}
+                  <ProgressGraph recommended={macronutrient.recommended}/>
+                  <Text style={{color: '#fff'}}>Recommended: {macronutrient.recommended}</Text>
                 </View>
               )
             })
@@ -160,7 +125,35 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   }, 
   macronutrientBox: {
-    backgroundColor: '#fff',
+    backgroundColor: '#B46ED2',
+    width: 250,
+    height: 150, 
+    margin: 5,
+    padding: 15,
+    right: 20,
+    left: 20,
+    borderRadius: 15,
+    shadowColor: '#ccc',
+    shadowOffset: {width: 4, height: 4},
+    shadowOpacity: 0.8,
+  }, 
+
+  vitaminsBox: {
+    backgroundColor: '#0CA',
+    width: 250,
+    height: 150, 
+    margin: 5,
+    padding: 15,
+    right: 20,
+    left: 20,
+    borderRadius: 15,
+    shadowColor: '#ccc',
+    shadowOffset: {width: 4, height: 4},
+    shadowOpacity: 0.8,
+  }, 
+
+  mineralsBox: {
+    backgroundColor: '#006DB2',
     width: 250,
     height: 150, 
     margin: 5,

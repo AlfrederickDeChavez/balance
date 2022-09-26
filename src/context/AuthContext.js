@@ -7,38 +7,25 @@ export default AuthContext;
 
 export const AuthProvider = ({children}) => {
 
+    // DOMAIN 
     const host = '127.0.0.1'
 
+    // AUTHENTICATION
     const [authtokens, setAuthTokens] = useState(null)
     const [user, setUser] = useState(null)
 
-    // // GETTING THE TOKEN FROM ASYNC STORAGE  
-    // const retrieveToken = async () => {
-    //     try {
-    //         const authtoken = await AsyncStorage.getItem('token')
-    //         setAuthTokens(JSON.parse(authtoken)) 
-    //     }
-    //     catch (e) {
-    //         console.log(e)
-    //     }    
-    
-    // } 
-
-
+    // ADDING FOOD TO DATABASE - POST 
     const addFood = async (food) => {
         console.log('Adding food...')
         let response = await fetch(`http://${host}:8000/foods/consumed/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer' + String(authtokens.access),
+                'Authorization': 'Token' + String(authtokens.access),
             },
-
             body: JSON.stringify(food)
         })
-
         let data = await response.json()
-        alert(data)
     }
 
     // SETTING THE 'TOKEN' TO ASYNC STORAGE
@@ -56,30 +43,33 @@ export const AuthProvider = ({children}) => {
 
 
     // FOR USER SIGN UP
-    const registerUser = async (username, email, password, password2, age, gender, height, weight) => {
+    const registerUser =  (username, email, password, password2, age, gender, height, weight) => {
 
-        let registrationCredentials = {
-            'username': `${username}`,
-            'email': `${email}`,
-            'password': `${password}`,
-            'password2': `${password2}`,
-            'age': `${age}`,
-            'gender': `${gender}`,
-            'height': `${height}`,
-            'weight': `${weight}`
-        }
+        // let registrationCredentials = {
+        //     'username': `${username}`,
+        //     'email': `${email}`,
+        //     'password': `${password}`,
+        //     'password2': `${password2}`,
+        //     'age': `${age}`,
+        //     'gender': `${gender}`,
+        //     'height': `${height}`,
+        //     'weight': `${weight}`
+        // }
 
-        let response = await fetch(`http://${host}:8000/accounts/register/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+        // let response = await fetch(`http://${host}:8000/accounts/register/`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
 
-            body: JSON.stringify(registrationCredentials)
-        })
+        //     body: JSON.stringify(registrationCredentials)
+        // })
 
-        let data = await response.json()
-        alert(data)
+        // let data = await response.json()
+
+        const response = { status: 200 }
+        // Success or failed alert
+        return response
           
     }
 
@@ -104,6 +94,7 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    // GETTING THE PERSONAL INFORMATION UPON COMPONENT LOAD
     const fetchUserData = async() => {
         let response = await fetch(`http://${host}:8000/accounts/fetch_user/`, {
             method: 'GET',
@@ -118,6 +109,7 @@ export const AuthProvider = ({children}) => {
         setUser(data)
     }
 
+    // REMOVE TOKENS FROM ASYNC STORAGE
     const logoutUser = async () => {
         try {
             setAuthTokens(null)
@@ -137,7 +129,7 @@ export const AuthProvider = ({children}) => {
         registerUser: registerUser,
         logoutUser: logoutUser,
         fetchUserData: fetchUserData,
-        user: user
+        user: user,
     }
 
     return (

@@ -16,18 +16,17 @@ import AuthContext from '../../context/AuthContext';
 const Tab = createBottomTabNavigator()
 
 
-
 const ContentStack = () => {
 
     const {fetchUserData} = useContext(AuthContext)
 
-    useEffect(() => {
-      fetchUserData()
-    }, [])
+    // useEffect(() => {
+    //   fetchUserData()
+    // }, [])
 
     return (
         <Tab.Navigator
-        initialRouteName='Plan'
+        initialRouteName='Home'
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, size, color}) => {
             let iconName; 

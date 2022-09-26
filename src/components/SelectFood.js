@@ -5,7 +5,10 @@ import SelectDropdown from 'react-native-select-dropdown';
 import { foods } from '../database/food';
 
 
-const SelectFood = ({setSelectedCategory, setSelectedFood}) => {
+const SelectFood = ({filterFoodToAdd}) => {
+
+    const [selectedCategory, setSelectedCategory] = useState('') 
+    const [selectedFood, setSelectedFood] = useState(null) 
 
     const [foodNames, setFoodNames] = useState([])
     const foodCategories = [
@@ -61,6 +64,7 @@ const SelectFood = ({setSelectedCategory, setSelectedFood}) => {
                     data={foodNames}
                     onSelect={(selectedItem, index) => {
                         setSelectedFood(selectedItem)
+                        filterFoodToAdd(selectedCategory, selectedItem)
                     }}
                     defaultButtonText={<View style={styles.dFlex}><Text style={{fontSize: 12, color: '#0CA036', fontWeight: 'bold'}}>Food Name</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#0CA036'}}/></View>}
                     buttonStyle={styles.nameBtn}
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#063b00',
         padding: 5,
-    },
+    }, 
 
     measureText: {
         color: '#fff',
