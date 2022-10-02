@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { foodsBarcode } from '../database/FoodBarcode';
+import { foodsBarcode } from '../../database/FoodBarcode';
 
-const Scanner = ({setOpenCamera}) => {
+const Scanner = ({setOpenCamera, visible, setVisible, setFoodToAdd}) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -22,10 +22,17 @@ const Scanner = ({setOpenCamera}) => {
   }, []);
 
   const filterBarcode = (data) => {
+    
     setScanned(true)
-    // const food = foodsBarcode.find(food => food.barcode == data)
-    // console.log(food)
-    console.log(data)
+    const food = foodsBarcode.find(food => food.Barcode == data)
+
+    if(food) {
+      setFoodToAdd(food)
+      setVisible(true)
+    } else {
+      alert('This product is currently not available on our database.')
+    }
+    
     setOpenCamera(false)
   }
 

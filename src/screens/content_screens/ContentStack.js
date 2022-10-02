@@ -10,7 +10,7 @@ import Profile from './Profile'
 import Dashboard from './Dashboard'
 import HomeScreen from './HomeScreen'
 import Plan from './Plan'
-import More from './More'
+import Recommendations from './Recommendations.js'
 import AuthContext from '../../context/AuthContext';
 
 const Tab = createBottomTabNavigator()
@@ -21,12 +21,12 @@ const ContentStack = () => {
     const {fetchUserData} = useContext(AuthContext)
 
     // useEffect(() => {
-    //   fetchUserData()
+    //   fetchUserData() 
     // }, [])
 
     return (
         <Tab.Navigator
-        initialRouteName='Home'
+        initialRouteName='Dashboard'
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, size, color}) => {
             let iconName; 
@@ -43,8 +43,8 @@ const ContentStack = () => {
             } else if (route.name === 'Plan') {
               iconName = focused ? 'notebook' : 'notebook-outline'
               return <MaterialCommunityIcons name={iconName} size={30} color='#fff'/>
-            } else if (route.name === 'More') {
-              iconName = 'more-horiz'
+            } else if (route.name === 'Recommendations') {
+              iconName = focused ? 'star' : 'star-border'
               return <MaterialIcons name={iconName} size={30} color='#fff'/>
             }
           }, 
@@ -58,13 +58,13 @@ const ContentStack = () => {
             marginBottom: 3,
           }
         })}
-          
+
       >
         <Tab.Screen name='Profile' component={Profile}/>
         <Tab.Screen name='Dashboard' component={Dashboard}/>
         <Tab.Screen name='Home' component={HomeScreen}/>
         <Tab.Screen name='Plan' component={Plan}/>
-        <Tab.Screen name='More' component={More}/>
+        <Tab.Screen name='Recommendations' component={Recommendations}/>
         
       </Tab.Navigator>
     );

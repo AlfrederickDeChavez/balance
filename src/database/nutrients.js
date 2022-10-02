@@ -1,19 +1,30 @@
 export const macronutrients = [
     {
         name: 'Protein',
+        intake: 78,
         recommended: 87,
+        color: '#795C34',
     },
     {
         name: 'Carbohydrates',
+        intake: 55,
         recommended: 76,
+        color: '#795C34',
+
     },
     {
         name: 'Water',
+        intake: 45,
         recommended: 213,
+        color: '#795C34',
+
     },
     {
         name: 'Dietary Fibers',
+        intake: 79,
         recommended: 98,
+        color: '#795C34',
+
     },
 
 ]

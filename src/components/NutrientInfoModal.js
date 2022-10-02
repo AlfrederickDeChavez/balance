@@ -2,8 +2,9 @@ import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity} from "react-
 import { useState, useEffect, useRef} from "react"
 import { Ionicons } from '@expo/vector-icons'
 
-const AlertSuccess = ({visible, setVisible, response}) => {
+const NutrientInfo = ({visible, setVisible}) => {
 
+    
     const [showAlert, setShowAlert] = useState(visible)
     const scaleValue = useRef(new Animated.Value(0)).current
 
@@ -32,20 +33,10 @@ const AlertSuccess = ({visible, setVisible, response}) => {
         <Modal transparent visible={showAlert}>
             <View style={styles.modal_bg}>
                 <Animated.View style={[styles.modal_container, {transform: [{scale: scaleValue}]}]}>
-                <View>
-                    <Ionicons name='checkmark-circle' style={styles.success_vector}/>
-                    <Text style={styles.account_created}>{response}</Text>
-                    </View>
-                    <TouchableOpacity 
-                    onPress={() => setVisible(false)}
-                    style={styles.ok_btn}
-                    >
-                    <Text style={styles.ok_text}>OK</Text>
-                    </TouchableOpacity>
-                
+                    <TouchableOpacity onPress={() => setVisible(false)}><Text>Exit</Text></TouchableOpacity>
                 </Animated.View>
             </View>
-        </Modal> 
+        </Modal>
     )
 }
 
@@ -59,7 +50,8 @@ const styles = StyleSheet.create({
 
     modal_container: {
         width: '80%',
-        backgroundColor: '#fff',
+        height: '80%',
+        backgroundColor: 'skyblue',
         paddingHorizontal: 20,
         paddingVertical: 30,
         borderRadius: 20,
@@ -96,4 +88,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AlertSuccess
+export default NutrientInfo

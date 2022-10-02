@@ -5,9 +5,9 @@ import AuthContext from '../../context/AuthContext'
 const Profile = ({navigation}) => {
 
   const {user} = useContext(AuthContext)
-  const username = user.username
-  const gender = user.gender
-  const age = user.age
+  const username = 'user.username'
+  const gender = 'user.gender'
+  const age = 'user.age'
 
   return (
     <SafeAreaView>

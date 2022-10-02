@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react'
 import {View, StyleSheet, TextInput, Text, TouchableOpacity} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import { foods } from '../database/food';
+import { foods } from '../../database/food';
 
 
 const SelectFood = ({filterFoodToAdd}) => {

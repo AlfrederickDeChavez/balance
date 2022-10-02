@@ -1,103 +1,72 @@
-import { SafeAreaView,View, Text, ScrollView, StyleSheet, StatusBar} from 'react-native'
-import React from 'react'
+import { SafeAreaView,View, Text, ScrollView, StyleSheet, StatusBar, TouchableOpacity} from 'react-native'
+import {useState} from 'react'
 import Header from '../../components/header'
-import { macronutrients , vitamins} from '../../database/nutrients'
-import ProgressGraph from '../../components/ProgressGraph'
+import EvaluationGuide from '../../components/DashboardView/EvaluationGuide'
+import Summary from '../../components/DashboardView/Summary'
+import Evaluation from '../../components/DashboardView/Evaluation'
 
 const Dashboard = () => {
 
+  const [showSummary, setShowSummary] = useState(true)
+  const [showEvaluation, setShowEvaluation] = useState(false)
 
+  const toggleSummary = () => {
+    setShowEvaluation(false)
+    setShowSummary(true)
+  }
+
+  const toggleEvaluation = () => {
+    setShowSummary(false)
+    setShowEvaluation(true)
+  }
 
   return (
     <SafeAreaView>
       <StatusBar/>
       <Header/>
-      <ScrollView style={{marginBottom: 60, backgroundColor: '#ddd'}}>
-        <View style={styles.performanceContainer}>
-          <View style={styles.title}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Your Performance</Text>
-          </View>
-          <View style={styles.performanceBox}>
-
-          </View>
-        </View>
-        <View style={styles.macronutrientsContainer}>
-          <View style={styles.title}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Macronutrients</Text>
-          </View>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {
-            macronutrients.map((macronutrient, index) => {
-              return (
-                <View key={index} style={styles.macronutrientBox}>
-                  <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>{macronutrient.name}</Text>
-                    {/* Graph */}
-                    <ProgressGraph recommended={macronutrient.recommended}/>
-                    <Text style={{color: '#fff'}}>Recommended: {macronutrient.recommended}</Text>
-
-                </View>
-              )
-            })
-          }
-          <View style={{width: 40}}></View>
-          </ScrollView>
+      <View style={styles.performanceContainer}>
+        <View style={styles.title}>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>Your Dietary Evaluation Guide</Text>
         </View>
 
-        <View style={styles.macronutrientsContainer}>
-          <View style={styles.title}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Vitamins</Text>
-          </View>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} bounces={true}>
-          {
-            vitamins.map((vitamin, index) => {
-              return (
-                <View key={index} style={styles.vitaminsBox}>
-                  <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>{vitamin.name}</Text>
-                  
-                  {/* Graph */}
-                  <ProgressGraph recommended={vitamin.recommended}/>
-                  <Text style={{color: '#fff'}}>Recommended: {vitamin.recommended}</Text>
+        {/* Evaluation Graph */}
+        <EvaluationGuide />
 
-                </View>
-              )
-            })
-          }
-          <View style={{width: 40}}></View>
-          </ScrollView>
-        </View>
+      </View>
 
-        <View style={styles.macronutrientsContainer}>
-          <View style={styles.title}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Minerals</Text>
-          </View>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {
-            macronutrients.map((macronutrient, index) => {
-              return (
-                <View key={index} style={styles.mineralsBox}>
-                  <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>{macronutrient.name}</Text>
-                  {/* Graph */}
-                  <ProgressGraph recommended={macronutrient.recommended}/>
-                  <Text style={{color: '#fff'}}>Recommended: {macronutrient.recommended}</Text>
-                </View>
-              )
-            })
-          }
-          <View style={{width: 40}}></View>
-          </ScrollView>
-        </View>
-      </ScrollView>
+      {/* Navigation */}
+
+      <View style={styles.navBar}>
+        <TouchableOpacity style={[styles.navBtn, {backgroundColor: showSummary ? '#0CA036' : '#FFF'}]}
+          onPress={toggleSummary}
+        >
+          <Text style={[styles.navText, {color: showSummary ? '#FFF' : '#0CA036'}]}>Summary</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.navBtn, {backgroundColor: showEvaluation ? '#0CA036' : '#FFF'}]}
+          onPress={toggleEvaluation}
+        >
+          <Text style={[styles.navText, {color: showEvaluation ? '#FFF' : '#0CA036'}]}>Evaluation</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Summary Tab */}
+
+      { showSummary && 
+        <Summary />
+      }
+
+      {/* Evaluation Tab */}
+
+      {
+        showEvaluation && 
+
+        <Evaluation />
+      }
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
-  performanceContainer: {
-    height: 200,
-    width: '100%',
-    paddingVertical: 5,
-    paddingRight: 20,
-  }, 
 
   title: {
     flexDirection: 'row',
@@ -107,65 +76,41 @@ const styles = StyleSheet.create({
     marginHorizontal: 25, 
   },
 
-  performanceBox: {
-    width: '93%',
-    height: 150,
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    marginRight: 10,
-    marginLeft: 25,
-    marginTop: 10,
-    shadowColor: '#ccc',
+  navBar: {
+    width: '100%',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    paddingHorizontal: 25,
+    paddingVertical: 10,
+    shadowColor: '#bbb',
     shadowOffset: {width: 4, height: 4},
     shadowOpacity: 0.8,
   },
-  macronutrientsContainer: {
-    height: 200,
+
+  navBtn: {
+    width: '50%',
+    borderColor: '#0CA036',
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    paddingVertical: 7,
+    marginHorizontal: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  navText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  },
+
+  performanceContainer: {
+    height: 100,
     width: '100%',
     paddingVertical: 5,
+    backgroundColor: '#ddd'
   }, 
-  macronutrientBox: {
-    backgroundColor: '#B46ED2',
-    width: 250,
-    height: 150, 
-    margin: 5,
-    padding: 15,
-    right: 20,
-    left: 20,
-    borderRadius: 15,
-    shadowColor: '#ccc',
-    shadowOffset: {width: 4, height: 4},
-    shadowOpacity: 0.8,
-  }, 
-
-  vitaminsBox: {
-    backgroundColor: '#0CA',
-    width: 250,
-    height: 150, 
-    margin: 5,
-    padding: 15,
-    right: 20,
-    left: 20,
-    borderRadius: 15,
-    shadowColor: '#ccc',
-    shadowOffset: {width: 4, height: 4},
-    shadowOpacity: 0.8,
-  }, 
-
-  mineralsBox: {
-    backgroundColor: '#006DB2',
-    width: 250,
-    height: 150, 
-    margin: 5,
-    padding: 15,
-    right: 20,
-    left: 20,
-    borderRadius: 15,
-    shadowColor: '#ccc',
-    shadowOffset: {width: 4, height: 4},
-    shadowOpacity: 0.8,
-  }, 
-  
+ 
   
 })
 export default Dashboard

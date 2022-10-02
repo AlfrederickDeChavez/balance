@@ -3,7 +3,7 @@ import React, {useRef, useContext} from 'react'
 
 // Components 
 import Header from '../../components/header'
-import AddFood from '../../components/AddFood'
+import AddFood from '../../components/AddFood/AddFood'
 
 import { MaterialIcons, FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -17,7 +17,7 @@ const HomeScreen = () => {
   const addFoodRef = useRef()
   const screenHeight = Dimensions.get('window').height
 
-  const weight = 70
+  const weight = 60
   const height = 170
   const gender = 'Male'
   const bmi = calculateBMI(weight, height)
@@ -106,7 +106,7 @@ const HomeScreen = () => {
           }
         }}
       >
-        <AddFood />
+        <AddFood /> 
       </RBSheet>
 
     </SafeAreaView>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   healthStatus: {
     width: screenWidth * 0.7,
     height: 150,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     borderRadius: 15,
     marginRight: 10,
     marginLeft: 25,

@@ -4,42 +4,58 @@ import {View, StyleSheet, TextInput, TouchableOpacity, Text} from 'react-native'
 import InsertFood from './InsertFood';
 import SearchResult from './SearchResult';
 import SelectFood from './SelectFood'; 
-import { foods } from '../database/food';
+import { foods } from '../../database/food';
 
-import ContentContext from '../context/ContentContext';
-import AuthContext from '../context/AuthContext';
+import ContentContext from '../../context/ContentContext';
+import AuthContext from '../../context/AuthContext';
 import Scanner from './Scanner';
+import ConfirmAlert from './ConfirmAlert';
 
 const AddFood = () => {
+
+    // FOOD
+    const [foodToAdd, setFoodToAdd] = useState(
+        {
+            Calcium: 0,
+            Calories: 0,
+            Category: "",
+            Chloride: 0,
+            DietaryFiber: 0,
+            Flouride: 0,
+            Folate: 0,
+            Iodine: 0,
+            Iron: 0,
+            Magnesium: 0,
+            Name: "",
+            Niacin: 0,
+            Phosphorus: 0,
+            Potassium: 0,
+            Protein: 0,
+            Riboflavin: 0,
+            Selenium: 0,
+            Sodium: 0,
+            Thiamin: 0,
+            Vitamin_A: 0,
+            Vitamin_B12: 0,
+            Vitamin_B6: 0,
+            Vitamin_C: 0,
+            Vitamin_D: 0,
+            Vitamin_E: 0,
+            Vitamin_K: 0,
+            Zinc: 0,
+            amount: 0,
+            quantity: 0,
+        }
+    )
 
     //NUTRIENTS STATE 
     const [foodName, setFoodName] = useState('')
     const [foodCategory, setFoodCategory] = useState('')
-    const [calories, setCalories] = useState(0)
-    const [protein, setProtein] = useState(0)
-    const [fiber, setFiber] = useState(0)
-    const [vitaminA, setVitaminA] = useState(0)
-    const [vitaminD, setVitaminD] = useState(0)
-    const [vitaminE, setVitaminE] = useState(0)
-    const [vitaminK, setVitaminK] = useState(0)
-    const [thiamin, setThiamin] = useState(0)
-    const [riboflavin, setRiboflavin] = useState(0)
-    const [niacin, setNiacin] = useState(0)
-    const [vitaminB6, setVitaminB6] = useState(0)
-    const [vitamin12, setVitamin12] = useState(0)
-    const [folate, setFolate] = useState(0)
-    const [vitaminC, setVitaminC] = useState(0)
-    const [iron, setIron] = useState(0)
-    const [zinc, setZinc] = useState(0)
-    const [selenium, setSelenium] = useState(0)
-    const [iodine, setIodine] = useState(0)
-    const [calcium, setCalcium] = useState(0)
-    const [magnesium, setMagnesium] = useState(0)
-    const [phosphorus, setPhosphorus] = useState(0)
-    const [flouride, setFlouride] = useState(0)
-    const [sodium, setSodium] = useState(0)
-    const [chloride, setChloride] = useState(0)
-    const [potassium, setPotassium] = useState(0)
+    
+
+    // CONFIRM ACTION
+    const [confirm, setConfirm] = useState(false)
+
 
     // MEASURE
     const [amount, setAmount] = useState(0)
@@ -89,15 +105,17 @@ const AddFood = () => {
 
     const [openCamera, setOpenCamera] = useState(false)
 
-    // FOOD TO ADD STAT
-    const [foodToAdd, setFoodToAdd] = useState()
-    const [selectedCategory, setSelectedCategory] = useState('') 
-    const [selectedFood, setSelectedFood] = useState(null) 
-
     // SEND FOOD
     const filterFoodToAdd = (category, name) => {
         const foodtoadd = foods.filter(food => food.Category == String(category) && food.Name == String(name))[0]
-        console.log({...foodtoadd, quantity: quantity, amount: amount})  
+        console.log({...foodtoadd, quantity: quantity, amount: amount}) 
+        setFoodToAdd({...foodtoadd, quantity: quantity, amount: amount}) 
+    }
+
+    const confirmFoodAdd = () => {
+        if (foodToAdd.Name){
+            setConfirm(true)
+        }
     }
 
     return (
@@ -162,7 +180,7 @@ const AddFood = () => {
 
                     {
                         openCamera ? 
-                        <Scanner setOpenCamera={setOpenCamera}/> : 
+                        <Scanner setOpenCamera={setOpenCamera} visible={confirm} setVisible={setConfirm} setFoodToAdd={setFoodToAdd}/> : 
                         <TouchableOpacity
                             style={styles.openCameraBtn}
                             onPress={() => setOpenCamera(true)}
@@ -194,10 +212,17 @@ const AddFood = () => {
 
             <TouchableOpacity 
                 style={styles.addFoodBtn}
-                onPress={() => sendFood()}
+                onPress={confirmFoodAdd}
             >
                 <Text style={styles.addFoodText}>Add</Text>
             </TouchableOpacity>
+
+            <ConfirmAlert 
+                visible={confirm}
+                setVisible={setConfirm}
+                food={foodToAdd}
+                setFood={setFoodToAdd}
+            />
         </View>
     )
 }

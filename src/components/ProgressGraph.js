@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 
-const ProgressGraph = ({recommended}) => {
+const ProgressGraph = ({recommended, intake}) => {
     
-    const [intake, setIntake] = useState(1)
+    const [intakeAmount, setIntakeAmount] = useState(intake)
     const progressBarWidth = (recommended/recommended) * 100
 
     return (
         <View style={styles.container}>
-        <Text style={styles.progressText}>{((intake/recommended) * 100).toFixed(1)}%</Text>
         <View style={[styles.progressBar, {width: `${progressBarWidth}%`}]}>
-            <View style={[styles.progress, {width: `${(intake / recommended) * 100}%`}]}></View>
+            <View style={[styles.progress, {width: `${(intakeAmount / recommended) * 100}%`}]}></View>
         </View>
+        <Text style={styles.progressText}>{((intakeAmount/recommended) * 100).toFixed(1)}%</Text>
         </View>
     )
 }

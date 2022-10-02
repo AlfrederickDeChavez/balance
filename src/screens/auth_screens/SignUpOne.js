@@ -47,10 +47,10 @@ const SignUpOne = ({navigation}) => {
 
   const updateOffset = (e) => {
     SetOffSet(e.nativeEvent.contentOffset.x)
-    if(offSet <= width / 8) {
-      setShowLogin(true)
-    } else if (offSet === width) {
+    if(offSet <= width/4) {
       setShowLogin(false)
+    } else if (offSet >= width * 0.25) {
+      setShowLogin(true)
     }
   } 
 
@@ -257,7 +257,6 @@ const SignUpOne = ({navigation}) => {
             <Paginator scrollX={scrollX}/>
 
             <TouchableOpacity 
-              // onPress={() => console.log()}
               onPress={showLogin ? register : goNext}
             > 
             
@@ -420,7 +419,7 @@ const styles = StyleSheet.create({
   goBack: {
     width: 50,
     height: 50, 
-    borderRadius: '50%',
+    borderRadius: 25,
     backgroundColor: 'white',
     display: 'flex',
     alignItems: 'center',
@@ -433,7 +432,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 50,
     marginBottom: 20,
-    borderRadius: '50%',
+    borderRadius: 25,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
