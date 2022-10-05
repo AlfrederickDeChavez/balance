@@ -29,7 +29,6 @@ export const foodsBarcode = [
         Vitamin_E: 0,
         Vitamin_K: 0,
         Zinc: 0,
-        amount: 0,
-        quantity: 0,
+        Quantity: 1,
     }
 ]

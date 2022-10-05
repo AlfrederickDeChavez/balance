@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import {View, StyleSheet, TextInput, Text, TouchableOpacity} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import { foods } from '../../database/food';
+import { Foods } from '../../database/FoodNutrientContent';
 
 
 const SelectFood = ({filterFoodToAdd}) => {
@@ -12,6 +12,9 @@ const SelectFood = ({filterFoodToAdd}) => {
 
     const [foodNames, setFoodNames] = useState([])
     const foodCategories = [
+        'Fruits',
+        'Vegetables',
+        'Proteins',
         'Dairy Products', 
         'Spices and Herbs',
         'Fats and Oils',
@@ -27,7 +30,7 @@ const SelectFood = ({filterFoodToAdd}) => {
 
     const filterFoods = (item) => {
         setSelectedCategory(item)
-        const filteredFood = foods.filter(food => food.Category == item)
+        const filteredFood = Foods.filter(food => food.Category == item)
         const names = []
         filteredFood.map(food => names.unshift(food.Name))
         setFoodNames(names)

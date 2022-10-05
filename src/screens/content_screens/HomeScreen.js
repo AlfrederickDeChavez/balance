@@ -9,6 +9,8 @@ import { MaterialIcons, FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicon
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { calculateBMI, interpretBMI } from '../../functions/BMICalculator'
 import AuthContext from '../../context/AuthContext'
+import { getEstimatedAverage } from '../../functions/EstimatedAverage'
+import { getRecommendedIntake } from '../../functions/RecommendedIntakes'
 
 const HomeScreen = () => {
 
@@ -22,6 +24,8 @@ const HomeScreen = () => {
   const gender = 'Male'
   const bmi = calculateBMI(weight, height)
   const userBMI = interpretBMI(bmi, gender)
+  const esAvgReq = getEstimatedAverage(4, gender)
+  const recNutIntake = getRecommendedIntake(23, 'Male')
 
   return (
     <SafeAreaView>
@@ -82,7 +86,7 @@ const HomeScreen = () => {
             <Ionicons name='bicycle' size={60} color='#b1b1b1' style={{marginLeft: 15}}/>
               <TouchableOpacity 
                 style={styles.addBtn}
-                onPress={() => logoutUser()}
+                onPress={() => console.log(recNutIntake.protein)} 
               >
                 <AntDesign name='pluscircle' size={15} color='#0CA036' />
                 <Text style={{marginLeft: 5, fontWeight: 'bold'}}>ADD EXERCISE</Text>

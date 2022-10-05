@@ -1,10 +1,14 @@
-import { StyleSheet, View, Text, TextInput } from "react-native"
+import { StyleSheet, View, Text, TextInput, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native"
+import { useState } from "react"
 
-const MacronutrientsInput = () => {
+const MacronutrientsInput = ({foodToAdd, setFoodToAdd}) => {
+
   return (
-    <>
-        <View style={styles.macronutrientsView}>
-                <View style={styles.macronutrientsContent}>
+    <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+    >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.macronutrientsView}>
+                <View style={styles.macronutrientsContent}> 
                     <View style={styles.leftView}>
                         <View style={styles.nutrientInputBox}>
                             <Text style={styles.nutrientName}>Calories</Text>
@@ -12,6 +16,8 @@ const MacronutrientsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
+                                value={foodToAdd.Calories}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Calories: val}) : setFoodToAdd({...foodToAdd, Calories: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -20,7 +26,8 @@ const MacronutrientsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-
+                                value={foodToAdd.Protein}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Protein: val}) : setFoodToAdd({...foodToAdd, Protein: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -29,31 +36,14 @@ const MacronutrientsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-                            />
-                        </View>
-                    </View>
-                    <View style={styles.rightView}>
-                        <View style={styles.nutrientInputBox}>
-                                <Text style={styles.nutrientName}>Linolenic Acid</Text>
-                                <TextInput 
-                                    style={styles.nutrientInput}
-                                    keyboardType='numeric'
-                                    placeholder='0.0'
-
-                                />
-                        </View>
-                        <View style={styles.nutrientInputBox}>
-                            <Text style={styles.nutrientName}>a Linolenic Acid</Text>
-                            <TextInput 
-                                style={styles.nutrientInput}
-                                keyboardType='numeric'
-                                placeholder='0.0'
+                                value={foodToAdd.DietaryFiber}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, DietaryFiber: val}) : setFoodToAdd({...foodToAdd, DietaryFiber: 0})}}
                             />
                         </View>
                     </View>
                 </View>      
-            </View>
-    </>
+            </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   )
 }
 

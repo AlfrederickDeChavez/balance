@@ -26,7 +26,7 @@ const ContentStack = () => {
 
     return (
         <Tab.Navigator
-        initialRouteName='Dashboard'
+        initialRouteName='Home'
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, size, color}) => {
             let iconName; 

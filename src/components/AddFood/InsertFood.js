@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { View, StyleSheet, TextInput, Text ,TouchableOpacity} from "react-native"
+import { View, StyleSheet, TextInput, Text ,TouchableOpacity, Keyboard, KeyboardAvoidingView, Platform} from "react-native"
 import MacronutrientsInput from "./MacronutrientsInput"
 import MineralsInput from "./MineralsInput"
 import VitaminsInput from "./VitaminsInput"
 
-const InsertFood = () => {
+const InsertFood = ({visible, setVisible, foodToAdd, setFoodToAdd}) => {
 
     const [inputMacros, setInputMacros] = useState(true)
     const [inputVitamins, setInputVitamins] = useState(false)
@@ -29,11 +29,15 @@ const InsertFood = () => {
         setInputMinerals(true)
     }
   return (
-    <>
+    <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
         <View>
             <TextInput
                 style={styles.foodNameInput}
                 placeholder='Enter food name'
+                onChangeText={(val) => setFoodToAdd({...foodToAdd, Name: `${val}`})}
+                value={String(foodToAdd.Name)}
             />
 
             <TextInput
@@ -64,18 +68,18 @@ const InsertFood = () => {
                 </TouchableOpacity>
             </View>
             {
-                inputMacros && <MacronutrientsInput />
+                inputMacros && <MacronutrientsInput setFoodToAdd={setFoodToAdd} foodToAdd={foodToAdd}/>
             }
                 
             {
-                inputVitamins && <VitaminsInput />
+                inputVitamins && <VitaminsInput setFoodToAdd={setFoodToAdd} foodToAdd={foodToAdd}/>
             }
             
             {
-                inputMinerals && <MineralsInput />
+                inputMinerals && <MineralsInput setFoodToAdd={setFoodToAdd} foodToAdd={foodToAdd} />
             }
         </View>
-    </>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -91,6 +95,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         backgroundColor: 'green',
         marginVertical: 10,
+        color: '#FFF',
     },
 
     quantityInput: {
@@ -99,7 +104,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 5,
         backgroundColor: 'green',
-        marginBottom: 10
+        marginBottom: 10,
+        color: '#FFF',
     },
 
     nutritionLabel: {

@@ -1,9 +1,12 @@
 import {ScrollView, View, Text, TouchableOpacity, StyleSheet} from 'react-native'
-import { macronutrients , vitamins} from '../../database/nutrients'
+import {  vitamins} from '../../database/nutrients'
 import ProgressGraph from '../../components/ProgressGraph'
+import { useContext } from 'react'
+import ContentContext from '../../context/ContentContext'
 
 const Summary = () => {
 
+    const { macronutrients } = useContext(ContentContext)
     return (
         
         <ScrollView style={{marginBottom: 200, backgroundColor: '#ddd'}}>
@@ -16,7 +19,7 @@ const Summary = () => {
             {
                 macronutrients.map((macronutrient, index) => {
                 return (
-                    <View key={index} style={[styles.macronutrientBox, {backgroundColor: macronutrient.color}]}>
+                    <View key={index} style={[styles.macronutrientBox, {backgroundColor: '#795C34'}]}>
                     
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>{macronutrient.name}</Text>
                         {/* Graph */}
@@ -25,6 +28,7 @@ const Summary = () => {
                 )
                 })
             }
+            
             <View style={{width: 40}}></View>
             </ScrollView>
             </View>

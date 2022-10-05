@@ -5,7 +5,7 @@ export const macronutrients = [
         recommended: 87,
         color: '#795C34',
     },
-    {
+    { 
         name: 'Carbohydrates',
         intake: 55,
         recommended: 76,
@@ -24,7 +24,6 @@ export const macronutrients = [
         intake: 79,
         recommended: 98,
         color: '#795C34',
-
     },
 
 ]

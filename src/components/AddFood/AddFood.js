@@ -4,7 +4,7 @@ import {View, StyleSheet, TextInput, TouchableOpacity, Text} from 'react-native'
 import InsertFood from './InsertFood';
 import SearchResult from './SearchResult';
 import SelectFood from './SelectFood'; 
-import { foods } from '../../database/food';
+import { Foods } from '../../database/FoodNutrientContent';
 
 import ContentContext from '../../context/ContentContext';
 import AuthContext from '../../context/AuthContext';
@@ -12,6 +12,9 @@ import Scanner from './Scanner';
 import ConfirmAlert from './ConfirmAlert';
 
 const AddFood = () => {
+
+    // CONTEXT
+    const [visible, setVisible] = useState(false)
 
     // FOOD
     const [foodToAdd, setFoodToAdd] = useState(
@@ -43,8 +46,7 @@ const AddFood = () => {
             Vitamin_E: 0,
             Vitamin_K: 0,
             Zinc: 0,
-            amount: 0,
-            quantity: 0,
+            Quantity: 1,
         }
     )
 
@@ -52,18 +54,10 @@ const AddFood = () => {
     const [foodName, setFoodName] = useState('')
     const [foodCategory, setFoodCategory] = useState('')
     
-
-    // CONFIRM ACTION
-    const [confirm, setConfirm] = useState(false)
-
-
     // MEASURE
     const [amount, setAmount] = useState(0)
     const [quantity, setQuantity] = useState(0)
 
-    // CONTEXT DATA
-    const {addFood, getFoods} = useContext(ContentContext)
-    const {authtokens} = useContext(AuthContext)
 
     // NAVIGATION STATE
     const [selectFood, setSelectFood] = useState(true)
@@ -107,14 +101,14 @@ const AddFood = () => {
 
     // SEND FOOD
     const filterFoodToAdd = (category, name) => {
-        const foodtoadd = foods.filter(food => food.Category == String(category) && food.Name == String(name))[0]
+        const foodtoadd = Foods.filter(food => food.Category == String(category) && food.Name == String(name))[0]
         console.log({...foodtoadd, quantity: quantity, amount: amount}) 
-        setFoodToAdd({...foodtoadd, quantity: quantity, amount: amount}) 
+        setFoodToAdd({...foodtoadd, Quantity: 1}) 
     }
-
+ 
     const confirmFoodAdd = () => {
         if (foodToAdd.Name){
-            setConfirm(true)
+            setVisible(true)
         }
     }
 
@@ -169,7 +163,7 @@ const AddFood = () => {
 
             {/* Inserting food to input */}
             {
-                insertFood && <InsertFood/>
+                insertFood && <InsertFood foodToAdd={foodToAdd} setFoodToAdd={setFoodToAdd}/>
             }
 
             {/* Scan Barcode to input */}
@@ -177,10 +171,10 @@ const AddFood = () => {
                 scanBarcode && 
                 
                 <View style={styles.scanBarcodeView}>
-
+ 
                     {
                         openCamera ? 
-                        <Scanner setOpenCamera={setOpenCamera} visible={confirm} setVisible={setConfirm} setFoodToAdd={setFoodToAdd}/> : 
+                        <Scanner visible={visible} setVisible={setVisible} setOpenCamera={setOpenCamera} setFoodToAdd={setFoodToAdd}/> : 
                         <TouchableOpacity
                             style={styles.openCameraBtn}
                             onPress={() => setOpenCamera(true)}
@@ -218,8 +212,8 @@ const AddFood = () => {
             </TouchableOpacity>
 
             <ConfirmAlert 
-                visible={confirm}
-                setVisible={setConfirm}
+                visible={visible}
+                setVisible={setVisible}
                 food={foodToAdd}
                 setFood={setFoodToAdd}
             />

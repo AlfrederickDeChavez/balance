@@ -47,10 +47,10 @@ const SignUpOne = ({navigation}) => {
 
   const updateOffset = (e) => {
     SetOffSet(e.nativeEvent.contentOffset.x)
-    if(offSet <= width/4) {
-      setShowLogin(false)
-    } else if (offSet >= width * 0.25) {
+    if(offSet <= width * 0.2) {
       setShowLogin(true)
+    } else if (offSet >= width * 0.8) {
+      setShowLogin(false)
     }
   } 
 

@@ -8,11 +8,12 @@ export default AuthContext;
 export const AuthProvider = ({children}) => {
 
     // DOMAIN 
-    const host = '127.0.0.1'
+    const host = '192.168.1.13'
 
     // AUTHENTICATION
-    const [authtokens, setAuthTokens] = useState(null)
+    const [authtokens, setAuthTokens] = useState()
     const [user, setUser] = useState(null)
+    const [loggingIn, setLoggingIn] = useState(false)
 
     // ADDING FOOD TO DATABASE - POST 
     const addFood = async (food) => {
@@ -33,8 +34,7 @@ export const AuthProvider = ({children}) => {
         try {
             await AsyncStorage.setItem('token', token)
             const authtoken = await AsyncStorage.getItem('token')
-            setAuthTokens(JSON.parse(authtoken)) 
-            
+            setAuthTokens(JSON.parse(authtoken))     
         } 
         catch (e) {
             console.log('store token error' + e)
@@ -75,7 +75,7 @@ export const AuthProvider = ({children}) => {
 
     // USER ALREADY HAVE AN ACCOUNT AND READY FOR AUTHENTICATION
     const loginUser = async (email, password) => {
-        console.log('Logged In')
+        setLoggingIn(true)
         let response = await fetch(`http://${host}:8000/accounts/login/`, {
             method: 'POST',
             headers: {
@@ -87,11 +87,14 @@ export const AuthProvider = ({children}) => {
 
         let data = await response.json()
         
+        setLoggingIn(false)
         if (response.status === 200) {
             storeToken(JSON.stringify(data))
         } else {
             alert('Something went wrong')
-        }
+        } 
+
+
     }
 
     // GETTING THE PERSONAL INFORMATION UPON COMPONENT LOAD
@@ -102,7 +105,7 @@ export const AuthProvider = ({children}) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${authtokens.access}`,
             },
-        })
+        }) 
 
         let data = await response.json()
         console.log(data)
@@ -111,14 +114,17 @@ export const AuthProvider = ({children}) => {
 
     // REMOVE TOKENS FROM ASYNC STORAGE
     const logoutUser = async () => {
-        try {
-            setAuthTokens(null)
-            await AsyncStorage.removeItem('token')
-        }
+        // try {
+        //     setAuthTokens(null)
+        //     await AsyncStorage.removeItem('token')
+        // }
 
-        catch (e) {
-            console.log('Logged Out User Error Not Working')
-        }
+        // catch (e) {
+        //     console.log('Logged Out User Error Not Working')
+        // }
+
+        const authtoken = await AsyncStorage.getItem('token')
+        console.log(authtoken)
     }
 
     // DATA AND FUNCTIONS TO BE PASSED TO OTHER COMPONENTS
@@ -130,6 +136,7 @@ export const AuthProvider = ({children}) => {
         logoutUser: logoutUser,
         fetchUserData: fetchUserData,
         user: user,
+        loggingIn: loggingIn
     }
 
     return (

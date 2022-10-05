@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     progressBar: {
-        height: 30,
+        height: 25,
         borderWidth: 2,
         borderColor: '#fff',
         padding: 2,
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         color: '#fff'
     }
-
 
 })
 

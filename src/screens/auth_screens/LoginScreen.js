@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import { SafeAreaView, Text , Dimensions, StyleSheet, View, TextInput, TouchableOpacity, StatusBar, Image} from 'react-native'
+import { SafeAreaView, Text , Dimensions, StyleSheet, View, TextInput, TouchableOpacity, StatusBar, Image, ActivityIndicator} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import AuthContext from '../../context/AuthContext'
 
@@ -8,7 +8,7 @@ const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const {loginUser} = useContext(AuthContext)
+  const {loginUser, loggingIn} = useContext(AuthContext)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,6 +60,17 @@ const LoginScreen = ({navigation}) => {
             <Text style={{color: 'white'}} >  Create an account.</Text>
           </TouchableOpacity> 
         </View>
+
+        {
+          loggingIn && 
+          <ActivityIndicator size='large' color='green' style={{
+            position: 'absolute',
+            top: 0,
+            bottom: '70%',
+            left: 0,
+            right: 0
+          }}/>
+        }
       </LinearGradient>
     </SafeAreaView>
   )

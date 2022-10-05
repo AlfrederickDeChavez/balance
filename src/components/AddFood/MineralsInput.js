@@ -1,9 +1,11 @@
-import { StyleSheet, View, Text, TextInput } from "react-native"
+import { StyleSheet, View, Text, TextInput, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform } from "react-native"
 
-const MineralsInput = () => {
+const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
   return (
-    <>
-        <View style={styles.mineralsView}>
+    <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.mineralsView}>
                 <View style={styles.mineralsContent}>
                     <View style={styles.leftView}>
                         <View style={styles.nutrientInputBox}>
@@ -12,6 +14,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
+                                value={foodToAdd.Iron}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Iron: val}) : setFoodToAdd({...foodToAdd, Iron: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -20,7 +24,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-
+                                value={foodToAdd.Zinc}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Zinc: val}) : setFoodToAdd({...foodToAdd, Zinc: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -29,7 +34,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-
+                                value={foodToAdd.Selenium}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Selenium: val}) : setFoodToAdd({...foodToAdd, Selenium: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -38,7 +44,8 @@ const MineralsInput = () => {
                                     style={styles.nutrientInput}
                                     keyboardType='numeric'
                                     placeholder='0.0'
-
+                                    value={foodToAdd.Iodine}
+                                    onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Iodine: val}) : setFoodToAdd({...foodToAdd, Iodine: 0})}}
                                 />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -47,7 +54,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-
+                                value={foodToAdd.Calcium}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Calcium: val}) : setFoodToAdd({...foodToAdd, Calcium: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -56,7 +64,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-
+                                value={foodToAdd.Magnesium}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Magnesium: val}) : setFoodToAdd({...foodToAdd, Magnesium: 0})}}
                             />
                         </View>
                     </View>
@@ -67,6 +76,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
+                                value={foodToAdd.Phosphorus}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Phosphorus: val}) : setFoodToAdd({...foodToAdd, Phosphorus: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -75,7 +86,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-
+                                value={foodToAdd.Flouride}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Flouride: val}) : setFoodToAdd({...foodToAdd, Flouride: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -84,7 +96,8 @@ const MineralsInput = () => {
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
                                 placeholder='0.0'
-
+                                value={foodToAdd.Sodium}
+                                onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Sodium: val}) : setFoodToAdd({...foodToAdd, Sodium: 0})}}
                             />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -93,7 +106,8 @@ const MineralsInput = () => {
                                     style={styles.nutrientInput}
                                     keyboardType='numeric'
                                     placeholder='0.0'
-
+                                    value={foodToAdd.Chloride}
+                                    onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Chloride: val}) : setFoodToAdd({...foodToAdd, Chloride: 0})}}
                                 />
                         </View>
                         <View style={styles.nutrientInputBox}>
@@ -102,13 +116,14 @@ const MineralsInput = () => {
                                     style={styles.nutrientInput}
                                     keyboardType='numeric'
                                     placeholder='0.0'
-
+                                    value={foodToAdd.Potassium}
+                                    onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Potassium: val}) : setFoodToAdd({...foodToAdd, Potassium: 0})}}
                                 />
                         </View>
                     </View>
                 </View>      
-            </View>
-    </>
+            </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -158,6 +173,7 @@ const styles = StyleSheet.create({
         width: '40%',
         paddingHorizontal: 5,
         paddingVertical: 8,
+        color: '#FFF'
     },
 
     nutrientName: {

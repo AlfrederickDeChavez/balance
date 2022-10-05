@@ -1,7 +1,13 @@
-import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity} from "react-native"
-import { useState, useEffect, useRef} from "react"
+import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, ActivityIndicator} from "react-native"
+import { useState, useEffect, useRef, useContext} from "react"
+import AuthContext from "../../context/AuthContext"
+import ContentContext from "../../context/ContentContext"
 
 const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
+
+    // CONTEXT DATA
+    const {addFood, getFoods, isLoading, showConfirm, setShowConfirm} = useContext(ContentContext)
+    const {authtokens} = useContext(AuthContext)
 
     const [showAlert, setShowAlert] = useState(visible)
     const scaleValue = useRef(new Animated.Value(0)).current
@@ -56,13 +62,15 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
         Vitamin_E: 0,
         Vitamin_K: 0,
         Zinc: 0,
-        amount: 0,
-        quantity: 0,
+        Quantity: 1,
     }
-
+ 
     const confirm = () => {
-        setVisible(false)
-        setFood(defaultFood)
+        addFood(food, authtokens)
+        setTimeout(() => {
+            setVisible(false)
+            setFood(defaultFood)
+        }, 2000)    
     }
 
     const cancel = () => {
@@ -79,7 +87,7 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
                         <Text style={{fontWeight: 'bold', marginVertical: 5,}}>Macronutrients</Text>
                         <Text>Calories: {food.Calories} kcal</Text>
                         <Text>Protein: {food.Protein} g</Text>
-                        <Text>Dietary Fiber: 23 g</Text>
+                        <Text>Dietary Fiber: {food.DietaryFiber} g</Text>
 
                         <Text style={{fontWeight: 'bold', marginVertical: 5,}}>Vitamins</Text>
 
@@ -123,6 +131,18 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
                     </TouchableOpacity>
                 </Animated.View>
             </View>
+            {
+                isLoading && 
+                <ActivityIndicator size='large'
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                    }}
+                />
+            }
         </Modal>
     )
 }
