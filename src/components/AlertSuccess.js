@@ -1,9 +1,11 @@
-import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity} from "react-native"
-import { useState, useEffect, useRef} from "react"
-import { Ionicons } from '@expo/vector-icons'
+import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, ActivityIndicator} from "react-native"
+import { useState, useEffect, useRef, useContext} from "react"
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'
+import AuthContext from "../context/AuthContext"
 
-const AlertSuccess = ({visible, setVisible, response}) => {
+const AlertSuccess = ({visible, setVisible}) => {
 
+    const {response, setRegistered, deleteResponse} = useContext(AuthContext)
     const [showAlert, setShowAlert] = useState(visible)
     const scaleValue = useRef(new Animated.Value(0)).current
 
@@ -28,19 +30,44 @@ const AlertSuccess = ({visible, setVisible, response}) => {
             }).start()
         }
     }
+
+    const close = () => {
+        setVisible(false)
+        deleteResponse()
+    }
+
     return(
         <Modal transparent visible={showAlert}>
             <View style={styles.modal_bg}>
                 <Animated.View style={[styles.modal_container, {transform: [{scale: scaleValue}]}]}>
-                <View>
-                    <Ionicons name='checkmark-circle' style={styles.success_vector}/>
-                    <Text style={styles.account_created}>{response}</Text>
-                    </View>
+                    {
+                        response.response == 'success' ? 
+                        
+                        <View>
+                            <Ionicons name='checkmark-circle' style={[styles.success_vector]}/>
+                            <Text style={[styles.account_created, {color: '#0CA036'}]}>{response.message}</Text> 
+                        </View>
+                        : 
+
+                        response.response == 'error' ?
+
+                        <View>
+                            <MaterialIcons name='error' style={[styles.success_vector, {color: 'red'} ]}/>
+                            <Text style={[styles.account_created, {color: 'red'}]}>{response.message}</Text>
+                        </View>
+
+                        : 
+                        
+                        <View>
+                            <ActivityIndicator size='large' style={{alignSelf: 'center'}}/>
+                        </View>
+                        
+                    }
                     <TouchableOpacity 
-                    onPress={() => setVisible(false)}
+                    onPress={close}
                     style={styles.ok_btn}
                     >
-                    <Text style={styles.ok_text}>OK</Text>
+                    <Text style={styles.ok_text}>CLOSE</Text>
                     </TouchableOpacity>
                 
                 </Animated.View>
@@ -73,7 +100,6 @@ const styles = StyleSheet.create({
     },
 
     account_created: {
-        color: '#0CA036',
         fontSize: 25,
         fontWeight: 'bold',
         alignSelf: 'center',
@@ -81,7 +107,7 @@ const styles = StyleSheet.create({
     },
 
     ok_btn: {
-        borderTopColor: '#0CA036',
+        borderTopColor: '#222',
         borderTopWidth: 1,
         width: '100%',
         alignSelf: 'center',
@@ -92,7 +118,7 @@ const styles = StyleSheet.create({
     ok_text: {
         alignSelf: 'center',
         fontSize: 18,
-        color: '#0ca036'
+        color: '#222'
     }
 })
 

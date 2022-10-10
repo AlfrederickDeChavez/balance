@@ -21,9 +21,9 @@ import AuthContext from '../../context/AuthContext';
 const SignUpOne = ({navigation}) => {
 
   // Context API imports
-  const {registerUser} = useContext(AuthContext)
-  const response = 'Account Created'
-  const [visible, setVisible] = useState(false)
+  const {registerUser, registered} = useContext(AuthContext)
+  const [visible, setVisible] = useState(registered)
+
   // Window Dimensions 
   const {width} = useWindowDimensions()
 
@@ -90,12 +90,8 @@ const SignUpOne = ({navigation}) => {
   }
 
   const register = () => {
-    const response = registerUser(username, email, password, password2, age, gender, height, weight)
-    if (response.status == 200) {
-      setVisible(true)
-    } else {
-      alert('Failed')
-    }
+    registerUser(username, email, password, password2, age, gender, height, weight)
+    setVisible(true)
   }
 
   return (
@@ -283,7 +279,7 @@ const SignUpOne = ({navigation}) => {
 
       </View>
 
-      <AlertSuccess visible={visible} setVisible={setVisible} response={response}></AlertSuccess>
+      <AlertSuccess visible={visible} setVisible={setVisible}></AlertSuccess>
     </SafeAreaView>
   )
 }

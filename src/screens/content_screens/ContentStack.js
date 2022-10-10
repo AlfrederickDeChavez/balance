@@ -12,17 +12,11 @@ import HomeScreen from './HomeScreen'
 import Plan from './Plan'
 import Recommendations from './Recommendations.js'
 import AuthContext from '../../context/AuthContext';
+import ContentContext from '../../context/ContentContext';
 
 const Tab = createBottomTabNavigator()
 
-
 const ContentStack = () => {
-
-    const {fetchUserData} = useContext(AuthContext)
-
-    // useEffect(() => {
-    //   fetchUserData() 
-    // }, [])
 
     return (
         <Tab.Navigator

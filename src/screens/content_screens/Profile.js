@@ -5,9 +5,6 @@ import AuthContext from '../../context/AuthContext'
 const Profile = ({navigation}) => {
 
   const {user} = useContext(AuthContext)
-  const username = 'user.username'
-  const gender = 'user.gender'
-  const age = 'user.age'
 
   return (
     <SafeAreaView>
@@ -17,8 +14,8 @@ const Profile = ({navigation}) => {
       <View style={styles.profileContent}>
         <View style={styles.profileBox}>
           <View>
-            <Text style={styles.username}>{username}</Text>
-            <Text style={styles.personalInfo}>{gender} ** {age} years old</Text>
+            <Text style={styles.username}>{user.username}</Text>
+            <Text style={styles.personalInfo}>{user.gender} ** {user.age} years old</Text>
             <TouchableOpacity 
               style={styles.editProfile}
               onPress={() => console.log('Edit Profile Clicked')}

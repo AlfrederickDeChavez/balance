@@ -1,8 +1,8 @@
-const getUpperLimit = (age) => {
+export const getUpperLimit = (age) => {
     if(age >= 0 && age <= 3) {
         return {
             vitaminA: 600,
-            vitaminD: 50,
+            vitaminD: 50, 
             vitaminE: 200,
             niacin: 10,
             vitaminB6: 30,

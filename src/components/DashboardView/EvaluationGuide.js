@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
         width: '33%',
         fontSize: 10,
         fontWeight: 'bold',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        color: 'brown'
     },
 
     safety: {
@@ -93,7 +94,8 @@ const styles = StyleSheet.create({
         width: '34%',
         fontSize: 10,
         fontWeight: 'bold',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        color: 'green'
     },
 
     toxic: {
@@ -101,7 +103,8 @@ const styles = StyleSheet.create({
         width: '33%',
         fontSize: 10,
         fontWeight: 'bold',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        color: 'brown'
     },
 
 

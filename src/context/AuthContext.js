@@ -7,13 +7,15 @@ export default AuthContext;
 
 export const AuthProvider = ({children}) => {
 
-    // DOMAIN 
-    const host = '192.168.1.13'
+    // DOMAIN  
+    const host = '192.168.1.2'
 
     // AUTHENTICATION
     const [authtokens, setAuthTokens] = useState()
     const [user, setUser] = useState(null)
     const [loggingIn, setLoggingIn] = useState(false)
+    const [registered, setRegistered] = useState(false)
+    const [response, setResponse] = useState({'': ''})
 
     // ADDING FOOD TO DATABASE - POST 
     const addFood = async (food) => {
@@ -34,7 +36,10 @@ export const AuthProvider = ({children}) => {
         try {
             await AsyncStorage.setItem('token', token)
             const authtoken = await AsyncStorage.getItem('token')
-            setAuthTokens(JSON.parse(authtoken))     
+            setTimeout(() => {
+                setAuthTokens(JSON.parse(authtoken)) 
+            }, 500)
+               
         } 
         catch (e) {
             console.log('store token error' + e)
@@ -43,38 +48,48 @@ export const AuthProvider = ({children}) => {
 
 
     // FOR USER SIGN UP
-    const registerUser =  (username, email, password, password2, age, gender, height, weight) => {
+    const registerUser = async (username, email, password, password2, age, gender, height, weight) => {
 
-        // let registrationCredentials = {
-        //     'username': `${username}`,
-        //     'email': `${email}`,
-        //     'password': `${password}`,
-        //     'password2': `${password2}`,
-        //     'age': `${age}`,
-        //     'gender': `${gender}`,
-        //     'height': `${height}`,
-        //     'weight': `${weight}`
-        // }
+        let registrationCredentials = {
+            'username': `${username}`,
+            'email': `${email}`,
+            'password': `${password}`,
+            'password2': `${password2}`,
+            'age': `${age}`,
+            'gender': `${gender}`,
+            'height': `${height}`,
+            'weight': `${weight}`
+        }
 
-        // let response = await fetch(`http://${host}:8000/accounts/register/`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
+        try {
+        let response = await fetch(`http://${host}:8000/accounts/register/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
 
-        //     body: JSON.stringify(registrationCredentials)
-        // })
+            body: JSON.stringify(registrationCredentials)
+        })
 
-        // let data = await response.json()
-
-        const response = { status: 200 }
+        let data = await response.json()
         // Success or failed alert
-        return response
-          
+        
+        if (data.response == 'success') {
+           setResponse(data)
+        } else if (data.response == 'error') {
+            setResponse(data)
+        }
+
+        }
+        catch(e) {
+            alert('Something went wrong')
+        }
+        
     }
 
     // USER ALREADY HAVE AN ACCOUNT AND READY FOR AUTHENTICATION
     const loginUser = async (email, password) => {
+
         setLoggingIn(true)
         let response = await fetch(`http://${host}:8000/accounts/login/`, {
             method: 'POST',
@@ -87,23 +102,26 @@ export const AuthProvider = ({children}) => {
 
         let data = await response.json()
         
-        setLoggingIn(false)
         if (response.status === 200) {
+            fetchUserData(data)
             storeToken(JSON.stringify(data))
+            setLoggingIn(false)
         } else {
+            setLoggingIn(false)
             alert('Something went wrong')
         } 
 
 
+        
     }
 
     // GETTING THE PERSONAL INFORMATION UPON COMPONENT LOAD
-    const fetchUserData = async() => {
+    const fetchUserData = async(token) => {
         let response = await fetch(`http://${host}:8000/accounts/fetch_user/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${authtokens.access}`,
+                'Authorization': `Token ${token.access}`,
             },
         }) 
 
@@ -127,6 +145,10 @@ export const AuthProvider = ({children}) => {
         console.log(authtoken)
     }
 
+    const deleteResponse = () => {
+        setResponse({})
+    }
+
     // DATA AND FUNCTIONS TO BE PASSED TO OTHER COMPONENTS
     const contextData = {
         addFood: addFood,
@@ -136,8 +158,13 @@ export const AuthProvider = ({children}) => {
         logoutUser: logoutUser,
         fetchUserData: fetchUserData,
         user: user,
-        loggingIn: loggingIn
+        loggingIn: loggingIn,
+        registered: registered,
+        response: response,
+        deleteResponse: deleteResponse
     }
+
+
 
     return (
         <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

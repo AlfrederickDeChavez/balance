@@ -70,7 +70,7 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
         setTimeout(() => {
             setVisible(false)
             setFood(defaultFood)
-        }, 2000)    
+        }, 1000)    
     }
 
     const cancel = () => {

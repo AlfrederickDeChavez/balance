@@ -26,7 +26,7 @@ export default function AppNavigation() {
     */
 
     <NavigationContainer>
-        { true ? <ContentStack /> : <AuthStack />}
+        { authtokens ? <ContentStack /> : <AuthStack />}
     </NavigationContainer>
   )  
      

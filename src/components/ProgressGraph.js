@@ -3,15 +3,16 @@ import {StyleSheet, Text, View} from 'react-native'
 
 const ProgressGraph = ({recommended, intake}) => {
     
-    const [intakeAmount, setIntakeAmount] = useState(intake)
     const progressBarWidth = (recommended/recommended) * 100
 
     return (
         <View style={styles.container}>
         <View style={[styles.progressBar, {width: `${progressBarWidth}%`}]}>
-            <View style={[styles.progress, {width: `${(intakeAmount / recommended) * 100}%`}]}></View>
+            <View style={[styles.progress, {width: `${(intake.toFixed(1) / recommended) * 100}%`}]}></View>
         </View>
-        <Text style={styles.progressText}>{((intakeAmount/recommended) * 100).toFixed(1)}%</Text>
+        <Text style={styles.progressText}>{((intake.toFixed(1)/recommended) * 100).toFixed(1)}%</Text>
+        <Text style={{color: '#FFF', fontSize: 14, fontWeight: 'bold', marginBottom: 5}}>My Intake: {intake.toFixed(1)}</Text>
+        <Text style={{color: '#FFF', fontSize: 14, fontWeight: 'bold'}}>Recommended: {recommended}</Text>
         </View>
     )
 }

@@ -1,11 +1,20 @@
-import { SafeAreaView,View, Text, ScrollView, StyleSheet, StatusBar, TouchableOpacity} from 'react-native'
-import {useState} from 'react'
+import { SafeAreaView,View, Text, StyleSheet, StatusBar, TouchableOpacity} from 'react-native'
+import {useEffect, useState, useContext} from 'react'
 import Header from '../../components/header'
 import EvaluationGuide from '../../components/DashboardView/EvaluationGuide'
 import Summary from '../../components/DashboardView/Summary'
 import Evaluation from '../../components/DashboardView/Evaluation'
+import ContentContext from '../../context/ContentContext'
+import AuthContext from '../../context/AuthContext'
 
 const Dashboard = () => {
+
+  const {user} = useContext(AuthContext)
+  const {updateRecommended} = useContext(ContentContext)
+  
+  useEffect(() => {
+    updateRecommended(user.age, user.gender)
+  }, [])
 
   const [showSummary, setShowSummary] = useState(true)
   const [showEvaluation, setShowEvaluation] = useState(false)

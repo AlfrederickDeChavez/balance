@@ -3,14 +3,13 @@ import { Text, View, StyleSheet} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-const EvaluationBar = ({name, intakeAmount, recommendedAmount}) => {
+const EvaluationBar = ({name, intake, recommended, estimated, upperlimit}) => {
 
     const [position, setPosition] = useState(0)
 
-    const [intake, setIntake] = useState(intakeAmount)
-    const EsAvRe = 56
-    const ReDaAl = recommendedAmount
-    const ToUpLi = 103
+    const EsAvRe = estimated
+    const ReDaAl = recommended 
+    const ToUpLi = upperlimit
 
     useEffect(() => {
         moveMarker()
@@ -34,9 +33,8 @@ const EvaluationBar = ({name, intakeAmount, recommendedAmount}) => {
             const finalPos = pos > 98 ? 98 : pos
             setPosition(finalPos)
         }
-    }
+    } 
     
-
     return (
         <View style={styles.evaluationContainer}>
             <Text>{name}</Text>

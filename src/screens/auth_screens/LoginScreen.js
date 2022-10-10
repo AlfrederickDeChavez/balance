@@ -34,6 +34,7 @@ const LoginScreen = ({navigation}) => {
             <TextInput 
               style={styles.inputField}
               onChangeText={(val) => setEmail(val)}
+
             /> 
           </View>
           <View style={styles.formControl}>
@@ -53,7 +54,7 @@ const LoginScreen = ({navigation}) => {
         >
           <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>
-
+ 
         <View style={styles.signUpLink}>
           <Text>Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUpOne')}> 

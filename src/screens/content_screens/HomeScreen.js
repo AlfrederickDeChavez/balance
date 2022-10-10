@@ -1,5 +1,5 @@
 import { SafeAreaView,View, Text, ScrollView, StyleSheet, TouchableOpacity, StatusBar, Dimensions, Image} from 'react-native'
-import React, {useRef, useContext} from 'react'
+import React, {useRef, useContext, useEffect} from 'react'
 
 // Components 
 import Header from '../../components/header'
@@ -11,21 +11,23 @@ import { calculateBMI, interpretBMI } from '../../functions/BMICalculator'
 import AuthContext from '../../context/AuthContext'
 import { getEstimatedAverage } from '../../functions/EstimatedAverage'
 import { getRecommendedIntake } from '../../functions/RecommendedIntakes'
+import ContentContext from '../../context/ContentContext'
 
 const HomeScreen = () => {
 
   const {user, logoutUser} = useContext(AuthContext)
+  const {foods, getFoods, calories, updateRecommended} = useContext(ContentContext)
 
   const addFoodRef = useRef()
   const screenHeight = Dimensions.get('window').height
+  const bmi = calculateBMI(user.weight, user.height)
+  const userBMI = interpretBMI(bmi, user.gender)
+  
+  useEffect(() => {
+    getFoods()
+  }, [])
 
-  const weight = 60
-  const height = 170
-  const gender = 'Male'
-  const bmi = calculateBMI(weight, height)
-  const userBMI = interpretBMI(bmi, gender)
-  const esAvgReq = getEstimatedAverage(4, gender)
-  const recNutIntake = getRecommendedIntake(23, 'Male')
+
 
   return (
     <SafeAreaView>
@@ -35,9 +37,7 @@ const HomeScreen = () => {
       <View style={styles.healthStatusContainer}>
         <View style={styles.title}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Health</Text>
-          <MaterialIcons name='more-horiz' size={30}/>
         </View>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.healthStatus}>
             <Image 
               source={userBMI.imgSrc}
@@ -45,27 +45,21 @@ const HomeScreen = () => {
             />
             <View style={styles.bmiDetailsView}>
               <Text style={[styles.bmiStatus, {color: userBMI.color, fontSize: userBMI.fontSize}]}>{userBMI.status}</Text>
-              <Text style={styles.bmiHeight}>Height: <Text style={{color: userBMI.color, fontWeight: '800'}}>{height}</Text> cm</Text>
-              <Text style={styles.bmiWeight}>Weight: <Text style={{color: userBMI.color, fontWeight: '800'}}>{weight}</Text> kg</Text>
+              <Text style={styles.bmiHeight}>Height: <Text style={{color: userBMI.color, fontWeight: '800'}}>{user.height}</Text> cm</Text>
+              <Text style={styles.bmiWeight}>Weight: <Text style={{color: userBMI.color, fontWeight: '800'}}>{user.weight}</Text> kg</Text>
               <Text style={styles.bmiResult}>BMI: <Text style={{color: userBMI.color}}>{bmi}</Text></Text>
             </View>
           </View>
-          <View style={styles.calorieCount}>
 
-          </View>
-        </ScrollView>
       </View>
 
       <View style={styles.addContainer}>
         <View style={styles.title}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>Food</Text>
-          <MaterialIcons name='more-horiz' size={30}/>
+          <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 5,}}>Food</Text>
         </View>
         <View style={styles.add}>
           <FontAwesome5 name='utensils' size={50} color='#b1b1b1' style={{marginLeft: 15}}/>
           <View style={{alignItems: 'flex-end'}}>
-            <Text style={{fontSize: 10, marginBottom: 5}}>Scan Food Barcode</Text>
-            <MaterialCommunityIcons name='barcode-scan' size={25} color='green' onPress={() => alert('Scan food')}/>
             <TouchableOpacity 
               style={styles.addBtn} 
               onPress={() => addFoodRef.current.open()}
@@ -79,14 +73,13 @@ const HomeScreen = () => {
       
       <View style={styles.addContainer}>
         <View style={styles.title}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>Exercise</Text>
-          <MaterialIcons name='more-horiz' size={30}/>
+          <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 5}}>Exercise</Text>
         </View>
         <View style={styles.add}>
             <Ionicons name='bicycle' size={60} color='#b1b1b1' style={{marginLeft: 15}}/>
               <TouchableOpacity 
                 style={styles.addBtn}
-                onPress={() => console.log(recNutIntake.protein)} 
+                onPress={() => console.log('Add Exercise')} 
               >
                 <AntDesign name='pluscircle' size={15} color='#0CA036' />
                 <Text style={{marginLeft: 5, fontWeight: 'bold'}}>ADD EXERCISE</Text>
@@ -123,7 +116,8 @@ const styles = StyleSheet.create({
   healthStatusContainer: {
     height: 200,
     width: screenWidth,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingHorizontal: 25,
   }, 
 
   title: {
@@ -131,16 +125,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 5,
-    marginHorizontal: 25,
+
   },
 
   healthStatus: {
-    width: screenWidth * 0.7,
+    width: '100%',
     height: 150,
     backgroundColor: '#FFF',
     borderRadius: 15,
     marginRight: 10,
-    marginLeft: 25,
     marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',

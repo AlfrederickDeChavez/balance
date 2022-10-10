@@ -9,7 +9,7 @@ export const getEstimatedAverage = (age, gender) => {
                 riboflavin: 0.4,
                 niacin: 5,
                 vitaminB6: 0.4,
-                vitaminB12: 0.8,
+                vitaminB12: 0.8, 
                 folate: 120,
                 vitaminC: 12,
                 iron: 6.4,
