@@ -37,7 +37,7 @@ const EvaluationBar = ({name, intake, recommended, estimated, upperlimit}) => {
     
     return (
         <View style={styles.evaluationContainer}>
-            <Text>{name}</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 12,}}>{name}</Text>
             <MaterialCommunityIcons name='map-marker-down' style={[styles.marker, {left: `${position}%`}]}/>
             <View style={styles.evaluationBar}>
             <LinearGradient 
@@ -72,7 +72,7 @@ const EvaluationBar = ({name, intake, recommended, estimated, upperlimit}) => {
 const styles = StyleSheet.create({
     
     marker: {
-        fontSize: 18,
+        fontSize: 16,
         color: '#A2410F'
     },
     evaluationContainer: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 
     evaluationBar: {
         width: '100%',
-        height: 18,
+        height: 16,
         flexDirection: 'row',
     },
 

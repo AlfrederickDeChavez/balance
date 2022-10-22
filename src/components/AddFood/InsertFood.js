@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 
     foodNameInput: {
         width: '100%',
-        height: 35,
+        height: 30,
         paddingHorizontal: 15,
         paddingVertical: 5,
         backgroundColor: 'green',
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 
     quantityInput: {
         width: '100%',
-        height: 35,
+        height: 30,
         paddingHorizontal: 15,
         paddingVertical: 5,
         backgroundColor: 'green',
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#063b00',
         color: '#fff',
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold',
         paddingVertical: 5,
         paddingHorizontal: 15,

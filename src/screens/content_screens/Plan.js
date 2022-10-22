@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { SafeAreaView, StyleSheet, View, TouchableOpacity, Dimensions, Text, ScrollView} from 'react-native'
+import { SafeAreaView, StyleSheet, View, TouchableOpacity, Dimensions, Text, ScrollView, StatusBar} from 'react-native'
 import Header from '../../components/header'
 import { MaterialCommunityIcons, Ionicons, MaterialIcons } from '@expo/vector-icons'
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -26,6 +26,7 @@ const Plan = () => {
 
   return (
     <SafeAreaView>
+      <StatusBar />
       <Header/>
       <View style={styles.container}>
         <View style={styles.achievementView}>
@@ -229,11 +230,11 @@ const styles = StyleSheet.create({
 
   addGoalBtn: {
     position: 'absolute',
-    top: screenHeight - 120,
+    top: screenHeight - 140,
     width: screenWidth - 100,
     alignSelf: 'center',
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingVertical: 5,
     borderWidth: 1,
     borderColor: 'green',
     backgroundColor: '#fff',

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 
-const ProgressGraph = ({recommended, intake}) => {
+const ProgressGraph = ({recommended, intake, label}) => {
     
     const progressBarWidth = (recommended/recommended) * 100
 
@@ -11,8 +11,8 @@ const ProgressGraph = ({recommended, intake}) => {
             <View style={[styles.progress, {width: `${(intake.toFixed(1) / recommended) * 100}%`}]}></View>
         </View>
         <Text style={styles.progressText}>{((intake.toFixed(1)/recommended) * 100).toFixed(1)}%</Text>
-        <Text style={{color: '#FFF', fontSize: 14, fontWeight: 'bold', marginBottom: 5}}>My Intake: {intake.toFixed(1)}</Text>
-        <Text style={{color: '#FFF', fontSize: 14, fontWeight: 'bold'}}>Recommended: {recommended}</Text>
+        <Text style={{color: '#FFF', fontSize: 12, fontWeight: 'bold', marginBottom: 5}}>My Intake: {intake.toFixed(1)}{label}</Text>
+        <Text style={{color: '#FFF', fontSize: 12, fontWeight: 'bold'}}>Recommended Intake: {recommended}{label}</Text>
         </View>
     )
 }
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     progressBar: {
-        height: 25,
+        height: 24,
         borderWidth: 2,
         borderColor: '#fff',
         padding: 2,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
 
     progressText: {
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         textAlign: 'right',
         color: '#fff'

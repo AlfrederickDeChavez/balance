@@ -8,7 +8,9 @@ import {
   TextInput, 
   ScrollView, 
   Animated,
-  useWindowDimensions
+  useWindowDimensions,
+  StatusBar,
+  Platform
 } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AlertSuccess from '../../components/AlertSuccess';
@@ -47,10 +49,20 @@ const SignUpOne = ({navigation}) => {
 
   const updateOffset = (e) => {
     SetOffSet(e.nativeEvent.contentOffset.x)
-    if(offSet <= width * 0.2) {
-      setShowLogin(true)
-    } else if (offSet >= width * 0.8) {
-      setShowLogin(false)
+    console.log(offSet)
+    console.log(width)
+    if(offSet <= width * 0.3) {
+      if(Platform.OS == 'ios') {
+        setShowLogin(true)
+      } else {
+        setShowLogin(false)
+      }
+    } else if (offSet >= width * 0.6) {
+      if(Platform.OS == 'ios') {
+        setShowLogin(false)
+      } else {
+        setShowLogin(true)
+      }
     }
   } 
 
@@ -87,22 +99,23 @@ const SignUpOne = ({navigation}) => {
       useNativeDriver: false,
       duration: 1500,
     }).start()
+
   }
 
   const register = () => {
     registerUser(username, email, password, password2, age, gender, height, weight)
     setVisible(true)
   }
-
+ 
   return (
     <SafeAreaView style={styles.container}>
-
+      <StatusBar />
       {
         showLogin &&
         <TouchableOpacity 
           style={{
             position: 'absolute',
-            top: 40,
+            top: 35,
             left: 20, 
           }}
           onPress={goBack}
@@ -183,7 +196,7 @@ const SignUpOne = ({navigation}) => {
 
                     {/* Gender Input */}
 
-                    <Text style={[styles.inputLabel, {marginBottom: 10}]}>Gender</Text>
+                    <Text style={[styles.inputLabel, {marginBottom: 10}]}>Sex</Text>
                     <View>
                       <RadioButtonGroup
                         containerStyle={styles.genderInput}
@@ -333,12 +346,14 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: 'black',
     marginBottom: 5,
+    fontSize: 14,
   },
 
   inputField: {
     backgroundColor: '#efefef',
-    paddingVertical: 12,
+    paddingVertical: 5,
     paddingHorizontal: 10,
+    height: 30,
   },
 
   genderInput: {
@@ -355,21 +370,22 @@ const styles = StyleSheet.create({
 
   ageInput: {
     backgroundColor: '#efefef',
-    paddingVertical: 12,
+    paddingVertical: 5,
     paddingHorizontal: 10,
     width: '25%',
     justifyContent: 'center',
+    height: 30,
 
   },
 
   heightInput: {
     backgroundColor: '#efefef',
-    paddingVertical: 12,
+    paddingVertical: 5,
     paddingHorizontal: 10,
     width: '50%',
     justifyContent: 'center',
     marginRight: 5,
-
+    height: 30,
   },
 
   weightInput: {

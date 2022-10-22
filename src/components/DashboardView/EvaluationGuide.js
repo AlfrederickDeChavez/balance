@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 
     evaluationBar: {
         width: '100%',
-        height: 30,
+        height: 20,
         flexDirection: 'row',
     },
 

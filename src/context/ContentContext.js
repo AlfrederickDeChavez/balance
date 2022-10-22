@@ -10,7 +10,7 @@ export default ContentContext;
 
 export const ContentProvider = ({children}) => {
 
-    const host = '192.168.1.2'
+    const host = 'balance-diet.up.railway.app'
     const {user} = useContext(AuthContext)
 
     // NUTRIENTS DATA
@@ -19,36 +19,44 @@ export const ContentProvider = ({children}) => {
         estimated: 1,
         recommended: 2500,
         upperlimit: 1,
+        label: 'g'
     })
     const [protein, setProtein] = useState({ 
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'g'
     })
     const [fiber, setFiber] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'g'
     })
     const [vitaminA, setVitaminA] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
     })
     const [vitaminD, setVitaminD] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [vitaminE, setVitaminE] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
 
     const [vitaminK, setVitaminK] = useState({
@@ -56,114 +64,152 @@ export const ContentProvider = ({children}) => {
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [thiamin, setThiamin] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [riboflavin, setRiboflavin] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [niacin, setNiacin] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [vitaminB6, setVitaminB6] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [vitaminB12, setVitaminB12] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [folate, setFolate] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [vitaminC, setVitaminC] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [iron, setIron] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [zinc, setZinc] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [selenium, setSelenium] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [iodine, setIodine] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [calcium, setCalcium] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [magnesium, setMagnesium] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [phosphorus, setPhosphorus] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [flouride, setFlouride] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [sodium, setSodium] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [chloride, setChloride] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
     const [potassium, setPotassium] = useState({
         intake: 0,
         estimated: 1,
         recommended: 1,
         upperlimit: 1,
+        label: 'mg'
+
     })
 
     
@@ -176,7 +222,7 @@ export const ContentProvider = ({children}) => {
     // SENDING FOOD TO THE BACKEND
     const addFood = async (food, token) => {
         setIsLoading(true)
-        let response = await fetch(`http://${host}:8000/foods/consumed/`, {
+        let response = await fetch(`https://${host}/foods/consumed/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -195,7 +241,7 @@ export const ContentProvider = ({children}) => {
 
     // GETTING FOODS FROM THE BACKEND
     const getFoods = async () => {
-        let response = await fetch(`http://${host}:8000/foods/consumed/`, {
+        let response = await fetch(`https://${host}/foods/consumed/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

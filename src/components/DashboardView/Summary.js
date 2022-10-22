@@ -40,26 +40,26 @@ const Summary = () => {
 
             <View style={styles.macronutrientsContainer}>
             <View style={styles.title}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Macronutrients</Text>
+                <Text style={{fontSize: 16, fontWeight: 'bold'}}>Macronutrients</Text>
             </View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             
                 <View style={[styles.macronutrientBox, {backgroundColor: '#795C34'}]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Calories</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={calories.recommended} intake={calories.intake}/>
+                    <ProgressGraph recommended={calories.recommended} intake={calories.intake} label={calories.label}/>
                 </View>
 
                 <View style={[styles.macronutrientBox, {backgroundColor: '#795C34'}]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Protein</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={protein.recommended} intake={protein.intake}/>
+                    <ProgressGraph recommended={protein.recommended} intake={protein.intake} label={protein.label}/>
                 </View>
 
                 <View style={[styles.macronutrientBox, {backgroundColor: '#795C34'}]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Dietary Fiber</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={fiber.recommended} intake={fiber.intake}/>
+                    <ProgressGraph recommended={fiber.recommended} intake={fiber.intake} label={fiber.label}/>
                 </View>
             
             <View style={{width: 40}}></View>
@@ -68,7 +68,7 @@ const Summary = () => {
 
             <View style={styles.macronutrientsContainer}>
             <View style={styles.title}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Vitamins</Text>
+                <Text style={{fontSize: 16, fontWeight: 'bold'}}>Vitamins</Text>
             </View>
 
 
@@ -78,67 +78,67 @@ const Summary = () => {
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Vitamin A</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={vitaminA.recommended} intake={vitaminA.intake}/>
+                    <ProgressGraph recommended={vitaminA.recommended} intake={vitaminA.intake} label={vitaminA.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Vitamin D</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={vitaminD.recommended} intake={vitaminD.intake}/>
+                    <ProgressGraph recommended={vitaminD.recommended} intake={vitaminD.intake} label={vitaminD.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Vitamin E</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={vitaminE.recommended} intake={vitaminE.intake}/>
+                    <ProgressGraph recommended={vitaminE.recommended} intake={vitaminE.intake} label={vitaminE.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Vitamin K</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={vitaminK.recommended} intake={vitaminK.intake}/>
+                    <ProgressGraph recommended={vitaminK.recommended} intake={vitaminK.intake} label={vitaminK.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Thiamin</Text>
                         {/* Graph */} 
-                    <ProgressGraph recommended={thiamin.recommended} intake={thiamin.intake}/>
+                    <ProgressGraph recommended={thiamin.recommended} intake={thiamin.intake} label={thiamin.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Riboflavin</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={riboflavin.recommended} intake={riboflavin.intake}/>
+                    <ProgressGraph recommended={riboflavin.recommended} intake={riboflavin.intake} label={riboflavin.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Niacin</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={niacin.recommended} intake={niacin.intake}/>
+                    <ProgressGraph recommended={niacin.recommended} intake={niacin.intake} label={niacin.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Vitamin B6</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={vitaminB6.recommended} intake={vitaminB6.intake}/>
+                    <ProgressGraph recommended={vitaminB6.recommended} intake={vitaminB6.intake} label={vitaminB6.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Vitamin B12</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={vitaminB12.recommended} intake={vitaminB12.intake}/>
+                    <ProgressGraph recommended={vitaminB12.recommended} intake={vitaminB12.intake} label={vitaminB12.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Folate</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={folate.recommended} intake={folate.intake}/>
+                    <ProgressGraph recommended={folate.recommended} intake={folate.intake} label={folate.label}/>
                 </View>
 
                 <View style={[styles.vitaminsBox]}>   
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Vitamin C</Text>
                         {/* Graph */}
-                    <ProgressGraph recommended={vitaminC.recommended} intake={vitaminC.intake}/>
+                    <ProgressGraph recommended={vitaminC.recommended} intake={vitaminC.intake} label={vitaminC.label}/>
                 </View>
 
                 <View style={{width: 40}}></View>
@@ -150,74 +150,74 @@ const Summary = () => {
 
             <View style={styles.macronutrientsContainer}>
                 <View style={styles.title}>
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>Minerals</Text>
+                    <Text style={{fontSize: 16, fontWeight: 'bold'}}>Minerals</Text>
                 </View>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Iron</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Iron</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={iron.recommended} intake={iron.intake}/>
+                        <ProgressGraph recommended={iron.recommended} intake={iron.intake} label={iron.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Zinc</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Zinc</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={zinc.recommended} intake={zinc.intake}/>
+                        <ProgressGraph recommended={zinc.recommended} intake={zinc.intake} label={zinc.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Selenium</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Selenium</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={selenium.recommended} intake={selenium.intake}/>
+                        <ProgressGraph recommended={selenium.recommended} intake={selenium.intake} label={selenium.label}/>
+                    </View>
+
+                    <View style={styles.mineralsBox}> 
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Iodine</Text>
+                            {/* Graph */}
+                        <ProgressGraph recommended={iodine.recommended} intake={iodine.intake} label={iodine.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Iodine</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Calcium</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={iodine.recommended} intake={iodine.intake}/>
+                        <ProgressGraph recommended={calcium.recommended} intake={calcium.intake} label={calcium.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Calcium</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Magnesium</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={calcium.recommended} intake={calcium.intake}/>
+                        <ProgressGraph recommended={magnesium.recommended} intake={magnesium.intake} label={magnesium.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Magnesium</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Phosphorus</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={magnesium.recommended} intake={magnesium.intake}/>
+                        <ProgressGraph recommended={phosphorus.recommended} intake={phosphorus.intake} label={phosphorus.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Phosphorus</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Flouride</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={phosphorus.recommended} intake={phosphorus.intake}/>
+                        <ProgressGraph recommended={flouride.recommended} intake={flouride.intake} label={flouride.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Flouride</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Sodium</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={flouride.recommended} intake={flouride.intake}/>
+                        <ProgressGraph recommended={sodium.recommended} intake={sodium.intake} label={sodium.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Sodium</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Chloride</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={sodium.recommended} intake={sodium.intake}/>
+                        <ProgressGraph recommended={chloride.recommended} intake={chloride.intake} label={chloride.label}/>
                     </View>
 
                     <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Chloride</Text>
+                        <Text style={{fontSize: 14, fontWeight: 'bold', color: '#fff'}}>Potassium</Text>
                             {/* Graph */}
-                        <ProgressGraph recommended={chloride.recommended} intake={chloride.intake}/>
-                    </View>
-
-                    <View style={styles.mineralsBox}>   
-                        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Potassium</Text>
-                            {/* Graph */}
-                        <ProgressGraph recommended={potassium.recommended} intake={potassium.intake}/>
+                        <ProgressGraph recommended={potassium.recommended} intake={potassium.intake} label={potassium.label}/>
                     </View>
                
                     <View style={{width: 40}}></View>
@@ -240,14 +240,14 @@ const styles = StyleSheet.create({
     },
   
     macronutrientsContainer: {
-      height: 200,
+      height: 190,
       width: '100%',
       paddingVertical: 5,
     }, 
   
     macronutrientBox: {
       width: 250,
-      height: 150, 
+      height: 140, 
       margin: 5,
       padding: 15,
       right: 20,
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     vitaminsBox: {
       backgroundColor: '#0CA',
       width: 250,
-      height: 150, 
+      height: 140, 
       margin: 5,
       padding: 15,
       right: 20,
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     mineralsBox: {
       backgroundColor: '#00B7EB',
       width: 250,
-      height: 150, 
+      height: 140, 
       margin: 5,
       padding: 15,
       right: 20,

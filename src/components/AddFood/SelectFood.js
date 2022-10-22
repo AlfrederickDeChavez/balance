@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
 
     nameText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         marginBottom: 5,
         textTransform: 'uppercase',
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
     measureText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         marginBottom: 5,
         textTransform: 'uppercase',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
 
     amountText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         marginBottom: 5,
         textTransform: 'uppercase',
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     amountInput: {
         backgroundColor: 'green',
         width: '70%',
-        height: 35,
+        height: 30,
         paddingHorizontal: 15, 
         color: '#fff'
     },

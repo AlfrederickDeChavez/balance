@@ -36,7 +36,7 @@ const HomeScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false }>
       <View style={styles.healthStatusContainer}>
         <View style={styles.title}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>Health</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>Health</Text>
         </View>
           <View style={styles.healthStatus}>
             <Image 
@@ -55,7 +55,7 @@ const HomeScreen = () => {
 
       <View style={styles.addContainer}>
         <View style={styles.title}>
-          <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 5,}}>Food</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 5,}}>Food</Text>
         </View>
         <View style={styles.add}>
           <FontAwesome5 name='utensils' size={50} color='#b1b1b1' style={{marginLeft: 15}}/>
@@ -64,8 +64,8 @@ const HomeScreen = () => {
               style={styles.addBtn} 
               onPress={() => addFoodRef.current.open()}
             >
-              <AntDesign name='pluscircle' size={15} color='#0CA036'/>
-              <Text style={{marginLeft: 5, fontWeight: 'bold'}}>ADD FOOD</Text>
+              <AntDesign name='pluscircle' size={12} color='#0CA036'/>
+              <Text style={{marginLeft: 5, fontWeight: 'bold', fontSize: 12,}}>ADD FOOD</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -73,21 +73,21 @@ const HomeScreen = () => {
       
       <View style={styles.addContainer}>
         <View style={styles.title}>
-          <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 5}}>Exercise</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 5}}>Exercise</Text>
         </View>
         <View style={styles.add}>
             <Ionicons name='bicycle' size={60} color='#b1b1b1' style={{marginLeft: 15}}/>
               <TouchableOpacity 
                 style={styles.addBtn}
-                onPress={() => console.log('Add Exercise')} 
+                onPress={() => alert('This feature is not available right now.')} 
               >
-                <AntDesign name='pluscircle' size={15} color='#0CA036' />
-                <Text style={{marginLeft: 5, fontWeight: 'bold'}}>ADD EXERCISE</Text>
+                <AntDesign name='pluscircle' size={12} color='#0CA036' />
+                <Text style={{marginLeft: 5, fontWeight: 'bold', fontSize: 12}}>ADD EXERCISE</Text>
               </TouchableOpacity>
         </View>
       </View>
 
-      <View style={{height: 60}}></View>
+      <View style={{height: 70}}></View>
       </ScrollView>
 
       <RBSheet
@@ -209,14 +209,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingHorizontal: 40,
+    paddingHorizontal: 30,
     shadowColor: '#ccc',
     shadowOffset: {width: 4, height: 4},
     shadowOpacity: 0.8,
   },
 
   addBtn: {
-    width: 180, 
+    width: 160, 
     height: 30,
     backgroundColor: 'white',
     borderColor: 'green',

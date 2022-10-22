@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         paddingVertical: 8,
         color: '#fff',
+        height: 30
     },
 
     nutrientName: {

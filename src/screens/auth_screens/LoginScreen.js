@@ -16,7 +16,7 @@ const LoginScreen = ({navigation}) => {
 
       <View style={styles.titleContainer}>
             <View style={styles.title}>
-              <Image source={require('../.././assets/images/greenLogo.png')} style={{width: 50, height: 50}}/>
+              <Image source={require('../.././assets/images/greenLogo.png')} style={{width: 40, height: 40}}/>
               <Text style={styles.titleName}>balance.</Text>
             </View>
       </View>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex:1, 
-    top: 20,
   },
 
   titleContainer: {
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
   },
 
   titleName: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: "700",
     color: '#0CA036',
     marginLeft: 5,
@@ -148,8 +147,10 @@ const styles = StyleSheet.create({
   }, 
   inputField: {
     backgroundColor: 'white',
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingHorizontal: 10,
+    fontSize: 10,
+    height: 28,
   },
 
   loginBtn: {
@@ -159,6 +160,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginVertical: 30,
     borderRadius: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
 
   },
 

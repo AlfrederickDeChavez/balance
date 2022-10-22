@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   return (
     <SafeAreaView>
-      <StatusBar/>
+      <StatusBar />
       <Header/>
       <View style={styles.performanceContainer}>
         <View style={styles.title}>

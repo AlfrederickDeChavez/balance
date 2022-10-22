@@ -6,12 +6,6 @@ import AuthContext from '../../context/AuthContext';
 
 const LandingScreen = ({navigation}) => {
 
-  const {authtokens} = useContext(AuthContext)
-
-  useEffect(() => {
-    console.log(authtokens)
-  }, [])
-  
   return (
     <View>
       <StatusBar />
@@ -21,9 +15,9 @@ const LandingScreen = ({navigation}) => {
       >
         <View style={styles.container}>
           <View style={{alignItems: 'center'}}>
-            <Image source={require('../.././assets/images/diet.png')} style={{width: 100, height: 100, alignSelf: 'center'}}/>
+            <Image source={require('../.././assets/images/diet.png')} style={{width: 90, height: 90, alignSelf: 'center'}}/>
             <View style={styles.logoContainer}>
-              <Image source={require('../.././assets/images/whiteLogo.png')} style={{width: 60, height: 60}}/>
+              <Image source={require('../.././assets/images/whiteLogo.png')} style={{width: 50, height: 50}}/>
               <Text style={styles.title}>balance.</Text>
             </View>
             <Text style={styles.punchLine}>Until proper diet becomes a habit.</Text>
@@ -64,7 +58,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: '800',
     color: 'white',
     marginLeft: 5,
@@ -73,10 +67,11 @@ const styles = StyleSheet.create({
   punchLine: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
     marginTop: 10,
   },
+  
   navBtn: {
     backgroundColor: 'white',
     flexDirection: 'row',

@@ -1,4 +1,4 @@
-import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, ActivityIndicator} from "react-native"
+import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, ActivityIndicator, Dimensions} from "react-native"
 import { useState, useEffect, useRef, useContext} from "react"
 import AuthContext from "../../context/AuthContext"
 import ContentContext from "../../context/ContentContext"
@@ -75,7 +75,7 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
 
     const cancel = () => {
         setVisible(false)
-        setFood(defaultFood)
+        setFood(defaultFood) 
     }
     return(
         <Modal transparent visible={showAlert}>
@@ -147,6 +147,8 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
     )
 }
 
+const screenHeight = Dimensions.get('window').height
+
 const styles = StyleSheet.create({
     modal_bg: {
         flex: 1,
@@ -157,6 +159,7 @@ const styles = StyleSheet.create({
 
     modal_container: {
         width: '85%',
+        maxHeight: screenHeight,
         backgroundColor: '#fff',
         paddingHorizontal: 20,
         paddingVertical: 15,

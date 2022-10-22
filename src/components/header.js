@@ -14,13 +14,13 @@ const Header = () => {
             <View style={styles.date}>
                 <MaterialCommunityIcons name='calendar-today' size={30} color='green'/>
                 <View style={{marginLeft: 10}}>
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>TODAY</Text>
+                    <Text style={{fontSize: 16, fontWeight: 'bold'}}>TODAY</Text>
                     <Text style={{fontSize: 12, color: 'green'}}>{date}</Text>
                 </View>
             </View>
             {/* <MaterialIcons name='chevron-right' size={40} color='#cecece'/> */}
         </View>
-        <View style={{
+        {/* <View style={{
             width: 40,
             height: 40, 
             justifyContent: 'center',
@@ -29,7 +29,8 @@ const Header = () => {
             borderRadius: 20, 
         }}>
             <Ionicons name='person-circle-outline' size={35} color='#fff'/>
-        </View>
+        </View> */}
+        <View style={{width: 40}}></View>
     </View>
   )
 }

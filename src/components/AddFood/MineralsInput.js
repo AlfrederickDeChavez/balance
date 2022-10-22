@@ -173,7 +173,8 @@ const styles = StyleSheet.create({
         width: '40%',
         paddingHorizontal: 5,
         paddingVertical: 8,
-        color: '#FFF'
+        color: '#FFF',
+        height: 30,
     },
 
     nutrientName: {

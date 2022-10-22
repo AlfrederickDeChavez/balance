@@ -1,13 +1,18 @@
-import { SafeAreaView, View, Text , StyleSheet, TouchableOpacity} from 'react-native'
-import {useContext} from 'react'
+import { SafeAreaView, View, Text , StyleSheet, TouchableOpacity, StatusBar, Dimensions} from 'react-native'
+import {useContext, useRef} from 'react'
 import AuthContext from '../../context/AuthContext'
+import RBSheet from 'react-native-raw-bottom-sheet';
+import EditProfile from '../../components/EditProfile';
 
 const Profile = ({navigation}) => {
 
   const {user} = useContext(AuthContext)
+  const updateProfileRef = useRef()
+  const screenHeight = Dimensions.get('window').height
 
   return (
     <SafeAreaView>
+      <StatusBar />
       <View style={styles.header}>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'green'}}>Profile</Text>
       </View>
@@ -18,13 +23,29 @@ const Profile = ({navigation}) => {
             <Text style={styles.personalInfo}>{user.gender} ** {user.age} years old</Text>
             <TouchableOpacity 
               style={styles.editProfile}
-              onPress={() => console.log('Edit Profile Clicked')}
+              onPress={() => updateProfileRef.current.open()}
             >
               <Text style={styles.editText}>Edit Profile</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
+
+      <RBSheet
+        ref={updateProfileRef}
+        closeOnDragDown={true}
+        height={screenHeight - 50}
+        customStyles={{
+          container: {
+            backgroundColor: '#0CA036',
+          },
+          draggableIcon: {
+            backgroundColor: 'green'
+          }
+        }}
+      >
+        <EditProfile />
+      </RBSheet>
     </SafeAreaView>
   )
 }
@@ -54,18 +75,19 @@ const styles = StyleSheet.create({
     shadowColor: '#ccc',
     shadowOffset: {width: 4, height: 4},
     shadowOpacity: 0.8,
-    padding: 25,
+    paddingHorizontal: 25,
+    paddingVertical: 20,
 
   },
 
   username: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#0CA036'
   },
   
   personalInfo: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#777'
   },
 
@@ -73,8 +95,8 @@ const styles = StyleSheet.create({
     width: '40%',
     backgroundColor: '#0CA036',
     padding: 10, 
-    marginVertical: 5,
     borderRadius: 10,
+    marginTop: 10,
   },
 
   editText: {

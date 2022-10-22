@@ -311,10 +311,10 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#bbb',
         paddingHorizontal: 25,
-        paddingVertical: 5,
+        paddingVertical: 3,
         marginTop: 15,
         marginBottom: 10,
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold'
     },
 

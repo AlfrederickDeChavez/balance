@@ -50,6 +50,7 @@ const AddFood = () => {
         }
     )
 
+
     //NUTRIENTS STATE 
     const [foodName, setFoodName] = useState('')
     const [foodCategory, setFoodCategory] = useState('')
@@ -112,6 +113,24 @@ const AddFood = () => {
         }
     }
 
+    const foods = [
+        'Fruits',
+        'Vegetables',
+        'Vegetarian',
+        'Apple',
+        'Orange'
+    ]
+
+    const [found, setFound] = useState([])
+
+    const find = (val) => {
+        setFound(Foods.filter((food) => {
+            return food.Name.toLowerCase().startsWith(val.toLowerCase())
+        }))
+    }
+        
+    
+
     return (
         <View style={styles.container}>
 
@@ -121,16 +140,16 @@ const AddFood = () => {
                 <TextInput 
                     style={{
                         width: '100%',
-                        height: 40,
+                        height: 30,
                         paddingHorizontal: 10,
-                        paddingVertical: 12,
+                        paddingVertical: 5,
                         marginBottom: 15,
                         backgroundColor: 'green',
                         color: '#fff'
                     }}
                     placeholder='Search food'  
                     onFocus={focusSearch}
-                    
+                    onChangeText={(val) => val.length == 0 ? setFound([]) : find(val)}
                 />
             </View>
 
@@ -194,7 +213,7 @@ const AddFood = () => {
             {/* Searching for a food to input */}
 
             {
-                searching && <SearchResult />
+                searching && <SearchResult found={found} setFound={setFound} setFoodToAdd={setFoodToAdd} setVisible={setVisible}/>
             }
 
             {
@@ -204,12 +223,18 @@ const AddFood = () => {
 
             {/* Add Button - Sends a POST Request to the Server */}
 
-            <TouchableOpacity 
-                style={styles.addFoodBtn}
-                onPress={confirmFoodAdd}
-            >
-                <Text style={styles.addFoodText}>Add</Text>
-            </TouchableOpacity>
+            {
+                ( selectFood || insertFood ) && 
+
+                    <TouchableOpacity 
+                    style={styles.addFoodBtn}
+                    onPress={confirmFoodAdd}
+                >
+                    <Text style={styles.addFoodText}>Add</Text>
+                </TouchableOpacity>
+            }
+
+            
 
             <ConfirmAlert 
                 visible={visible}
@@ -248,14 +273,16 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#fff',
+        height: 40,
     },
 
     navigationBtn: {
         width: '33.33333%',
         alignItems: 'center',
-        paddingVertical: 10, 
+        paddingVertical: 5, 
         borderWidth: 3,
-        borderColor: '#fff'
+        borderColor: '#fff',
+        justifyContent: 'center'
     },
 
     navigationBtnActive: {
@@ -264,7 +291,8 @@ const styles = StyleSheet.create({
 
     navigationText: {
         color: '#0CA036',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 12,
     },
 
     dFlex: {
