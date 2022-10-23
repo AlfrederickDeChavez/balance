@@ -47,17 +47,18 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         color: '#fff',
         paddingHorizontal: 10,
-        paddingVertical: 10,
+        paddingVertical: 5,
         textAlign: 'center'
     },
 
     goalInput: {
         width: '100%',
         paddingHorizontal: 15,
-        paddingVertical: 10,
+        paddingVertical: 5,
         backgroundColor: 'green',
         color: '#fff',
         marginVertical: 15,
+        height: 30,
     },
 
     submitGoal: {

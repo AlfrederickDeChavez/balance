@@ -69,7 +69,7 @@ const Scanner = ({setOpenCamera, visible, setVisible, setFoodToAdd}) => {
             borderWidth: 2,
         }}></View>
       </BarCodeScanner>
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      
     </View>
   );
 }

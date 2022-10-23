@@ -49,15 +49,14 @@ const SignUpOne = ({navigation}) => {
 
   const updateOffset = (e) => {
     SetOffSet(e.nativeEvent.contentOffset.x)
-    console.log(offSet)
-    console.log(width)
-    if(offSet <= width * 0.3) {
+    console.log(offSet, showLogin)
+    if(offSet <= width - 50) {
       if(Platform.OS == 'ios') {
         setShowLogin(true)
       } else {
         setShowLogin(false)
       }
-    } else if (offSet >= width * 0.6) {
+    } else if (offSet >= width - 50) {
       if(Platform.OS == 'ios') {
         setShowLogin(false)
       } else {
@@ -70,7 +69,7 @@ const SignUpOne = ({navigation}) => {
   // Animation functions
 
   const goNext = () => {
-
+    
     signUpRef.current.scrollToEnd()
     Animated.timing(goNextAnim, {
       toValue: 100, 
@@ -83,6 +82,8 @@ const SignUpOne = ({navigation}) => {
       useNativeDriver: false,
       duration: 1500,
     }).start()
+
+    setShowLogin(true)
   
   }
 
@@ -99,6 +100,7 @@ const SignUpOne = ({navigation}) => {
       useNativeDriver: false,
       duration: 1500,
     }).start()
+    setShowLogin(false)
 
   }
 
@@ -270,7 +272,7 @@ const SignUpOne = ({navigation}) => {
             > 
             
               <Animated.View 
-                style={[styles.nextbtn, {width: showLogin ? goNextAnim : 50}]}
+                style={[styles.nextbtn, {width: 100}]}
               >
               {
                 showLogin ? 

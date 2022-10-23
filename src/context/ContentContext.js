@@ -231,10 +231,16 @@ export const ContentProvider = ({children}) => {
             body: JSON.stringify(food)
         }) 
         let data = await response.json()
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 2000)
-        alert(data.success)
+
+        if(response.status == 200) {
+            alert('Food added successfully')
+        } else {
+            alert('Something went wrong')
+        }
+        // setTimeout(() => {
+        //     setIsLoading(false)
+        // }, 2000)
+        // alert(data.success)
 
         getFoods()
     }

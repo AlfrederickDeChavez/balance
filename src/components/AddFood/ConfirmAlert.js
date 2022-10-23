@@ -131,7 +131,7 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
                     </TouchableOpacity>
                 </Animated.View>
             </View>
-            {
+            {/* {
                 isLoading && 
                 <ActivityIndicator size='large'
                     style={{
@@ -142,7 +142,7 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
                         bottom: 0,
                     }}
                 />
-            }
+            } */}
         </Modal>
     )
 }
