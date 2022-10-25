@@ -4,6 +4,7 @@ import React, {useRef, useContext, useEffect} from 'react'
 // Components 
 import Header from '../../components/header'
 import AddFood from '../../components/AddFood/AddFood'
+import AddExercise from '../../components/AddExercise'
 
 import { MaterialIcons, FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -19,6 +20,7 @@ const HomeScreen = () => {
   const {foods, getFoods, calories, updateRecommended} = useContext(ContentContext)
 
   const addFoodRef = useRef()
+  const addExerciseRef = useRef()
   const screenHeight = Dimensions.get('window').height
   const bmi = calculateBMI(user.weight, user.height)
   const userBMI = interpretBMI(bmi, user.gender)
@@ -79,7 +81,7 @@ const HomeScreen = () => {
             <Ionicons name='bicycle' size={60} color='#b1b1b1' style={{marginLeft: 15}}/>
               <TouchableOpacity 
                 style={styles.addBtn}
-                onPress={() => alert('This feature is not available right now.')} 
+                onPress={() => addExerciseRef.current.open()} 
               >
                 <AntDesign name='pluscircle' size={12} color='#0CA036' />
                 <Text style={{marginLeft: 5, fontWeight: 'bold', fontSize: 12}}>ADD EXERCISE</Text>
@@ -104,6 +106,22 @@ const HomeScreen = () => {
         }}
       >
         <AddFood /> 
+      </RBSheet>
+
+      <RBSheet
+        ref={addExerciseRef}
+        closeOnDragDown={true}
+        height={screenHeight - 50}
+        customStyles={{
+          container: {
+            backgroundColor: '#0CA036',
+          },
+          draggableIcon: {
+            backgroundColor: 'green'
+          }
+        }}
+      >
+        <AddExercise />
       </RBSheet>
 
     </SafeAreaView>

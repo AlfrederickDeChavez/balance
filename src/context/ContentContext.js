@@ -221,7 +221,6 @@ export const ContentProvider = ({children}) => {
 
     // SENDING FOOD TO THE BACKEND
     const addFood = async (food, token) => {
-        setIsLoading(true)
         let response = await fetch(`https://${host}/foods/consumed/`, {
             method: 'POST',
             headers: {
@@ -230,6 +229,7 @@ export const ContentProvider = ({children}) => {
             },
             body: JSON.stringify(food)
         }) 
+        
         let data = await response.json()
 
         if(response.status == 200) {
@@ -237,10 +237,6 @@ export const ContentProvider = ({children}) => {
         } else {
             alert('Something went wrong')
         }
-        // setTimeout(() => {
-        //     setIsLoading(false)
-        // }, 2000)
-        // alert(data.success)
 
         getFoods()
     }
@@ -379,6 +375,48 @@ export const ContentProvider = ({children}) => {
         setPotassium({...potassium, intake: POTASSIUM})
     }
 
+    //SEND EXERCISE TO THE BACKEND
+    const addExercise = async (exercise) => {
+        let response = await fetch(`https://${host}/exercise/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${authtokens.access}`, 
+            },
+            body: JSON.stringify(exercise)
+        }) 
+
+        let data = await response.json()
+
+        if(response.status == 200) {
+            alert('Exercise added successfully')
+        } else {
+            alert('Something went wrong')
+        }
+        getExercises()
+    }
+
+    // GETTING FOODS FROM THE BACKEND
+    const getExercises = async () => {
+        let response = await fetch(`https://${host}/exercise/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${authtokens.access}`,
+            },
+        })
+
+        let data = await response.json()
+
+        if (response.status == 200) {
+            console.log(data)
+        }
+
+    }
+
+
+
+
     
     // PASSING DOWN THE DATA
     const contextData = {
@@ -412,7 +450,8 @@ export const ContentProvider = ({children}) => {
         flouride: flouride,
         sodium: sodium,
         chloride: chloride,
-        potassium: potassium
+        potassium: potassium,
+        addExercise: addExercise
 
     } 
 

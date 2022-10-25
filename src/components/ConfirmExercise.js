@@ -1,14 +1,11 @@
-import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, Image, Dimensions} from "react-native"
+import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, Dimensions, Image} from "react-native"
 import { useState, useEffect, useRef, useContext} from "react"
-import AuthContext from "../../context/AuthContext"
-import ContentContext from "../../context/ContentContext"
+import ContentContext from "../context/ContentContext"
+import { exercises } from "../database/exercises"
 
-const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
+const ConfirmExercise = ({visible, setVisible, exercise, duration, intensity}) => {
 
-    // CONTEXT DATA
-    const {addFood} = useContext(ContentContext)
-    const {authtokens} = useContext(AuthContext)
-
+    const {addExercise} = useContext(ContentContext)
     const [showAlert, setShowAlert] = useState(visible)
     const scaleValue = useRef(new Animated.Value(0)).current
 
@@ -34,85 +31,45 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
         }
     }
 
-    const defaultFood = {
-        Calcium: 0,
-        Calories: 0,
-        Category: "",
-        Chloride: 0,
-        DietaryFiber: 0,
-        Flouride: 0,
-        Folate: 0,
-        Iodine: 0,
-        Iron: 0,
-        Magnesium: 0,
-        Name: "",
-        Niacin: 0,
-        Phosphorus: 0,
-        Potassium: 0,
-        Protein: 0,
-        Riboflavin: 0,
-        Selenium: 0,
-        Sodium: 0,
-        Thiamin: 0,
-        Vitamin_A: 0,
-        Vitamin_B12: 0,
-        Vitamin_B6: 0,
-        Vitamin_C: 0,
-        Vitamin_D: 0,
-        Vitamin_E: 0,
-        Vitamin_K: 0,
-        Zinc: 0,
-        Quantity: 1,
-    }
- 
     const confirm = () => {
-        addFood(food, authtokens)
+        addExercise({
+            exercise: exercise,
+            intensity: intensity,
+            duration: duration,
+        })
+
         setTimeout(() => {
             setVisible(false)
-            setFood(defaultFood)
-        }, 1000)    
+        }, 1000)
     }
 
-    const cancel = () => {
-        setVisible(false)
-        setFood(defaultFood) 
-    }
     return(
         <Modal transparent visible={showAlert}>
             <View style={styles.modal_bg}>
                 <Animated.View style={[styles.modal_container, {transform: [{scale: scaleValue}]}]}>
-                <View style={styles.foodView}>
+                    <View style={styles.exerciseView}>
                         <View style={styles.iconBg}>
-                            <Image source={require('../../assets/exercises/diet.png')} style={styles.exerciseIcon}/>
+                            <Image source={require('../assets/exercises/cardio.png')} style={styles.exerciseIcon}/>
                         </View>    
                         <View style={styles.detailsView}>
-                            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#333', marginBottom: 5}}>{food.Name}</Text>
-                            <Text style={{color: '#555', fontSize: 10,}}>Macronutrients: Calories - {food.Calories}, Protein ...</Text>
-                            <Text style={{color: '#555', fontSize: 10,}}>Vitamins: Vitamin A - {food.Vitamin_A}, Vitamin D ...</Text>
-                            <Text style={{color: '#555', fontSize: 10,}}>Minerals: Iron - {food.Iron}, Zinc ...</Text>
+                            <Text style={{fontSize: 22, fontWeight: 'bold', color: '#333'}}>{exercise}</Text>
+                            <Text style={{color: '#555'}}>Duration: {duration}</Text>
+                            <Text style={{color: '#555'}}>Intensity: {intensity}</Text>
                         </View>            
                     </View>
-                    <TouchableOpacity 
-                        onPress={confirm}
-                        style={styles.confirm_btn}
-                    >
-                        <Text style={styles.confirm_text}>CONFIRM</Text>
+                    <TouchableOpacity onPress={() => confirm()} style={styles.confirmBtn}>
+                        <Text style={{color: '#FFF', fontSize: 16, fontWeight: 'bold', textTransform: 'uppercase'}}>Confirm</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity 
-                        onPress={cancel}
-                        style={styles.cancel_btn}
-                    >
+                    <TouchableOpacity onPress={() => setVisible(false)} style={styles.cancelBtn}>
                         <Text>Cancel</Text>
                     </TouchableOpacity>
                 </Animated.View>
             </View>
-            
         </Modal>
     )
 }
 
 const screenHeight = Dimensions.get('window').height
-const screenWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
     modal_bg: {
@@ -132,7 +89,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 
-    confirm_btn: {
+    confirmBtn: {
         width: '100%',
         height: 40,
         backgroundColor: '#0CA', 
@@ -141,7 +98,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    cancel_btn: {
+    cancelBtn: {
         width: '100%',
         height: 40,
         borderWidth: 1,
@@ -150,18 +107,11 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center'
-
     },
 
-    confirm_text: {
-        color: '#FFF',
-        fontSize: 16,
-        fontWeight: 'bold'
-    },
-
-    foodView: {
+    exerciseView: {
         width: '100%',
-        height: 120,
+        height: 100,
         marginBottom: 10,
         alignItems: 'center',
         flexDirection: 'row'
@@ -189,8 +139,6 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         paddingTop: 5,
     }
-
-
 })
 
-export default ConfirmAlert
+export default ConfirmExercise

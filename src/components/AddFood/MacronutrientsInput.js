@@ -15,7 +15,7 @@ const MacronutrientsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0g'
                                 value={foodToAdd.Calories}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Calories: val}) : setFoodToAdd({...foodToAdd, Calories: 0})}}
                             />
@@ -25,7 +25,7 @@ const MacronutrientsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0g'
                                 value={foodToAdd.Protein}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Protein: val}) : setFoodToAdd({...foodToAdd, Protein: 0})}}
                             />
@@ -35,7 +35,7 @@ const MacronutrientsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0g'
                                 value={foodToAdd.DietaryFiber}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, DietaryFiber: val}) : setFoodToAdd({...foodToAdd, DietaryFiber: 0})}}
                             />

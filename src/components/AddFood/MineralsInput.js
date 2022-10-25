@@ -13,7 +13,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Iron}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Iron: val}) : setFoodToAdd({...foodToAdd, Iron: 0})}}
                             />
@@ -23,7 +23,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Zinc}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Zinc: val}) : setFoodToAdd({...foodToAdd, Zinc: 0})}}
                             />
@@ -33,7 +33,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Selenium}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Selenium: val}) : setFoodToAdd({...foodToAdd, Selenium: 0})}}
                             />
@@ -43,7 +43,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                                 <TextInput 
                                     style={styles.nutrientInput}
                                     keyboardType='numeric'
-                                    placeholder='0.0'
+                                    placeholder='0.0mg'
                                     value={foodToAdd.Iodine}
                                     onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Iodine: val}) : setFoodToAdd({...foodToAdd, Iodine: 0})}}
                                 />
@@ -53,7 +53,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Calcium}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Calcium: val}) : setFoodToAdd({...foodToAdd, Calcium: 0})}}
                             />
@@ -63,7 +63,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Magnesium}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Magnesium: val}) : setFoodToAdd({...foodToAdd, Magnesium: 0})}}
                             />
@@ -75,7 +75,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Phosphorus}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Phosphorus: val}) : setFoodToAdd({...foodToAdd, Phosphorus: 0})}}
                             />
@@ -85,7 +85,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Flouride}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Flouride: val}) : setFoodToAdd({...foodToAdd, Flouride: 0})}}
                             />
@@ -95,7 +95,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                             <TextInput 
                                 style={styles.nutrientInput}
                                 keyboardType='numeric'
-                                placeholder='0.0'
+                                placeholder='0.0mg'
                                 value={foodToAdd.Sodium}
                                 onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Sodium: val}) : setFoodToAdd({...foodToAdd, Sodium: 0})}}
                             />
@@ -105,7 +105,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                                 <TextInput 
                                     style={styles.nutrientInput}
                                     keyboardType='numeric'
-                                    placeholder='0.0'
+                                    placeholder='0.0mg'
                                     value={foodToAdd.Chloride}
                                     onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Chloride: val}) : setFoodToAdd({...foodToAdd, Chloride: 0})}}
                                 />
@@ -115,7 +115,7 @@ const MineralsInput = ({foodToAdd, setFoodToAdd}) => {
                                 <TextInput 
                                     style={styles.nutrientInput}
                                     keyboardType='numeric'
-                                    placeholder='0.0'
+                                    placeholder='0.0mg'
                                     value={foodToAdd.Potassium}
                                     onChangeText={(val) => { val ? setFoodToAdd({...foodToAdd, Potassium: val}) : setFoodToAdd({...foodToAdd, Potassium: 0})}}
                                 />
@@ -172,16 +172,17 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         width: '40%',
         paddingHorizontal: 5,
-        paddingVertical: 8,
+        paddingVertical: 4,
         color: '#FFF',
-        height: 30,
+        height: 25,
+        fontSize: 10
     },
 
     nutrientName: {
         textAlign: 'right',
         marginRight: 5,
         color: '#fff',
-        fontSize: 14,
+        fontSize: 10,
         textTransform: 'capitalize'
 
     }

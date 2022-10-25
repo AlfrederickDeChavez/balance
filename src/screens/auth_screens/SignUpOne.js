@@ -224,6 +224,7 @@ const SignUpOne = ({navigation}) => {
 
                   <View style={styles.formControl}>
                     <Text style={styles.inputLabel}>Age</Text>
+                    <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
                     <TextInput 
                       keyboardType='numeric'
                       maxLength={3}
@@ -231,6 +232,8 @@ const SignUpOne = ({navigation}) => {
                       onChangeText={(value) => setAge(value)}
                       
                     /> 
+                    <Text>y/o</Text>
+                    </View>
                   </View>
 
                   {/* Height and Weight Input */}
@@ -377,7 +380,7 @@ const styles = StyleSheet.create({
     width: '25%',
     justifyContent: 'center',
     height: 30,
-
+    marginRight: 5
   },
 
   heightInput: {

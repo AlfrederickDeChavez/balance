@@ -18,7 +18,7 @@ const normalMale = {
     imgSrc: require('../assets/images/normalweightMale.png'),
     color: '#0CA036',
     status: 'Normal',
-    fontSize: 28,
+    fontSize: 24,
 }
 
 const overweightMale = {
@@ -32,14 +32,14 @@ const obeseMale = {
     imgSrc: require('../assets/images/obeseMale.png'),
     color: '#FF8E01',
     status: 'Obese',
-    fontSize: 28,
+    fontSize: 26,
 }
 
 const extremelyobeseMale = {
     imgSrc: require('../assets/images/extremelyobeseMale.png'),
     color: '#FF1A00',
     status: 'Extremely Obese',
-    fontSize: 26,
+    fontSize: 18,
 }
 
 // FEMALE BMI INTERPRETATION
@@ -55,7 +55,7 @@ const normalFemale = {
     imgSrc: require('../assets/images/normalweightFemale.png'),
     color: '#0CA036',
     status: 'Normal',
-    fontSize: 28,
+    fontSize: 24,
 }
 
 const overweightFemale = {
@@ -69,14 +69,14 @@ const obeseFemale = {
     imgSrc: require('../assets/images/obeseFemale.png'),
     color: '#FF8E01',
     status: 'Obese',
-    fontSize: 28,
+    fontSize: 26,
 }
 
 const extremelyobeseFemale = {
     imgSrc: require('../assets/images/extremelyobeseFemale.png'),
     color: '#FF1A00',
     status: 'Extremely Obese',
-    fontSize: 26,
+    fontSize: 18,
 }
 
 export const interpretBMI = (bmi, gender) => {
