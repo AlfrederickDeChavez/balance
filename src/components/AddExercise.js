@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback , Keyboard} from "react-native";
 import SelectDropdown from 'react-native-select-dropdown';
 import { useState } from "react";
 import { exerciseList } from "../database/exerciseList";
@@ -8,22 +8,25 @@ import { Ionicons } from "@expo/vector-icons";
 const AddExercise = () => {
 
     const [exercise, setExercise] = useState('Walking')
-    const [duration, setDuration] = useState('10 - 30 minutes')
+    const [duration, setDuration] = useState(0)
     const [intensity, setIntensity] = useState('Moderate')
     const [visible, setVisible] = useState(false)
 
-    const durations = [
-        'Less than 10 minutes',
-        '10 - 30 minutes', 
-        '30 minutes - 1 hour',
-        'More than 1 hour'
-    ]
-
     const intensityList = [
-        'High',
-        'Moderate',  
-        'Low'
+        'Very Light',
+        'Light',  
+        'Moderate',
+        'Moderately Vigorous',
+        'Vigorous',
+        'Extremely Vigorous'
     ]
+  
+    // 1.5
+    // 2.0
+    // 3.5
+    // 4.5  
+    // 6
+    // 10
 
     const add = () => {
         setVisible(true)
@@ -46,24 +49,18 @@ const AddExercise = () => {
             >
                 
             </SelectDropdown>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View>
 
             <View style={{width: '100%', flexDirection: 'row', marginTop: 50}}>
                 <View style={styles.durationView}>
                     <Text style={styles.durationText}>Duration</Text>
-                    <SelectDropdown
-                        data={durations}
-                        onSelect={(selectedItem, index) => {
-                            setDuration(selectedItem)
-                        }}
-                        defaultButtonText={<View style={styles.dFlex}><Text style={{fontSize: 12, color: '#0CA036', fontWeight: 'bold'}}>10 - 30 minutes</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#0CA036'}}/></View>}
-                        buttonStyle={styles.nameBtn}
-                        buttonTextStyle={{color: '#0CA036', fontSize: 12, fontWeight: 'bold'}}
-                        rowStyle={styles.rowStyle}
-                        rowTextStyle={styles.rowTextStyle}
-                        dropdownStyle={styles.dropdownStyle}
-                    >
-                        
-                    </SelectDropdown>
+                    <TextInput 
+                        style={styles.durationInput}
+                        placeholder='minutes'
+                        keyboardType="numeric"
+                        onChangeText={(val) => setDuration(parseFloat(val))}
+                    />
 
                 </View>
                 <View style={styles.intensityView}>
@@ -71,7 +68,7 @@ const AddExercise = () => {
                     <SelectDropdown
                         data={intensityList}
                         onSelect={(selectedItem, index) => {
-                            setIntensity(selectedItem)
+                            setIntensity(selectedItem) 
                         }}
                         defaultButtonText={<View style={styles.dFlex}><Text style={{fontSize: 12, color: '#0CA036', fontWeight: 'bold'}}>Moderate</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#0CA036'}}/></View>}
                         buttonStyle={styles.nameBtn}
@@ -84,6 +81,8 @@ const AddExercise = () => {
                     </SelectDropdown>
                 </View>
             </View>
+            </View>
+            </TouchableWithoutFeedback>
 
             <TouchableOpacity 
                 style={styles.addBtn}
@@ -211,6 +210,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#0CA036',
         textTransform: 'uppercase'
+    },
+
+    durationInput: {
+        width: '100%',
+        height: 30,
+        borderColor: '#aaa',
+        borderWidth: 1,
+        color: '#fff',
+        paddingHorizontal: 5,
+        backgroundColor: 'green'
     }
 
 })

@@ -4,11 +4,14 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AuthContext from '../../context/AuthContext';
 
-const LandingScreen = ({navigation}) => {
+const LandingScreen = ({navigation, setRouteName}) => {
+
+  const ToLogin = () => {
+    setRouteName('LoginScreen')
+  }
 
   return (
     <View>
-      <StatusBar />
       <LinearGradient
         colors={['#37EF68', '#0CA036']}
         style={styles.backGround}

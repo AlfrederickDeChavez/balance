@@ -3,6 +3,7 @@ import AuthContext from "./AuthContext";
 import { getEstimatedAverage } from "../functions/EstimatedAverage";
 import { getRecommendedIntake } from "../functions/RecommendedIntakes"
 import { getUpperLimit } from "../functions/UpperLimits"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ContentContext = createContext()
 
@@ -10,7 +11,7 @@ export default ContentContext;
 
 export const ContentProvider = ({children}) => {
 
-    const host = 'balance-diet.up.railway.app'
+    const host = 'balance-intake.up.railway.app'
     const {user} = useContext(AuthContext)
 
     // NUTRIENTS DATA
@@ -19,41 +20,41 @@ export const ContentProvider = ({children}) => {
         estimated: 1,
         recommended: 2500,
         upperlimit: 1,
-        label: 'g'
+        label: 'kcal'
     })
     const [protein, setProtein] = useState({ 
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 70,
         upperlimit: 1,
         label: 'g'
     })
     const [fiber, setFiber] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 25,
         upperlimit: 1,
         label: 'g'
     })
     const [vitaminA, setVitaminA] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 600,
         upperlimit: 1,
-        label: 'mg'
+        label: 'ug'
     })
     const [vitaminD, setVitaminD] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 5,
         upperlimit: 1,
-        label: 'mg'
+        label: 'ug'
 
     })
     const [vitaminE, setVitaminE] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 10,
         upperlimit: 1,
         label: 'mg'
 
@@ -62,15 +63,15 @@ export const ContentProvider = ({children}) => {
     const [vitaminK, setVitaminK] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 61,
         upperlimit: 1,
-        label: 'mg'
+        label: 'ug'
 
     })
     const [thiamin, setThiamin] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 1.2,
         upperlimit: 1,
         label: 'mg'
 
@@ -78,7 +79,7 @@ export const ContentProvider = ({children}) => {
     const [riboflavin, setRiboflavin] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 1.3,
         upperlimit: 1,
         label: 'mg'
 
@@ -86,7 +87,7 @@ export const ContentProvider = ({children}) => {
     const [niacin, setNiacin] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 16,
         upperlimit: 1,
         label: 'mg'
 
@@ -94,7 +95,7 @@ export const ContentProvider = ({children}) => {
     const [vitaminB6, setVitaminB6] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 1.3,
         upperlimit: 1,
         label: 'mg'
 
@@ -102,15 +103,15 @@ export const ContentProvider = ({children}) => {
     const [vitaminB12, setVitaminB12] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 2.4,
         upperlimit: 1,
-        label: 'mg'
+        label: 'ug'
 
     })
     const [folate, setFolate] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 400,
         upperlimit: 1,
         label: 'mg'
 
@@ -118,7 +119,7 @@ export const ContentProvider = ({children}) => {
     const [vitaminC, setVitaminC] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 70,
         upperlimit: 1,
         label: 'mg'
 
@@ -126,7 +127,7 @@ export const ContentProvider = ({children}) => {
     const [iron, setIron] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 12,
         upperlimit: 1,
         label: 'mg'
 
@@ -134,7 +135,7 @@ export const ContentProvider = ({children}) => {
     const [zinc, setZinc] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 6.5,
         upperlimit: 1,
         label: 'mg'
 
@@ -142,23 +143,23 @@ export const ContentProvider = ({children}) => {
     const [selenium, setSelenium] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 40,
         upperlimit: 1,
-        label: 'mg'
+        label: 'ug'
 
     })
     const [iodine, setIodine] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 150,
         upperlimit: 1,
-        label: 'mg'
+        label: 'ug'
 
     })
     const [calcium, setCalcium] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 750,
         upperlimit: 1,
         label: 'mg'
 
@@ -166,7 +167,7 @@ export const ContentProvider = ({children}) => {
     const [magnesium, setMagnesium] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 240,
         upperlimit: 1,
         label: 'mg'
 
@@ -174,7 +175,7 @@ export const ContentProvider = ({children}) => {
     const [phosphorus, setPhosphorus] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 700,
         upperlimit: 1,
         label: 'mg'
 
@@ -182,7 +183,7 @@ export const ContentProvider = ({children}) => {
     const [flouride, setFlouride] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 3,
         upperlimit: 1,
         label: 'mg'
 
@@ -190,7 +191,7 @@ export const ContentProvider = ({children}) => {
     const [sodium, setSodium] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 500,
         upperlimit: 1,
         label: 'mg'
 
@@ -198,7 +199,7 @@ export const ContentProvider = ({children}) => {
     const [chloride, setChloride] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 750,
         upperlimit: 1,
         label: 'mg'
 
@@ -206,7 +207,7 @@ export const ContentProvider = ({children}) => {
     const [potassium, setPotassium] = useState({
         intake: 0,
         estimated: 1,
-        recommended: 1,
+        recommended: 2000,
         upperlimit: 1,
         label: 'mg'
 
@@ -214,27 +215,32 @@ export const ContentProvider = ({children}) => {
 
     
     const [foods, setFoods] = useState([])
+    const [exercises, setExercises] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const {authtokens} = useContext(AuthContext)
+    const [caloriesBurn, setCaloriesBurn] = useState(0)
+    const [reached, setReached] = useState([])
 
-
+    // useEffect(() => {
+    //     checkedIfReached()
+    // }, [])
 
     // SENDING FOOD TO THE BACKEND
-    const addFood = async (food, token) => {
+    const addFood = async (food, quantity) => {
         let response = await fetch(`https://${host}/foods/consumed/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${token.access}`, 
+                'Authorization': `Token ${authtokens.access}`, 
             },
-            body: JSON.stringify(food)
+            body: JSON.stringify({...food, Quantity: quantity})
         }) 
         
         let data = await response.json()
 
         if(response.status == 200) {
             alert('Food added successfully')
-        } else {
+        } else { 
             alert('Something went wrong')
         }
 
@@ -321,31 +327,31 @@ export const ContentProvider = ({children}) => {
         let POTASSIUM = 0 
 
         for(let i = 0; i < foods.length; i++) {
-            CALORIES += foods[i].calories
-            PROTEIN += foods[i].protein
-            FIBER += foods[i].dietary_fiber
-            VITAMINA += foods[i].vitamin_A
-            VITAMIND += foods[i].vitamin_D
-            VITAMINE += foods[i].vitamin_E
-            VITAMINK += foods[i].vitamin_K
-            THIAMIN += foods[i].thiamin
-            RIBOFLAVIN += foods[i].riboflavin
-            NIACIN += foods[i].niacin
-            VITAMINB6 += foods[i].vitamin_B6
-            VITAMINB12 += foods[i].vitamin_B12
-            FOLATE += foods[i].folate
-            VITAMINC += foods[i].vitamin_C
-            IRON += foods[i].iron
-            ZINC += foods[i].zinc
-            SELENIUM += foods[i].selenium
-            IODINE += foods[i].iodine
-            CALCIUM += foods[i].calcium
-            MAGNESIUM += foods[i].magnesium
-            PHOSPHORUS += foods[i].phosphorus
-            FLOURIDE += foods[i].flouride
-            SODIUM += foods[i].sodium
-            CHLORIDE += foods[i].chloride
-            POTASSIUM += foods[i].potassium
+            CALORIES += (foods[i].calories * foods[i].quantity)
+            PROTEIN += (foods[i].protein * foods[i].quantity)
+            FIBER += (foods[i].dietary_fiber * foods[i].quantity)
+            VITAMINA += (foods[i].vitamin_A * foods[i].quantity)
+            VITAMIND += (foods[i].vitamin_D * foods[i].quantity)
+            VITAMINE += (foods[i].vitamin_E * foods[i].quantity)
+            VITAMINK += (foods[i].vitamin_K * foods[i].quantity)
+            THIAMIN += (foods[i].thiamin * foods[i].quantity)
+            RIBOFLAVIN += (foods[i].riboflavin * foods[i].quantity)
+            NIACIN += (foods[i].niacin * foods[i].quantity)
+            VITAMINB6 += (foods[i].vitamin_B6 * foods[i].quantity)
+            VITAMINB12 += (foods[i].vitamin_B12 * foods[i].quantity)
+            FOLATE += (foods[i].folate * foods[i].quantity)
+            VITAMINC += (foods[i].vitamin_C * foods[i].quantity)
+            IRON += (foods[i].iron * foods[i].quantity)
+            ZINC += (foods[i].zinc * foods[i].quantity)
+            SELENIUM += (foods[i].selenium * foods[i].quantity)
+            IODINE += (foods[i].iodine * foods[i].quantity)
+            CALCIUM += (foods[i].calcium * foods[i].quantity)
+            MAGNESIUM += (foods[i].magnesium * foods[i].quantity)
+            PHOSPHORUS += (foods[i].phosphorus * foods[i].quantity)
+            FLOURIDE += (foods[i].flouride * foods[i].quantity)
+            SODIUM += (foods[i].sodium * foods[i].quantity)
+            CHLORIDE += (foods[i].chloride * foods[i].quantity)
+            POTASSIUM += (foods[i].potassium * foods[i].quantity)
         }
 
         setCalories({...calories, intake: CALORIES})
@@ -373,7 +379,133 @@ export const ContentProvider = ({children}) => {
         setSodium({...sodium, intake: SODIUM})
         setChloride({...chloride, intake: CHLORIDE})
         setPotassium({...potassium, intake: POTASSIUM})
+
+        // checkedIfReached()
     }
+
+    const checkedIfReached = () => {
+          
+        if (protein.intake > protein.recommended) {
+            setReached([...reached, 'protein'])
+        }
+
+        if (fiber.intake > fiber.recommended) {
+            
+            setReached([...reached, 'fiber'])
+
+        }
+
+        if (vitaminA.intake > vitaminA.recommended) {
+            setReached([...reached, 'vitaminA'])
+
+        }
+
+        if (vitaminK.intake > vitaminK.recommended) {
+            setReached([...reached, 'vitaminK'])
+
+        }
+
+        if (vitaminD.intake > vitaminD.recommended) {
+            setReached([...reached, 'vitaminD'])
+
+        }
+
+        if (vitaminE.intake > vitaminE.recommended) {
+            setReached([...reached, 'vitaminE'])
+
+        }
+
+        if (thiamin.intake > thiamin.recommended) {
+            setReached([...reached, 'thiamin'])
+
+        }
+
+        if (riboflavin.intake > riboflavin.recommended) {
+            setReached([...reached, 'riboflavin'])
+
+        }
+
+        if (niacin.intake > niacin.recommended) {
+            setReached([...reached, 'niacin'])
+
+        }
+
+        if (vitaminB6.intake > vitaminB6.recommended) {
+            setReached([...reached, 'vitaminB6'])
+
+        }
+
+        if (vitaminB12.intake > vitaminB12.recommended) {
+            setReached([...reached, 'vitaminB12'])
+
+        }  
+
+        if (folate.intake > folate.recommended) {
+            setReached([...reached, 'folate'])
+
+        }
+
+        if (vitaminC.intake > vitaminC.recommended) {
+            setReached([...reached, 'vitaminC'])
+
+        }
+
+        if (iron.intake > iron.recommended) {
+            setReached([...reached, 'iron'])
+
+        }
+
+        if (zinc.intake > zinc.recommended) {
+            setReached([...reached, 'zinc'])
+
+        }
+
+        if (selenium.intake > selenium.recommended) {
+            setReached([...reached, 'selenium'])
+
+        }
+
+        if (iodine.intake > iodine.recommended) {
+            setReached([...reached, 'iodine'])
+
+        }
+
+        if (calcium.intake > calcium.recommended) {
+            setReached([...reached, 'calcium'])
+
+        }
+
+        if (magnesium.intake > magnesium.recommended) {
+            setReached([...reached, 'magnesium'])
+
+        }
+
+        if (phosphorus.intake > phosphorus.recommended) {
+            setReached([...reached, 'phosphorus'])
+
+        }
+
+        if (flouride.intake > flouride.recommended) {
+            setReached([...reached, 'flouride'])
+
+        }
+
+        if (sodium.intake > sodium.recommended) {
+            setReached([...reached, 'sodium'])
+
+        }
+
+        if (chloride.intake > chloride.recommended) {
+            setReached([...reached, 'chloride'])
+
+        }
+
+        if (potassium.intake > potassium.recommended) {
+            setReached([...reached, 'potassium'])
+        }
+    }
+
+
 
     //SEND EXERCISE TO THE BACKEND
     const addExercise = async (exercise) => {
@@ -404,14 +536,40 @@ export const ContentProvider = ({children}) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${authtokens.access}`,
             },
-        })
+        }) 
 
         let data = await response.json()
 
         if (response.status == 200) {
-            console.log(data)
+            setExercises(data)
+            calculateCaloriesBurned(data)
+        }
+    }
+
+    const calculateCaloriesBurned = (data) => {
+        let burned = 0;
+        for(let i=0; i < data.length; i++) {
+            let met, indivBurned;
+            if(data[i].intensity == 'Very Light') {
+                met = 1.5
+            } else if (data[i].intensity == 'Light') {
+                met = 2.0
+            } else if (data[i].intensity == 'Moderate') {
+                met = 3.5
+            } else if (data[i].intensity == 'Moderately Vigorous') {
+                met = 4.5
+            } else if (data[i].intensity == 'Vigorous') {
+                met = 6.0
+            } else if (data[i].intensity == 'Extremely Vigorous') {
+                met = 10.0
+            }
+
+            indivBurned = ((met * (3.5 * user.weight)) / 200) * data[i].duration
+
+            burned += indivBurned
         }
 
+        setCaloriesBurn(burned.toFixed(1))
     }
 
 
@@ -426,7 +584,7 @@ export const ContentProvider = ({children}) => {
         foods: foods, 
         updateIntake: updateIntake,
         updateRecommended: updateRecommended,
-        calories: calories,
+        calories: calories, 
         protein: protein,
         fiber: fiber,
         vitaminA: vitaminA,
@@ -451,8 +609,13 @@ export const ContentProvider = ({children}) => {
         sodium: sodium,
         chloride: chloride,
         potassium: potassium,
-        addExercise: addExercise
-
+        addExercise: addExercise,
+        exercises: exercises,
+        getExercises: getExercises,
+        setCalories: setCalories,
+        caloriesBurn: caloriesBurn,
+        reached: reached,
+        checkedIfReached:checkedIfReached
     } 
 
     return (

@@ -52,9 +52,9 @@ const ConfirmExercise = ({visible, setVisible, exercise, duration, intensity}) =
                             <Image source={require('../assets/exercises/cardio.png')} style={styles.exerciseIcon}/>
                         </View>    
                         <View style={styles.detailsView}>
-                            <Text style={{fontSize: 22, fontWeight: 'bold', color: '#333'}}>{exercise}</Text>
-                            <Text style={{color: '#555'}}>Duration: {duration}</Text>
-                            <Text style={{color: '#555'}}>Intensity: {intensity}</Text>
+                            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#333'}}>{exercise}</Text>
+                            <Text style={{color: '#555', fontSize: 10}}>Duration: {duration} minutes</Text>
+                            <Text style={{color: '#555', fontSize: 10}}>Intensity: {intensity}</Text>
                         </View>            
                     </View>
                     <TouchableOpacity onPress={() => confirm()} style={styles.confirmBtn}>

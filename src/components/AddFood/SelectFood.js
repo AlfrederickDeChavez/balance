@@ -1,17 +1,35 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState} from 'react'
-import {View, StyleSheet, TextInput, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TextInput, Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Foods } from '../../database/FoodNutrientContent';
+import { Foods100g } from '../../database/food';
 
 
-const SelectFood = ({filterFoodToAdd}) => {
+const SelectFood = ({filterFoodToAdd, measure, setMeasure, measurement, setMeasurement}) => {
 
     const [selectedCategory, setSelectedCategory] = useState('') 
     const [selectedFood, setSelectedFood] = useState(null) 
-
     const [foodNames, setFoodNames] = useState([])
     const foodCategories = [
+        'Filipino Food',
+        'Fruits',
+        'Vegetables',
+        'Proteins',
+        'Dairy Products', 
+        'Spices and Herbs',
+        'Fats and Oils',
+        'Poultry Products',
+        'Nut and Seed Products',
+        'Beverages',
+        'Baked Products',
+        'Snacks',
+        'Sausage and Luncheon Meats',
+        'Cereal Grains and Pasta',
+        'Sweets'
+    ]
+
+    const foodCategories100g = [
         'Fruits',
         'Vegetables',
         'Proteins',
@@ -30,23 +48,61 @@ const SelectFood = ({filterFoodToAdd}) => {
 
     const filterFoods = (item) => {
         setSelectedCategory(item)
+      
         const filteredFood = Foods.filter(food => food.Category == item)
+        const names = []
+        filteredFood.map(food => names.unshift(food.Name))
+        setFoodNames(names)    
+    }
+
+    const filterFoods100 = (item) => {
+        setSelectedCategory(item)
+        const filteredFood = Foods100g.filter(food => food.Category == item)
         const names = []
         filteredFood.map(food => names.unshift(food.Name))
         setFoodNames(names)
     }
 
   return (
-    <>
-    <View style={styles.dropdownContainer}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View>
+
+            <View style={styles.dropdownContainer}>
 
                 {/* Food Category Options */}
 
-                <Text style={styles.nameText}>Category</Text>
+                <Text style={styles.nameText}>Select Measurement</Text>
                 <SelectDropdown
-                    data={foodCategories}
+                    data={['Per serving', 'Per 100 grams']}
                     onSelect={(selectedItem, index) => {
-                        filterFoods(selectedItem)
+                        setSelectedCategory('')
+                        setSelectedFood(null)
+                        setMeasurement(selectedItem)
+                    }}
+                    defaultButtonText={<View style={styles.dFlex}><Text style={{fontSize: 12, color: '#0CA036', fontWeight: 'bold'}}>Per serving</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#0CA036'}}/></View>}
+                    buttonStyle={styles.nameBtn}
+                    buttonTextStyle={{color: '#0CA036', fontSize: 12, fontWeight: 'bold'}}
+                    rowStyle={styles.rowStyle}
+                    rowTextStyle={styles.rowTextStyle}
+                    dropdownStyle={styles.dropdownStyle}
+                >
+                    <Ionicons name='arrow-right'/>
+                </SelectDropdown>
+            </View>
+            <View style={styles.dropdownContainer}>
+
+                {/* Food Category Options */}
+
+                <Text style={styles.nameText}>Food Category</Text>
+                <SelectDropdown
+                    data={measurement == 'Per serving' ? foodCategories : foodCategories100g}
+                    onSelect={(selectedItem, index) => {
+                        if(measurement == 'Per serving') {
+                            filterFoods(selectedItem)
+                        } else {
+                            filterFoods100(selectedItem)
+                        }
+                        
                     }}
                     defaultButtonText={<View style={styles.dFlex}><Text style={{fontSize: 12, color: '#0CA036', fontWeight: 'bold'}}>Food Category</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#0CA036'}}/></View>}
                     buttonStyle={styles.nameBtn}
@@ -62,7 +118,7 @@ const SelectFood = ({filterFoodToAdd}) => {
 
                 {/* Food Name options */}
 
-                <Text style={styles.nameText}>Name</Text>
+                <Text style={styles.nameText}>Food Name</Text>
                 <SelectDropdown
                     data={foodNames}
                     onSelect={(selectedItem, index) => {
@@ -79,42 +135,34 @@ const SelectFood = ({filterFoodToAdd}) => {
                     <Ionicons name='arrow-right'/>
                 </SelectDropdown>
             </View>
-            <View style={styles.numericInputFormControl}>
-                <View style={styles.numericInputContainer}> 
 
-                    {/* Amount of food - grams */}
+           
 
-                    <Text style={styles.amountText}>Amount</Text>
-                    <View style={
-                        {
-                        flexDirection: 'row',
-                        alignItems: 'flex-end'
-                        }}>
-                        <TextInput 
+            {
+                measurement == 'Per 100 grams' && 
+                    <View>
+                        <Text style={{color: '#ddd', fontSize: 16, marginBottom: 5 }}>Amount</Text>
+                        <TextInput
+                            style={{
+                                width: '100%',
+                                height: 30,
+                                paddingVertical: 5,
+                                paddingHorizontal: 10,
+                                color: '#fff',
+                                borderRadius: 3,
+                                backgroundColor: 'green'
+                            }}
+
+                            placeholder='Enter amount in grams (g)'
                             keyboardType='numeric'
-                            style={styles.amountInput}
-                            placeholder='0.0'
+                            onChangeText={(val) => setMeasure(parseFloat(val))}
                         />
-                         <Text style={{
-                            color: '#fff',
-                            marginLeft: 3,
-                        }}>grams</Text>
                     </View>
-
-                </View>
-            </View>
-            <View style={styles.numericInputContainer}>
-
-                {/* Food Quantity */}
-
-                <Text style={styles.amountText}>Quantity</Text>
-                <TextInput 
-                    keyboardType='numeric'
-                    style={styles.amountInput}
-                    placeholder='0'
-                />
-            </View>
-    </>
+                
+            }
+            
+        </View>  
+    </TouchableWithoutFeedback>
   )
 
  

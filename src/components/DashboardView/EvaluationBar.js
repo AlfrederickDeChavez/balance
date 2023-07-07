@@ -41,16 +41,16 @@ const EvaluationBar = ({name, intake, recommended, estimated, upperlimit}) => {
             <MaterialCommunityIcons name='map-marker-down' style={[styles.marker, {left: `${position}%`}]}/>
             <View style={styles.evaluationBar}>
             <LinearGradient 
-                    colors={['red', '#F76601', '#0CA036']} 
+                    colors={['red', '#F76601']} 
                     style={styles.EAR} 
                     start={{x: 0, y: 0.5}} 
                     end={{x: 1, y: 0.5}} 
                 />
                 <LinearGradient 
-                    colors={['#0CA036', '#0CA036']} 
+                    colors={['#F76601', '#0CA036', '#0CA036']}
                     style={[styles.RDA, {marginLeft: 0.5, marginRight: 0.5}]} 
                     start={{x: 0, y: 0.5}} 
-                    end={{x: 0, y: 0.5}} 
+                    end={{x: 1, y: 0.5}} 
                 />
                 <LinearGradient 
                     colors={['#0CA036', '#0CA036','#F76601']} 

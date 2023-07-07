@@ -5,6 +5,7 @@ import InsertFood from './InsertFood';
 import SearchResult from './SearchResult';
 import SelectFood from './SelectFood'; 
 import { Foods } from '../../database/FoodNutrientContent';
+import { Foods100g } from '../../database/food';
 
 import ContentContext from '../../context/ContentContext';
 import AuthContext from '../../context/AuthContext';
@@ -15,6 +16,11 @@ const AddFood = () => {
 
     // CONTEXT
     const [visible, setVisible] = useState(false)
+
+    
+    const [quantity, setQuantity] = useState(1)
+    const [measure, setMeasure] = useState(100)
+    const [measurement, setMeasurement] = useState('Per serving')
 
     // FOOD
     const [foodToAdd, setFoodToAdd] = useState(
@@ -49,16 +55,6 @@ const AddFood = () => {
             Quantity: 1,
         }
     )
-
-
-    //NUTRIENTS STATE 
-    const [foodName, setFoodName] = useState('')
-    const [foodCategory, setFoodCategory] = useState('')
-    
-    // MEASURE
-    const [amount, setAmount] = useState(0)
-    const [quantity, setQuantity] = useState(0)
-
 
     // NAVIGATION STATE
     const [selectFood, setSelectFood] = useState(true)
@@ -102,15 +98,56 @@ const AddFood = () => {
 
     // SEND FOOD
     const filterFoodToAdd = (category, name) => {
-        const foodtoadd = Foods.filter(food => food.Category == String(category) && food.Name == String(name))[0]
-        console.log({...foodtoadd, quantity: quantity, amount: amount}) 
-        setFoodToAdd({...foodtoadd, Quantity: 1}) 
+        if(measurement == 'Per serving') {
+            const foodtoadd = Foods.filter(food => food.Category == String(category) && food.Name == String(name))[0]
+            setFoodToAdd({...foodtoadd, Quantity: quantity}) 
+        } else {
+            const foodtoadd = Foods100g.filter(food => food.Category == String(category) && food.Name == String(name))[0]
+            setFoodToAdd({...foodtoadd, Quantity: quantity}) 
+        }
+        
     }
  
     const confirmFoodAdd = () => {
+
         if (foodToAdd.Name){
-            setVisible(true)
+            if (measurement == 'Per serving') {
+                setVisible(true)
+            } else {
+                setFoodToAdd({...foodToAdd, 
+                    Calories: ((foodToAdd.Calories * measure) / 100).toFixed(1),
+                    Chloride: ((foodToAdd.Chloride * measure) / 100).toFixed(1),
+                    DietaryFiber: ((foodToAdd.DietaryFiber * measure) / 100).toFixed(1),
+                    Flouride: ((foodToAdd.Flouride * measure) / 100).toFixed(1),
+                    Folate: ((foodToAdd.Folate * measure) / 100).toFixed(1),
+                    Iodine: ((foodToAdd.Iodine * measure) / 100).toFixed(1),
+                    Iron: ((foodToAdd.Iron * measure) / 100).toFixed(1),
+                    Magnesium: ((foodToAdd.Magnesium * measure) / 100).toFixed(1),
+                    Niacin: ((foodToAdd.Niacin * measure) / 100).toFixed(1),
+                    Phosphorus: ((foodToAdd.Phosphorus * measure) / 100).toFixed(1),
+                    Potassium: ((foodToAdd.Potassium * measure) / 100).toFixed(1),
+                    Protein: ((foodToAdd.Protein * measure) / 100).toFixed(1),
+                    Riboflavin: ((foodToAdd.Riboflavin * measure) / 100).toFixed(1),
+                    Selenium: ((foodToAdd.Selenium * measure) / 100).toFixed(1),
+                    Sodium: ((foodToAdd.Sodium * measure) / 100).toFixed(1),
+                    Thiamin: ((foodToAdd.Thiamin * measure) / 100).toFixed(1),
+                    Vitamin_A: ((foodToAdd.Vitamin_A * measure) / 100).toFixed(1),
+                    Vitamin_B12: ((foodToAdd.Vitamin_B12 * measure) / 100).toFixed(1),
+                    Vitamin_B6: ((foodToAdd.Vitamin_B6 * measure) / 100).toFixed(1),
+                    Vitamin_C: ((foodToAdd.Vitamin_C * measure) / 100).toFixed(1),
+                    Vitamin_D: ((foodToAdd.Vitamin_D * measure) / 100).toFixed(1),
+                    Vitamin_E: ((foodToAdd.Vitamin_E * measure) / 100).toFixed(1),
+                    Vitamin_K: ((foodToAdd.Vitamin_K * measure) / 100).toFixed(1),
+                    Zinc: ((foodToAdd.Zinc * measure) / 100).toFixed(1),
+                    Quantity: quantity
+                }) 
+                setVisible(true)
+            }
         }
+
+        console.log(foodToAdd.Calories)
+        
+        
     }
 
     const foods = [
@@ -177,6 +214,10 @@ const AddFood = () => {
             {
                 selectFood && <SelectFood 
                                 filterFoodToAdd={filterFoodToAdd}
+                                measure={measure}
+                                setMeasure={setMeasure}
+                                measurement={measurement}
+                                setMeasurement={setMeasurement}
                             />
             }
 
@@ -234,13 +275,15 @@ const AddFood = () => {
                 </TouchableOpacity>
             }
 
-            
+             
 
             <ConfirmAlert 
                 visible={visible}
                 setVisible={setVisible}
                 food={foodToAdd}
                 setFood={setFoodToAdd}
+                setQuantity={setQuantity}
+                quantity={quantity}
             />
         </View>
     )

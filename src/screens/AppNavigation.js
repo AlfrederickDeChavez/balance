@@ -1,9 +1,11 @@
 //Navigation
 import {NavigationContainer} from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+
 
 //hooks 
 import {useContext} from 'react';
-
+ 
 //Async Storage 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,7 +18,7 @@ import AuthContext from '../context/AuthContext';
 
 export default function AppNavigation() {
 
-  const {authtokens} = useContext(AuthContext)
+  const {authtokens, user, loading} = useContext(AuthContext)
   
   return (
     
@@ -26,7 +28,40 @@ export default function AppNavigation() {
     */
 
     <NavigationContainer>
-        { authtokens ? <ContentStack /> : <AuthStack />}
+        {/* { authtokens ? } */}
+      {
+        loading ? 
+
+          <ActivityIndicator size='large' color='black' style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0
+
+          }}/>
+
+          : 
+
+          !authtokens ? 
+
+          <AuthStack />
+          
+          : 
+
+          user ?
+
+          <ContentStack /> :
+
+          <AuthStack />
+
+
+          
+          
+      }
+        
+       
+      
     </NavigationContainer>
   )  
      

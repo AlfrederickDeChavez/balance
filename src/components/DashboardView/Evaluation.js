@@ -40,7 +40,8 @@ const Evaluation = () => {
         <ScrollView style={{ marginBottom: 200, backgroundColor: '#ddd'}}>
             
             <Text style={styles.title}>Macronutrients</Text>
-                <View>
+            
+                {/* <View>
                     <EvaluationBar 
                         name='Calories' 
                         intake={calories.intake}
@@ -48,7 +49,7 @@ const Evaluation = () => {
                         recommended={calories.recommended}
                         upperlimit={vitaminA.upperlimit}
                     />
-                </View>
+                </View> */}
 
                 <View>
                     <EvaluationBar 

@@ -7,16 +7,16 @@ const EvaluationGuide = () => {
         <View style={styles.container}>
             <View style={styles.evaluationBar}>
                 <LinearGradient 
-                    colors={['red', '#F76601', '#0CA036']} 
+                    colors={['red', '#F76601']} 
                     style={styles.EAR} 
                     start={{x: 0, y: 0.5}} 
                     end={{x: 1, y: 0.5}} 
                 />
                 <LinearGradient 
-                    colors={['#0CA036', '#0CA036']} 
+                    colors={['#F76601', '#0CA036', '#0CA036']} 
                     style={[styles.RDA, {marginLeft: 1, marginRight: 0.5}]} 
                     start={{x: 0, y: 0.5}} 
-                    end={{x: 0, y: 0.5}} 
+                    end={{x: 1, y: 0.5}} 
                 />
                 <LinearGradient 
                     colors={['#0CA036', '#0CA036','#F76601']} 
@@ -32,9 +32,9 @@ const EvaluationGuide = () => {
                 />
             </View>
             <View style={styles.evaluationLabel}>
-                <Text style={styles.under}>Deficiency</Text>
-                <Text style={styles.safety}>Safety</Text>
-                <Text style={styles.toxic}>Toxicity</Text>
+                <Text style={styles.under}>Low</Text>
+                <Text style={styles.safety}>balance</Text>
+                <Text style={styles.toxic}>High</Text>
             </View>
         </View>
     )

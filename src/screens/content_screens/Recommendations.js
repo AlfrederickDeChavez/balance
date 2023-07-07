@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { SafeAreaView, View, Text , StyleSheet, TouchableOpacity, ScrollView, Image, StatusBar} from 'react-native'
 import FoodBenefits from '../../components/FoodBenefits'
 import { foods } from '../../database/benefits'
+import ContentContext from '../../context/ContentContext'
 
 const Recommendations = () => {
 
+  const {reached, calories, checkedIfReached} = useContext(ContentContext)
   const [visible, setVisible] = useState(false)
   const [food, setFood] = useState(
     {
@@ -12,6 +14,11 @@ const Recommendations = () => {
     },
 
   )
+
+  useEffect(() => {
+    console.log('checked')
+    checkedIfReached()
+  }, [calories.intake, calories.recommended])
 
   const showFood = (thisFood) => {
     setFood(thisFood)
@@ -32,26 +39,32 @@ const Recommendations = () => {
           paddingVertical: 5,
           fontSize: 16,
           fontWeight: '700',
-          backgroundColor: '#ddd',
+          backgroundColor: '#ddd', 
           marginBottom: 15,
         }}>Foods</Text>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-
+          
           {
             foods.map((food, index) => {
-              return (
-                <View style={styles.foodContainer} key={index}>
-                  <View style={styles.foodDetails}>
-                    <Image source={food.image} style={styles.foodImage}/>
-                    <Text style={{color: 'green', fontWeight: 'bold', fontSize: 14, marginTop: 5}}>{food.name}</Text>
-                    <Text style={{color: '#323232',  fontSize: 10,}}>{food.category}</Text>
+
+              if(reached.includes(food.main)) {
+                return null
+              } else { 
+                return (
+                  <View style={styles.foodContainer} key={index}>
+                    <View style={styles.foodDetails}>
+                      <Image source={food.image} style={styles.foodImage}/>
+                      <Text style={{color: 'green', fontWeight: 'bold', fontSize: 14, marginTop: 5}}>{food.name}</Text>
+                      <Text style={{color: '#323232',  fontSize: 10,}}>{food.category}</Text>
+                    </View> 
+                    <TouchableOpacity style={styles.foodBenefits} onPress={() => showFood(food)}>
+                      <Text style={{color: '#FFF', fontWeight: 'bold'}}>Benefits</Text>
+                    </TouchableOpacity>
                   </View> 
-                  <TouchableOpacity style={styles.foodBenefits} onPress={() => showFood(food)}>
-                    <Text style={{color: '#FFF', fontWeight: 'bold'}}>Benefits</Text>
-                  </TouchableOpacity>
-                </View> 
-              )
+                )
+              }
+              
             })
           }
           
@@ -120,6 +133,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-  }
+  },
+
 })
 export default Recommendations

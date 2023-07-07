@@ -1,13 +1,14 @@
-import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, Image, Dimensions} from "react-native"
+import { Text, View, Modal, StyleSheet, Animated, TouchableOpacity, Image, Dimensions, TextInput} from "react-native"
 import { useState, useEffect, useRef, useContext} from "react"
-import AuthContext from "../../context/AuthContext"
 import ContentContext from "../../context/ContentContext"
+import SelectDropdown from 'react-native-select-dropdown';
+import { Ionicons } from '@expo/vector-icons';
 
-const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
+
+const ConfirmAlert = ({visible, setVisible, food, setFood, quantity, setQuantity}) => {
 
     // CONTEXT DATA
     const {addFood} = useContext(ContentContext)
-    const {authtokens} = useContext(AuthContext)
 
     const [showAlert, setShowAlert] = useState(visible)
     const scaleValue = useRef(new Animated.Value(0)).current
@@ -66,16 +67,19 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
     }
  
     const confirm = () => {
-        addFood(food, authtokens)
+        addFood(food, quantity)
         setTimeout(() => {
             setVisible(false)
             setFood(defaultFood)
         }, 1000)    
+
+        setQuantity(1)
     }
 
     const cancel = () => {
         setVisible(false)
         setFood(defaultFood) 
+        setQuantity(1)
     }
     return(
         <Modal transparent visible={showAlert}>
@@ -92,6 +96,25 @@ const ConfirmAlert = ({visible, setVisible, food, setFood}) => {
                             <Text style={{color: '#555', fontSize: 10,}}>Minerals: Iron - {food.Iron}, Zinc ...</Text>
                         </View>            
                     </View>
+
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 15}}>
+                        <Text style={{fontSize: 16, color: '#333'}}>Quantity: </Text>
+                        <SelectDropdown
+                            data={[0.25, 0.5, 0.75, 1, 1.25, 1.50, 1.75, 2, 2.5, 3, 3.5, 4]}
+                            onSelect={(selectedItem) => {
+                                setQuantity(selectedItem)
+                            }}
+                            defaultButtonText={<View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}><Text style={{fontSize: 14, color: '#222', fontWeight: 'bold'}}>{quantity}</Text><Ionicons name='caret-down-outline' style={{fontSize: 12, color: '#222'}}/></View>}
+                            buttonStyle={{width: 90, height: 35, flexDirection: 'row'}}
+                            buttonTextStyle={{color: '#222', fontSize: 14, fontWeight: 'bold'}}
+                            rowStyle={{height: 40}}
+                            rowTextStyle={{color: '#222', fontSize: 14}}
+                            // dropdownStyle={{backgroundColor: 'red'}}
+                        >
+                            <Ionicons name='arrow-right'/>
+                        </SelectDropdown>
+                    </View>
+
                     <TouchableOpacity 
                         onPress={confirm}
                         style={styles.confirm_btn}
@@ -188,6 +211,16 @@ const styles = StyleSheet.create({
         height: 90,
         paddingLeft: 15,
         paddingTop: 5,
+    },
+
+    quantityInput: {
+        width: 90,
+        height: 30,
+        borderColor: '#ccc', 
+        borderWidth: 1,
+        marginBottom: 15,
+        textAlign: 'center',
+        color: '#000'
     }
 
 

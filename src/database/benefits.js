@@ -4,7 +4,8 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/orange.png'),
         nutrient: 'Vitamin C',
-        benefits: ['Prevents formation of kidney stones', 'Promotes healthy body tissues', 'Promotes proper digestion']
+        benefits: ['Prevents formation of kidney stones', 'Promotes healthy body tissues', 'Promotes proper digestion'],
+        main: 'vitaminC'
       },
   
       {
@@ -12,6 +13,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/fish.png'),
         nutrient: 'Vitamin D | Riboflavin',
+        main: 'vitaminD',
         benefits: ['Lowers the risk of heart-related issues', 'Aid mental condition', 'Reduce the risk of autoimmune diseases']
       },
 
@@ -20,6 +22,7 @@ export const foods = [
         category: 'Poultry',
         image: require('../assets/foods/egg.png'),
         nutrient: 'Protein | Vitamin A',
+        main: 'protein',
         benefits: ['Helps in maintaining healthy weight', 'Boosts brain power', 'Encourages healthy hair and nails', 'Facilitates muscle building']
       },
 
@@ -28,6 +31,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/apple.png'),
         nutrient: 'Vitamin C | Fiber',
+        main: 'vitaminC',
         benefits: ['Decrease risk of diabetes', 'Solves respiratory issues', 'Offers whiter and healthier teeth', 'Boosts immune system']
       },
 
@@ -36,6 +40,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/beef.png'),
         nutrient: 'Protein',
+        main: 'protein',
         benefits: ['Reduces risk of heart disease', 'Prevents anemia', 'Enhances muscle growth']
       },
 
@@ -44,6 +49,7 @@ export const foods = [
         category: 'Grains and Pasta',
         image: require('../assets/foods/pasta.png'),
         nutrient: 'Protein',
+        main: 'protein',
         benefits: ['Keep blood sugar regulated due to its low glycemic index', 'Promotes better digestion', 'Lowers risk of heart disease']
       },
 
@@ -52,6 +58,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/fried-chicken.png'),
         nutrient: 'Protein',
+        main: 'protein',
         benefits: ['Helps in building muscles', 'Improves your mood', 'Promotes heart health', 'Controls blood pressure']
       },
 
@@ -60,6 +67,7 @@ export const foods = [
         category: 'Dairy Products',
         image: require('../assets/foods/yoghurt.png'),
         nutrient: 'Calcium',
+        main: 'calcium',
         benefits: ['Helps in building stronger bones and teeth', 'Stimulates immune system', 'Promotes better digestion']
       },
 
@@ -68,6 +76,7 @@ export const foods = [
         category: 'Baked Products',
         image: require('../assets/foods/whole-wheat-bread.png'),
         nutrient: 'Fiber | Vitamin B',
+        main: 'fiber',
         benefits: ['Helps to avoid cardiovascular disease', 'Improves gut health', 'Decreases inflammation and blood sugar']
       },
 
@@ -76,6 +85,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/blackberry.png'),
         nutrient: 'Vitamin C | Vitamin K',
+        main: 'vitaminC',
         benefits: ['Beneficial in maintaining healthy and glowing skin', 'Helps improve cognitive body functions', 'Good for maintaining healthy eyes and bones', 'Boosts immunity and promotes weight loss']
       },
 
@@ -84,14 +94,16 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/avocado.png'),
         nutrient: 'Vitamin C | E | B6 | K',
+        main: 'vitaminC',
         benefits: ['Helps manage stress and anxiety', 'Support healthy blood sugar levels', 'Support overall nutrient absorption']
       },
 
-      {
+      {  
         name: 'Broccoli',
         category: 'Vegetables',
         image: require('../assets/foods/broccoli.png'),
         nutrient: 'Vitamin C | K | Iron',
+        main: 'vitaminK',
         benefits: ['Remove toxins and free radicals from body', 'Provides relief from stomach disorders', 'Protect eyes against macular degeneration', 'Aids in treating cancer']
       },
 
@@ -100,6 +112,7 @@ export const foods = [
         category: 'Grains and Pasta',
         image: require('../assets/foods/brown-rice.png'),
         nutrient: 'Thiamin | Niacin | Zinc',
+        main: 'niacin',
         benefits: ['Lowers risk of Type 2 diabetes', 'Helps prevent gallstones', 'Treats digestive disorder']
       },
 
@@ -108,6 +121,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/carrot.png'),
         nutrient: 'Folate | Vitamin K',
+        main: 'folate',
         benefits: ['Helps maintain healthy eyes', 'Protect your liver', 'Improves immune system']
       },
 
@@ -116,6 +130,7 @@ export const foods = [
         category: 'Dairy Products',
         image: require('../assets/foods/cheese.png'),
         nutrient: 'Calcium | Vitamin A',
+        main: 'calcium',
         benefits: ['Strengthens bone and cartilage', 'Improves the health of your hair', 'Prevents hypertension', 'Dental care']
       },
 
@@ -124,6 +139,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/chicken-breast.png'),
         nutrient: 'Selenium | Niacin',
+        main: 'selenium',
         benefits: ['Promotes muscle growth', 'Controls blood pressure', 'Reduces risk of cancer']
       },
 
@@ -132,6 +148,7 @@ export const foods = [
         category: 'Sweets',
         image: require('../assets/foods/chocolate.png'),
         nutrient: 'Magnesium | Iron | Zinc',
+        main: 'magnesium',
         benefits: ['Reduces stress and anxiety', 'Improves skin health and appearance', 'Reduces the risk of stroke']
       },
 
@@ -140,6 +157,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/corn.png'),
         nutrient: 'Phosphorus',
+        main: 'phosphorus',
         benefits: ['Helps maintain good vision and skin', 'Controls diabetes and hypertension', 'Lowers risk of colon cancer']
       },
 
@@ -148,6 +166,7 @@ export const foods = [
         category: 'Dairy Products',
         image: require('../assets/foods/dairy.png'),
         nutrient: 'Calcium',
+        main: 'calcium',
         benefits: ['Strengthens bones', 'Dental care']
       },
 
@@ -156,6 +175,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/ham.png'),
         nutrient: 'Protein | Potassium',
+        main: 'potassium',
         benefits: ['Helps build and maintain muscle mass', 'Boosts satiety', 'Aids thyroid function']
       },
 
@@ -164,6 +184,8 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/liver.png'),
         nutrient: 'Vitamin A | B12',
+        main: 'vitaminA',
+
         benefits: ['Removes harmful body toxins', 'Helps in recycling the blood', 'Filters out alcohol']
       },
 
@@ -172,6 +194,8 @@ export const foods = [
         category: 'Dairy Products',
         image: require('../assets/foods/milk.png'),
         nutrient: 'Calcium',
+        main: 'calcium',
+
         benefits: ['Neutralizes toxins in the body', 'Strengthens bones and teeth', 'Controls blood pressure']
       },
 
@@ -180,6 +204,7 @@ export const foods = [
         category: 'Grains and Pasta',
         image: require('../assets/foods/oat.png'),
         nutrient: 'Zinc | Thiamin',
+        main: 'zinc',
         benefits: ['Helps lower blood pressure level', 'Lowers risk of Type 2 diabetes', 'Protect against asthma']
       },
 
@@ -188,6 +213,7 @@ export const foods = [
         category: 'Grains and Pasta',
         image: require('../assets/foods/oatmeal.png'),
         nutrient: 'Zinc | Thiamin',
+        main: 'zinc',
         benefits: ['Helps lower blood pressure level', 'Lowers risk of Type 2 diabetes', 'Protect against asthma']
       },
 
@@ -196,6 +222,7 @@ export const foods = [
         category: 'Nuts and Seeds',
         image: require('../assets/foods/peanut.png'),
         nutrient: 'Niacin | Vitamin E',
+        main: 'vitaminE',
         benefits: ['Eliminates body toxins', 'Prevents gallstones', 'Reduces risk of heart disease', 'Minimizes hair loss']
       },
 
@@ -204,6 +231,7 @@ export const foods = [
         category: 'Nuts and Seeds',
         image: require('../assets/foods/peanut-butter.png'),
         nutrient: 'Folate | Vitamin E | B',
+        main: 'folate',
         benefits: ['Promotes growth of bones and muscles', 'Reduces risk of gallstones', 'Reduces risk of Type 2 diabetes']
       },
 
@@ -212,6 +240,7 @@ export const foods = [
         category: 'Grains and Pasta',
         image: require('../assets/foods/porridge.png'),
         nutrient: 'Iron | Calcium',
+        main: 'iron',
         benefits: ['Promotes healthy gut bacteria', 'Promotes weight loss', 'Improve blood sugar control']
       },
 
@@ -220,6 +249,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/potato.png'),
         nutrient: 'Vitamin C | B6 | Protein',
+        main: 'vitaminB6',
         benefits: ['Alleviate kidney stones', 'Prevents different forms of anemia', 'Strengthens the immune system']
       },
 
@@ -228,6 +258,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/salmon.png'),
         nutrient: 'Selenium',
+        main: 'selenium',
         benefits: ['Improves memory and brain functions', 'Promotes healthy eyes', 'Helps maintain heathy skin and hair', 'Good for maintaining insulin levels']
       },
 
@@ -236,6 +267,7 @@ export const foods = [
         category: 'Nuts and Seeds',
         image: require('../assets/foods/seeds.png'),
         nutrient: 'Fiber | Vitamin K',
+        main: 'vitaminK',
         benefits: ['Helps regulate blood sugar', 'Promotes better sleep', 'Prevents kidney stone formation']
       },
 
@@ -244,6 +276,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/soy.png'),
         nutrient: 'Folate | Iron',
+        main: 'folate',
         benefits: ['Help relieve gastrointestinal issues', 'Helps strengthen immunity', 'Aid in weight loss efforts']
       },
 
@@ -252,6 +285,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/spinach.png'),
         nutrient: 'Vitamin K | A',
+        main: 'vitaminK',
         benefits: ['Strengthens cardiovascular system', 'Fights acne and wrinkles', 'Prevent oral health problems', 'Nourishes the eyes']
       },
 
@@ -260,6 +294,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/strawberry.png'),
         nutrient: 'Vitamin C',
+        main: 'vitaminC',
         benefits: ['Helps in maintaining healthy eyes', 'Reduces inflammation', 'Helps to lower depression']
       },
 
@@ -268,6 +303,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/tofu.png'),
         nutrient: 'Protein',
+        main: 'protein',
         benefits: ['Helps in strengthening bones', 'Provides relief from gout', 'Reduces risk of anemia']
       },
 
@@ -276,6 +312,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/tuna.png'),
         nutrient: 'Vitamin D',
+        main: 'vitaminD',
         benefits: ['Protects skin and kidney against infection', 'Promotes growth of muscles and body', 'Reduces blood pressure and risk of heart diseases']
       },
 
@@ -284,6 +321,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/watermelon.png'),
         nutrient: 'Vitamin A | B6',
+        main: 'vitaminA',
         benefits: ['Effective kidney cleanser', 'Promotes digestion and regularity', 'Prevents heart disease and stroke']
       }, 
 
@@ -292,6 +330,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/blackcurrant.png'),
         nutrient: 'Vitamin C | Potassium',
+        main: 'potassium',
         benefits: ['Fight free radicals in the body', 'Reduces oxidative stress and cell damage', 'Regulates high blood pressure', 'Boosts immune system']
       }, 
 
@@ -300,6 +339,7 @@ export const foods = [
         category: 'Shellfish',
         image: require('../assets/foods/shellfish.png'),
         nutrient: 'Vitamin B12 | Zinc',
+        main: 'vitaminB12',
         benefits: ['Helps prevent rheumatoid arthritis', 'Keeps your brain healthy', 'Prevents anemia']
       }, 
 
@@ -308,6 +348,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/asparagus.png'),
         nutrient: 'Folate',
+        main: 'folate',
         benefits: ['Supports healthy pregnancy for women', 'Helps lower blood pressure', 'Can improve digestive health']
       }, 
 
@@ -316,6 +357,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/sprouts.png'),
         nutrient: 'Zinc | Calcium',
+        main: 'zinc',
         benefits: ['Helps improve eye vision', 'Minimizes the formation of dandruff', 'Improves heart health']
       }, 
 
@@ -324,6 +366,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/bananas.png'),
         nutrient: 'Potassium | Magnesium',
+        main: 'magnesium',
         benefits: ['Regulates blood sugar level', 'Contains powerful antioxidants', 'Supports digestive health']
       }, 
 
@@ -332,6 +375,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/green-pea.png'),
         nutrient: 'Vitamin C',
+        main: 'vitaminC',
         benefits: ['Helps prevent stomach cancer', 'Regulates blood sugar level', 'Prevents constipation']
       }, 
 
@@ -340,6 +384,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/apricot.png'),
         nutrient: 'Potassium | Calcium',
+        main: 'calcium',
         benefits: ['Helps prevent skin disorder', 'Preventing vision disorder', 'Stabilizing fluid level']
       }, 
 
@@ -348,6 +393,7 @@ export const foods = [
         category: 'Shellfish',
         image: require('../assets/foods/oyster.png'),
         nutrient: 'Zinc',
+        main: 'zinc',
         benefits: ['Increase blood circulation', 'Provides unique antioxidants', 'Contributes to heart health']
       }, 
 
@@ -356,6 +402,7 @@ export const foods = [
         category: 'Nuts and Seeds',
         image: require('../assets/foods/cashew.png'),
         nutrient: 'Phosphorus | Magnesium',
+        main: 'phosphorus',
         benefits: ['Helps in lowering blood pressure', 'Prevents the formation of gallstones', 'Beneficial for dealing with Type 2 diabetes']
       }, 
 
@@ -364,6 +411,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/pumpkin.png'),
         nutrient: 'Vitamin A | Fiber',
+        main: 'vitaminA',
         benefits: ['Facilitates eyes health and skin', 'Provides useful antioxidants', 'Supports immune system']
       }, 
 
@@ -372,6 +420,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/lentils.png'),
         nutrient: 'Fiber | Iron',
+        main: 'fiber',
         benefits: ['Boosts energy level', 'Helps maintain an ideal blood tonicity', 'Decrease risk of heart disease']
       }, 
 
@@ -380,6 +429,7 @@ export const foods = [
         category: 'Shellfish',
         image: require('../assets/foods/crab.png'),
         nutrient: 'Selenium | Vitamin B12',
+        main: 'selenium',
         benefits: ['Improves mental activity', 'Eliminates inflammation', 'Improves blood circulation']
       }, 
 
@@ -388,6 +438,7 @@ export const foods = [
         category: 'Baked Products',
         image: require('../assets/foods/bread.png'),
         nutrient: 'Folate | Calcium',
+        main: 'folate',
         benefits: ['Provides beneficial bacteria to protect digestive system', 'Increases muscle mass', 'Maintain bone health']
       }, 
 
@@ -396,6 +447,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/coffee.png'),
         nutrient: 'Potassium | Magnesium',
+        main: 'magnesium',
         benefits: ['Enhances blood flow and sharpens memory', 'Lower risk of Type 2 diabetes', 'Protects lives against certain conditions']
       }, 
 
@@ -404,6 +456,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/raisins.png'),
         nutrient: 'Magnesium | Potassium',
+        main: 'potassium',
         benefits: ['Good remedy for chronic constipation', 'Helps to combat hair loss, skin diseases and joint pain', 'Helps relieve bacterial infections']
       }, 
 
@@ -412,6 +465,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/bacon.png'),
         nutrient: 'Protein',
+        main: 'protein',
         benefits: ['Protect your body from heart attack and heatstroke', 'Decrease diabetes risks', 'Increases your energy']
       }, 
 
@@ -420,6 +474,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/seaweed.png'),
         nutrient: 'Iodine | Fiber',
+        main: 'iodine',
         benefits: ['Helps regulates blood sugar level', 'Improve gut health', 'Help with thyroid function']
       }, 
 
@@ -428,6 +483,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/tomato.png'),
         nutrient: 'Potassium | Calcium',
+        main: 'potassium',
         benefits: ['Helps prevent the formation of gallstones', 'Control blood control', 'Enhances the health of your skin']
       }, 
 
@@ -436,6 +492,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/lettuce.png'),
         nutrient: 'Vitamin C | Vitamin A',
+        main: 'vitaminA',
         benefits: ['Reduces risks of cancer and heart disease', 'Strengthens the bone', 'Helps control anxiety']
       }, 
 
@@ -444,6 +501,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/celery.png'),
         nutrient: 'Vitamin A | C | K',
+        main: 'vitaminK',
         benefits: ['Helps to lower cholesterol level', 'Reduces blood pressure', 'Helps lower arthritis pain', 'Reduces asthma symptoms']
       }, 
 
@@ -452,6 +510,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/olives.png'),
         nutrient: 'Vitamin E',
+        main: 'vitaminE',
         benefits: ['Lowers risks and treatment of cognitive diseases', 'Reduces the risks of cancer', 'Provides powerful antioxidants']
       }, 
 
@@ -460,6 +519,7 @@ export const foods = [
         category: 'Proteins',
         image: require('../assets/foods/shrimp.png'),
         nutrient: 'Magnesium | Iron',
+        main: 'iron',
         benefits: ['Maintains eye health', 'Improves mood and brain health', 'Protects against heart disease']
       }, 
 
@@ -468,6 +528,7 @@ export const foods = [
         category: 'Vegetables',
         image: require('../assets/foods/squash.png'),
         nutrient: 'Vitamin C | Magnesium',
+        main: 'vitaminA',
         benefits: ['Improves eye health', 'Reduce risk of depression', 'Enhance skin health']
       }, 
 
@@ -476,6 +537,7 @@ export const foods = [
         category: 'Fruits',
         image: require('../assets/foods/melon.png'),
         nutrient: 'Potassium | Calcium',
+        main: 'potassium',
         benefits: ['Preserves heart and vein health', 'Strengthens immune system', 'Lowers blood pressure']
       }, 
 
@@ -484,6 +546,7 @@ export const foods = [
         category: 'Nuts and Seeds',
         image: require('../assets/foods/coconut.png'),
         nutrient: 'Vitamin B | C | E',
+        main: 'vitaminB6',
         benefits: ['Provides powerful antioxidants', 'Boosts brain function', 'Improves bone strength and dental health']
       }, 
 

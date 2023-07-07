@@ -4,7 +4,7 @@ import MacronutrientsInput from "./MacronutrientsInput"
 import MineralsInput from "./MineralsInput"
 import VitaminsInput from "./VitaminsInput"
 
-const InsertFood = ({visible, setVisible, foodToAdd, setFoodToAdd}) => {
+const InsertFood = ({foodToAdd, setFoodToAdd}) => {
 
     const [inputMacros, setInputMacros] = useState(true)
     const [inputVitamins, setInputVitamins] = useState(false)
@@ -40,11 +40,6 @@ const InsertFood = ({visible, setVisible, foodToAdd, setFoodToAdd}) => {
                 value={String(foodToAdd.Name)}
             />
 
-            <TextInput
-                style={styles.quantityInput}
-                placeholder='Enter quantity'
-                keyboardType='numeric'
-            />
             <Text style={styles.nutritionLabel}>Nutritional Content</Text>
 
             <View style={styles.nutrientsNavigation}>
@@ -84,9 +79,6 @@ const InsertFood = ({visible, setVisible, foodToAdd, setFoodToAdd}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
 
     foodNameInput: {
         width: '100%',
@@ -95,16 +87,6 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         backgroundColor: 'green',
         marginVertical: 10,
-        color: '#FFF',
-    },
-
-    quantityInput: {
-        width: '100%',
-        height: 30,
-        paddingHorizontal: 15,
-        paddingVertical: 5,
-        backgroundColor: 'green',
-        marginBottom: 10,
         color: '#FFF',
     },
 
@@ -117,12 +99,6 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         paddingHorizontal: 15,
     },
-
-    nutritionalContent: {
-        width: '100%',
-        height: '60%',
-        marginBottom: 100,
-    },    
 
     nutrientsNavigation: {
         flexDirection: 'row',
@@ -147,7 +123,6 @@ const styles = StyleSheet.create({
         color: '#fff',
     }
     
-
 })
 
 export default InsertFood

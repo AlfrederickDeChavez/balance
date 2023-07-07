@@ -1,27 +1,60 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect} from 'react'
 import { SafeAreaView, StyleSheet, View, TouchableOpacity, Dimensions, Text, ScrollView, StatusBar} from 'react-native'
 import Header from '../../components/header'
 import { MaterialCommunityIcons, Ionicons, MaterialIcons } from '@expo/vector-icons'
 import RBSheet from 'react-native-raw-bottom-sheet';
 import AddGoal from '../../components/AddGoal'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Plan = () => {
 
   const addGoalRef = useRef()
 
+  
+
+  useEffect(() => {
+    const date = new Date().toLocaleDateString()
+    AsyncStorage.getItem('goals').then((goals) => {
+      if(goals) {
+      
+        const activeGoals = JSON.parse(goals).filter((goal) => goal.date == date)
+        setGoals(activeGoals)
+
+      } else {
+        setGoals([])
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
+
+    AsyncStorage.getItem('achievements').then((achievements) => {
+      if(achievements) {
+        const activeAchievements = JSON.parse(achievements).filter((achievement) => achievement.date == date)
+        setAchievements(activeAchievements)
+      }else {
+        setAchievements([])
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
+  }, [])
+  
   const [goals, setGoals] = useState([])
   const [achievements, setAchievements] = useState([])
 
   const finishGoal = (id) => {
-     const achievement = goals[id]
-     setAchievements([achievement, ...achievements])
-     goals.splice(id)
-  }
+    const achievement = goals[id]
+    setAchievements([achievement, ...achievements])
+    goals.splice(id)
+    AsyncStorage.setItem('achievements', JSON.stringify([achievement, ...achievements]))
+    AsyncStorage.setItem('goals', JSON.stringify(goals.splice(id)))
+  } 
 
   const deleteGoal = (id) => {
     const newGoals = goals.filter((goal) => goal !== goals[id])
     setGoals(newGoals)
+    AsyncStorage.setItem('goals', JSON.stringify(newGoals))
   }
 
   return (
@@ -46,7 +79,7 @@ const Plan = () => {
                 return (
                   <View key={index} style={styles.achievementBox}>
                     <Ionicons name='flag-sharp' style={styles.achievementIcon}/>
-                    <Text style={styles.achievementText}>{achievement}</Text>
+                    <Text style={styles.achievementText}>{achievement.goal}</Text>
                   </View>
                 )
               })
@@ -74,7 +107,7 @@ const Plan = () => {
                 return (
                   <View key={index} style={styles.goalBox}>
                     <MaterialCommunityIcons name='target' style={styles.target}/>
-                    <Text style={styles.goalText}>{goal}</Text>
+                    <Text style={styles.goalText}>{goal.goal}</Text>
                     <View style={styles.goalBtnControl}>
                       <TouchableOpacity style={[styles.goalBtn, {backgroundColor: 'red'}]}
                         onPress={() => deleteGoal(index)}

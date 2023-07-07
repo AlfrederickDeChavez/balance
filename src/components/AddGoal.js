@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AddGoal = ({goals, setGoals}) => {
     
@@ -7,8 +8,9 @@ const AddGoal = ({goals, setGoals}) => {
 
     const submitGoal = () => {
 
-        if(goal != ''){
-            setGoals([...goals, goal])
+        if(goal != ''){ 
+            setGoals([...goals, {date: new Date().toLocaleDateString(), goal: goal}])
+            AsyncStorage.setItem('goals', JSON.stringify([...goals, {date: new Date().toLocaleDateString(), goal: goal}]))
             setGoal('')
         }
     }
@@ -45,11 +47,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '700',
         textTransform: 'uppercase',
-        color: '#fff',
+        color: '#fff', 
         paddingHorizontal: 10,
         paddingVertical: 5,
         textAlign: 'center'
-    },
+    }, 
 
     goalInput: {
         width: '100%',

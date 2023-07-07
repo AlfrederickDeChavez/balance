@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { SafeAreaView, Text , Dimensions, StyleSheet, View, TextInput, TouchableOpacity, StatusBar, Image, ActivityIndicator} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import AuthContext from '../../context/AuthContext'
@@ -8,7 +8,7 @@ const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const {loginUser, loggingIn} = useContext(AuthContext)
+  const {loginUser, loggingIn, disabled} = useContext(AuthContext)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,6 +51,7 @@ const LoginScreen = ({navigation}) => {
           onPress={() => {
             loginUser(email, password)
           }}
+          disabled={disabled}
         >
           <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>

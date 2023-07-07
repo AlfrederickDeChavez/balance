@@ -6,14 +6,28 @@ import Summary from '../../components/DashboardView/Summary'
 import Evaluation from '../../components/DashboardView/Evaluation'
 import ContentContext from '../../context/ContentContext'
 import AuthContext from '../../context/AuthContext'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Dashboard = () => {
 
+
+
   const {user} = useContext(AuthContext)
-  const {updateRecommended} = useContext(ContentContext)
+  const {updateRecommended, setCalories, calories} = useContext(ContentContext)
   
   useEffect(() => {
     updateRecommended(user.age, user.gender)
+    AsyncStorage.getItem('calories')
+    .then((rcalories)=> {
+        if(rcalories) { 
+          let recoCalories = JSON.parse(rcalories)
+          setCalories({...calories, recommended: recoCalories})
+        } else {
+          console.log('NO CALORIES')
+        }
+    }).catch((error) => {
+        console.log(error)
+    })  
   }, [])
 
   const [showSummary, setShowSummary] = useState(true)

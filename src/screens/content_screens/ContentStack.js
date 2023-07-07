@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { ActivityIndicator } from 'react-native';
 
 //Icons
@@ -19,10 +19,26 @@ const Tab = createBottomTabNavigator()
 
 const ContentStack = () => {
 
-    const {user} = useContext(AuthContext)
+    const {user, authtokens, refreshToken} = useContext(AuthContext)
 
+    useEffect(() => {
+      
+        let time = 1000 * 60 * 25
+        let interval = setInterval(() => {
+            if(authtokens) {
+                refreshToken(authtokens)
+            } else {
+                logoutUser()
+            } 
+
+        }, time)
+
+        return () => clearInterval(interval)
+ 
+    }, [])
+    
     if (user) {
-          return (
+          return ( 
               
             <Tab.Navigator
             initialRouteName='Home'

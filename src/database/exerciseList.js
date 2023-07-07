@@ -1,7 +1,7 @@
 export const exerciseList = [
     'Walking',
     'Jogging',
-    'Cardiovascular Fitness',
+    'Cardio Fitness',
     'Strength Training',
     'Swimming',
     'Stretching',

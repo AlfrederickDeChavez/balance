@@ -1,34 +1,37 @@
 import { SafeAreaView,View, Text, ScrollView, StyleSheet, TouchableOpacity, StatusBar, Dimensions, Image} from 'react-native'
-import React, {useRef, useContext, useEffect} from 'react'
+import React, {useRef, useContext, useEffect, useState} from 'react'
 
 // Components 
 import Header from '../../components/header'
 import AddFood from '../../components/AddFood/AddFood'
 import AddExercise from '../../components/AddExercise'
 
-import { MaterialIcons, FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
+import {  FontAwesome5,  AntDesign, Ionicons } from '@expo/vector-icons'
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { calculateBMI, interpretBMI } from '../../functions/BMICalculator'
 import AuthContext from '../../context/AuthContext'
-import { getEstimatedAverage } from '../../functions/EstimatedAverage'
-import { getRecommendedIntake } from '../../functions/RecommendedIntakes'
 import ContentContext from '../../context/ContentContext'
+import Disclaimer from '../../components/Disclaimer'
 
 const HomeScreen = () => {
 
-  const {user, logoutUser} = useContext(AuthContext)
-  const {foods, getFoods, calories, updateRecommended} = useContext(ContentContext)
+  const {user} = useContext(AuthContext)
+  const {getFoods, getExercises, updateRecommended} = useContext(ContentContext)
 
   const addFoodRef = useRef()
   const addExerciseRef = useRef()
   const screenHeight = Dimensions.get('window').height
   const bmi = calculateBMI(user.weight, user.height)
   const userBMI = interpretBMI(bmi, user.gender)
+  const [visible, setVisible] = useState(true)
   
   useEffect(() => {
+    
     getFoods()
+    getExercises()
+    setVisible(true)
+    
   }, [])
-
 
 
   return (
@@ -124,6 +127,10 @@ const HomeScreen = () => {
         <AddExercise />
       </RBSheet>
 
+        <Disclaimer 
+          visible={visible}
+          setVisible={setVisible}
+        />
     </SafeAreaView>
   )
 }

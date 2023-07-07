@@ -8,15 +8,17 @@ export default AuthContext;
 export const AuthProvider = ({children}) => {
 
     // DOMAIN  
-    const host = 'balance-diet.up.railway.app'
+    // const host = 'balance-intake.up.railway.app'
+    const host = 'web-production-86a3e.up.railway.app'
 
     // AUTHENTICATION
     const [authtokens, setAuthTokens] = useState()
     const [user, setUser] = useState(null)
     const [loggingIn, setLoggingIn] = useState(false)
     const [registered, setRegistered] = useState(false)
-    const [response, setResponse] = useState({'': ''})
+    const [response, setResponse] = useState({})
     const [loading, setLoading] = useState(true)
+    const [disabled, setDisabled] = useState(false)
 
     // ADDING FOOD TO DATABASE - POST 
     const addFood = async (food) => {
@@ -27,24 +29,9 @@ export const AuthProvider = ({children}) => {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token' + String(authtokens.access),
             }, 
-            body: JSON.stringify(food)
+            body: JSON.stringify(food) 
         })
         let data = await response.json()
-    }
-
-    // SETTING THE 'TOKEN' TO ASYNC STORAGE
-    const storeToken = async (token) => {
-        try {
-            await AsyncStorage.setItem('token', token)
-            const authtoken = await AsyncStorage.getItem('token')
-            setTimeout(() => {
-                setAuthTokens(JSON.parse(authtoken)) 
-            }, 500)
-               
-        } 
-        catch (e) {
-            console.log('store token error' + e)
-        }
     }
 
 
@@ -91,6 +78,7 @@ export const AuthProvider = ({children}) => {
     // USER ALREADY HAVE AN ACCOUNT AND READY FOR AUTHENTICATION
     const loginUser = async (email, password) => {
 
+        setDisabled(true)
         setLoggingIn(true)
         let response = await fetch(`https://${host}/accounts/login/`, {
             method: 'POST',
@@ -103,39 +91,41 @@ export const AuthProvider = ({children}) => {
 
         let data = await response.json()
         
-        if (response.status === 200) {
-            storeToken(JSON.stringify(data))
+        if (response.status === 200) {   
+            setAuthTokens(data)         
+            AsyncStorage.setItem('token', JSON.stringify(data))
             fetchUserData(data)
             setLoggingIn(false)
+            setDisabled(false)
         } else {
             setLoggingIn(false)
             alert('Something went wrong')
+            setDisabled(false)
         } 
+
+        
     
     }
 
-    const refreshToken = async () => {
+    const refreshToken = async (token) => {
         let response = await fetch(`https://${host}/accounts/login/refresh/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
 
-            body: JSON.stringify({'refresh': authtokens.refresh})
+            body: JSON.stringify({'refresh': token.refresh})
         })
 
         let data = await response.json()
 
         if (response.status == 200) {
+            AsyncStorage.setItem('token', JSON.stringify(data))
             setAuthTokens(data)
         } else {
             logoutUser()
         }
 
-        if(loading) {
-            setLoading(false)
-        }
-        
     }
 
     // GETTING THE PERSONAL INFORMATION UPON COMPONENT LOAD
@@ -153,10 +143,11 @@ export const AuthProvider = ({children}) => {
             let data = await response.json()
 
             if (response.status == 200) {
+                AsyncStorage.setItem('user', JSON.stringify(data))
                 setUser(data)
             } else {
                 return null
-            }
+            } 
         } catch (e) {
             return null
         }
@@ -169,10 +160,11 @@ export const AuthProvider = ({children}) => {
         try {
             setAuthTokens(null)
             await AsyncStorage.removeItem('token')
+            await AsyncStorage.removeItem('user')
         }
 
         catch (e) {
-            console.log('Logged Out User Error Not Working')
+            console.log('Something went wrong')
         }
     }
 
@@ -201,9 +193,10 @@ export const AuthProvider = ({children}) => {
 
         if (response.status == 200) {
             setUser({...user, username: data.username, age: data.age, gender: data.gender, height: data.height, weight: data.weight})
+            AsyncStorage.setItem('user', JSON.stringify({...user, username: data.username, age: data.age, gender: data.gender, height: data.height, weight: data.weight}))
             alert('Your profile has been updated successfully!')
         }
-        
+         
     }
 
     // DATA AND FUNCTIONS TO BE PASSED TO OTHER COMPONENTS
@@ -219,27 +212,41 @@ export const AuthProvider = ({children}) => {
         registered: registered,
         response: response,
         deleteResponse: deleteResponse,
-        updateProfile: updateProfile
+        updateProfile: updateProfile,
+        loading: loading,
+        disabled: disabled
     }
 
-
-    useEffect(() => {
-        if (loading) {
-            refreshToken()
-        }
-
-        let time = 1000 * 60 * 25
-        let interval = setInterval(() => {
-            if(authtokens) {
-                refreshToken()
-            } 
-
-        }, time)
-
-        return () => clearInterval(interval)
+    useEffect(() => {  
  
-    }, [authtokens, loading])
+        AsyncStorage.getItem('token')
+            .then((token) => {
+                if(token){
+                    refreshToken(JSON.parse(token))
+                    setLoading(true)
+                }else {
+                    console.log('NO TOKEN')
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+            
+        AsyncStorage.getItem('user')
+            .then((user)=> {
+                if(user) { 
+                    setUser(JSON.parse(user))
+                } else {
+                    console.log('NO USER')
+                }
+            }).catch((error) => {
+                console.log(error)
+            })  
 
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+
+    }, [])
     return (
         <AuthContext.Provider value={contextData}>
             {children}

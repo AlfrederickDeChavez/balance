@@ -49,7 +49,6 @@ const SignUpOne = ({navigation}) => {
 
   const updateOffset = (e) => {
     SetOffSet(e.nativeEvent.contentOffset.x)
-    console.log(offSet, showLogin)
     if(offSet <= width - 50) {
       if(Platform.OS == 'ios') {
         setShowLogin(true)
